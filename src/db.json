@@ -1,0 +1,13 @@
+{
+    "user":[
+        {
+            "employeeId":"C008",
+            "name":"Vi",
+            "email":"vi@mail.com",
+            "password":"$2a$10$c4P/IUqyyqNAJN3vkmXBGOE2.UIur5YUTopaAoVFSHFr4LcoyR6Cu",
+            "avatarUrl":"",
+            "department":"HR",
+            "role":"Officer",
+            "phone":null}
+    ]
+}
