@@ -1,4 +1,7 @@
 # CompanyPrivateSocial
+account: caitlyn@mail.com
+password: 123
+
 ## Idea
 CompanyPrivateSocial is a social of company. In there, employee can contact, update, follow their work and their active in company.
 HR will provide employee their account and they can change their profile and update their post on social.
