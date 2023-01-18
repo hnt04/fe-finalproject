@@ -1,70 +1,414 @@
-# Getting Started with Create React App
+# CompanyPrivateSocial
+## Idea
+CompanyPrivateSocial is a social of company. In there, employee can contact, update, follow their work and their active in company.
+HR will provide employee their account and they can change their profile and update their post on social.
+Beside that, emphoyee can see members's information throught Department and know who the best employees of months, years are. 
+In daily working, employer can assign tasks for their subordinate and follow up the process
+## Front-end
+### Features
+- User can log-in accout(email & password) which is provided by HR.
+- User can not register new account
+- User can follow update news by their colleague
+- User can see view of task list
+- Main page -> post of employee for update company's info, menu -> department, commendation board, tasks
+#### Pages:
+1. PostPage
+    - Post -> all employee can post their active or news, colleague can comment and reaction.
+2. DepartmentPage -> employee can see all depart of company, colleague's info and their department's Contact
+3. Commendation Board -> top employees of months or years are honored  
+4. TaskPage -> user can see all tasks and user's tasks to handle
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Libraries
+- MUI
+## Back-end
+### Features
+- Only HR can create new user
+## Database - Model
+### User
+***Authentication***
+```javascript
+employeeId: { 
+            type: String, 
+            required: true,
+            unique: true, 
+        },
+        name: {
+            type: String,
+            required: true,
+        },
+        email: {
+            type: String,
+            required: true,
+        },
+        password: {
+            type: String,
+            required: true,
+            select: false,
+        },
+        avatarUrl: {
+            type: String,
+            required: false,
+            default: "",
+        },
+        department: {
+            type: String,
+            enum: [
+            "GM",
+            "HR",
+            "Internal Communication",
+            "Sales",
+            "Finance",
+            "IT",
+            "Admin",
+            "Marketing",
+            "Legal",
+            ],
+            required: true,
+        },
+        role: {
+            type: String,
+            enum: [
+            "General Manager",
+            "Manager",
+            "Supervisor",
+            "Senior Officer",
+            "Officer",
+            "Junior Officer",
+            "Intern",
+            ],
+            required: true,
+        },
+        phone: {
+            type: Number,
+            required: false,
+            default: "",
+        },
+        tasks: [{ type: mongoose.SchemaTypes.ObjectId, ref: "Task" }],
+        commentCount: { 
+            type: Number, 
+            default:0 },
+        postCount: { 
+            type: Number, 
+            default:0 },
+        isDeleted: {
+            type: Boolean,
+            default:false,
+            select: false
+        },
+```
 
-## Available Scripts
+### Task
+```javascript
+  {
+    task_name: {
+      type: String,
+      required: true,
+    },
+    handler: [
+      {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: "User",
+      },
+    ],
+    assigner: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "User",
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: ["PENDING", "WORKING", "REVIEW", "DONE", "ARCHIVE"],
+      required: true,
+      default: "PENDING",
+    },
+    reviewAt: {
+      type: Date,
+      require: true,
+      default: Date,
+    },
+    deadlineAt: {
+      type: Date,
+      require: true,
+    },
+    taskCount: { 
+      type: Number, 
+      default:0 },
+    isDeleted: {
+      type: Boolean,
+      default:false,
+      select: false
+  }
+       
+### Post
 
-In the project directory, you can run:
+```javascript
+{
+        content: {
+        type: String,
+        require: true,
+        },
+        image: {
+        type: String,
+        require: "",
+        },
+        author: { 
+            type: mongoose.SchemaTypes.ObjectId, 
+            required: true,
+            ref: "User" 
+        },
+        isDeleted: {
+            type: Boolean,
+            default:false,
+            select: false
+        },
+        commentCount: { type: Number, default:0 },
+        reaction: { like: { type: Number, default:0 }},
+  }
+  
+```
 
-### `npm start`
+### Comment
+```javascript
+{
+        content: {
+        type: String,
+        require: true,
+        },
+        image: {
+        type: String,
+        require: true,
+        },
+        author: { 
+            type: mongoose.SchemaTypes.ObjectId, require: true, ref: "User" 
+        },
+        post: {
+            type: mongoose.SchemaTypes.ObjectId, require: true, ref: "Post"
+        },
+        reaction: { like: 0 },
+  }
+```
+### Commendation
+```javascript
+{
+    name: [
+      {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: "User",
+      },
+    ],
+    month: {
+        type: String,
+            enum: [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+            ],
+            required: true,
+      },
+  },
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## API EndPoints
+### UserAPI
+```javascript
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+// CREATE
+/**
+ * @route POST /users
+ * @description Create new user
+ * @access login required, private, HR
+ */
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+// GET ALL USERS
+/**
+ * @route GET /users
+ * @description Get a list of users
+ * @access login required
+ */
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+// GET MY USER
+/**
+ * @route GET /users/me
+ * @description Get my user
+ * @access login required
+ */
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+// GET SINGLE USER
+/**
+ * @route GET /users/:id
+ * @description Get a user profile
+ * @access login required
+ */
 
-### `npm run eject`
+// UPDATE
+/**
+ * @route PUT /users
+ * @description update a user
+ * @access login required
+ */
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+// GET ALL POST OF USER
+/**
+ * @route GET /users/:userId/posts
+ * @description Get a list of posts
+ * @access Login require
+ */
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+// GET ALL TASK OF USER
+/**
+ * @route GET /users/:userId/tasks
+ * @description Get a list of posts
+ * @access Login require
+ */
 
-## Learn More
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### TaskAPI
+```javascript
+// CREATE
+/**
+ * @route POST /tasks
+ * @description create a task
+ * @access login required
+ */
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+// GET ALL TASKS
+/**
+ * @route GET /tasks
+ * @description Get a list of tasks
+ * @access login required
+ */
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+// GET SINGLE TASK
+/**
+ * @route GET /tasks/:id
+ * @description Get task by id
+ * @access login required
+ */
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+// UPDATE
+/**
+ * @route PUT /tasks
+ * @description update a task
+ * @access login required
+ */
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+// DELETE
+/**
+ * @route DELETE /tasks
+ * @description delete a task
+ * @access login required
+ */
 
-### Advanced Configuration
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### PostAPI
+```javascript
 
-### Deployment
+// CREATE
+/**
+ * @route POST /posts
+ * @description Create a new post
+ * @access Login require
+ */
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+// GET SINGLE POST
+/**
+ * @route GET /posts/:id
+ * @description Get post by id
+ * @access Login require
+ */
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+// UPDATE
+/**
+ * @route PUT /posts/:id
+ * @description update a post
+ * @access Login require
+ */
+
+// DELETE
+/**
+ * @route DELETE /posts
+ * @description delete a post
+ * @access Login require
+ */
+
+
+// GET ALL COMMENTS IN POST
+/**
+ * @route GET /posts/:id/comments
+ * @description Get a list of comments in post
+ * @access Login require
+ */
+```
+
+### CommentAPI:
+```javascript
+// CREATE
+/**
+ * @route POST /comments
+ * @description Create new comment
+ * @body {content,postId}
+ * @access Login required
+ */
+
+// GET SINGLE POST
+/**
+ * @route GET /comments/:id
+ * @description Get comment by id
+ * @access public
+ */
+
+// UPDATE
+/**
+ * @route PUT /comments/:id
+ * @description update a comment
+ * @access public
+ */
+
+// DELETE 
+/**
+ * @route DELETE /comments
+ * @description delete a comment
+ * @access public
+ */
+```
+
+### CommendationAPI
+```javascript
+// CREATE COMMENDATION OF MONTH
+/**
+ * @route POST /commendations
+ * @description Create a list of commendation
+ * @access login required
+ */
+
+// GET COMMENDATION OF MONTH
+/**
+ * @route GET /commendations
+ * @description Get a list of commendation
+ * @access login required
+ */
+```
