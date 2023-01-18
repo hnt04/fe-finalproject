@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import {Button, MenuItem, Modal} from "@mui/material";
 import { useDispatch } from "react-redux";
 import {getUsers} from "./userSlice";
-import { getCommendations } from "../commendtionboard/commendationSlice";
+import { createCommendations } from "../commendtionboard/commendationSlice";
 
 
 function ActionButton(id,sx){
@@ -17,25 +17,14 @@ function ActionButton(id,sx){
   const handleDeleteEmployee = () => {
     setCommendationAction(false)
   };
-  // if (currentUserId === targetUserId) return null;
 
-  // const btnGetUser = (
-  //   <Button
-  //     sx={{ fontSize: "0.6rem", ...sx }}
-  //     size="small"
-  //     variant="contained"
-  //     onClick={() => dispatch(getUsers())}
-  //   >
-  //     Add
-  //   </Button>
-  // );
 
   const btnAddUser = (
     <Button
       sx={{ fontSize: "0.6rem", ...sx }}
       size="small"
       variant="contained"
-      onClick={() => dispatch(getCommendations())}
+      onClick={() => dispatch(createCommendations())}
     >
       Add
     </Button>

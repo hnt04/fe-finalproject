@@ -11,9 +11,9 @@ function MainLayout() {
     <Stack sx={{ minHeight: "100vh" }}>
         <MainHeader />
         <AlertMsg />
-        <MainBody />
-        {/* <Outlet /> */}
-        <Box sx={{ flexGrow: 1 }} />
+        {/* <MainBody /> */}
+        <Outlet />
+        {/* <Box sx={{ flexGrow: 1 }} /> */}
         <MainFooter />
     </Stack>
   );

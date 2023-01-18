@@ -17,7 +17,7 @@ function MainBody() {
   const FixedMenu = styled("div")(({ theme }) => ({
     position: "relative",
     // borderRadius: theme.shape.borderRadius,
-    backgroundColor: "#000022",
+    backgroundColor: "#ece4f2",
     height: "50vh",
     width: "20vw",
 
@@ -58,7 +58,7 @@ function MainBody() {
                     marginTop: "3%",
                     marginLeft: "5%",
                     marginBottom: "3%",
-                    "&:hover": { color: "#f3e5f5" },
+                    "&:hover": { color: "#4a148c" },
                   }}
                 >
                   Member
@@ -81,7 +81,7 @@ function MainBody() {
                     marginTop: "3%",
                     marginLeft: "5%",
                     marginBottom: "3%",
-                    "&:hover": { color: "#f3e5f5" },
+                    "&:hover": { color: "#4a148c" },
                   }}
                 >
                   Commendation Board
@@ -103,7 +103,7 @@ function MainBody() {
                     marginTop: "3%",
                     marginLeft: "5%",
                     marginBottom: "3%",
-                    "&:hover": { color: "#f3e5f5" },
+                    "&:hover": { color: "#4a148c" },
                   }}
                 >
                   Task
@@ -115,8 +115,8 @@ function MainBody() {
         </FixedMenu>
       </Paper>
       {/* </Grid> */}
-      <Grid maxWidth="100%" maxHeight="100%" sx={{width:"100%",height:"100em"}}>
-        <Outlet maxWidth="100%" maxHeight="100%" sx={{width:"100%",height:"100em"}}/>
+      <Grid maxWidth="100%" maxHeight="100%" sx={{width:"100%",height:"100%"}}>
+        <Outlet maxWidth="100%" maxHeight="100%" sx={{width:"100%",height:"100%"}}/>
       </Grid>
     </Grid>
   );

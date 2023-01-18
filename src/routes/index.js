@@ -10,13 +10,14 @@ import AuthRequire from "./AuthRequire";
 import RegisterPage from "../pages/RegisterPage";
 import AccountPage from "../pages/AccountPage";
 import Profile from "../features/user/Profile";
-import CreateTask from "../features/task/CreateTask";
 import CommendationBoardPage from "../features/commendtionboard/CommendationBoardPage";
 import AuthRequiredHR from "./AuthRequiredHR";
 import UserMainPage from "../features/user/UserMainPage";
 import MemberList from "../features/member/MemberList";
 import MemberProfile from "../features/member/MemberProfile";
 import TaskList from "../features/task/TaskList";
+import TaskAllList from "../features/task/TaskAllList";
+import TasksPage from "../features/task/TasksPage";
 
 function Router() {
   return (
@@ -33,10 +34,10 @@ function Router() {
         <Route path="account" element={<AccountPage />} />
         <Route path="me" element={<Profile />} />
         <Route path="users/:userId" element={<MemberProfile />} />
-        <Route path="member" element={<MemberList />}></Route>
-        <Route path="commendation" element={<CommendationBoardPage />}></Route>
-        <Route path="tasks" element={<CreateTask />} />
-        <Route path="tasks/me" element={<TaskList />} />
+        <Route path="member" element={<MemberList />} />
+        <Route path="commendation" element={<CommendationBoardPage />} />
+        <Route path="tasks" element={<TaskAllList />} />
+        <Route path="tasks/me" element={<TasksPage />} />
         <Route path="users" element={
             <AuthRequiredHR>
               <UserMainPage />

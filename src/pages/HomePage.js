@@ -16,7 +16,7 @@ const TabsWrapperStyle = styled("div")(({ theme }) => ({
     width: "100%",
     display:"flex",
     position: "absolute",
-    backgroundColor: "#fff",
+    backgroundColor: "#ece4f2",
     [theme.breakpoints.up("sm")] : {
         justifyContent:"center",
     },
@@ -37,7 +37,7 @@ function HomePage() {
             sx={{ 
                 mb: 3,
                 maxHeight:"100%",
-                height: 3000,
+                height: "auto",
                 position: "relative",
 
             }}>

@@ -14,6 +14,7 @@ const initialState = {
   userList: [],
   currentUserById:{},
   totalPages: 1,
+  allowedUsers: []
 };
 
 const slice = createSlice({
@@ -65,10 +66,15 @@ const slice = createSlice({
       state.isLoading = false;
       state.error = null;
       
-      const users = action.payload;
-      console.log("action.payload",action.payload)
+      state.userList = action.payload;
+    },
 
+    getUsersAllowedSuccess(state, action) {
+      state.isLoading = false;
+      state.error = null;
 
+      state.allowedUsers = action.payload;      
+      
     },
     // getAllUsersSuccess(state, action) {
     //   state.isLoading = false;
@@ -122,20 +128,33 @@ export const getUsers = ({filterName, page = 1, limit = POST_PER_PAGE}) => async
   }
 };
 
+export const getUsersAllowed = () => async (dispatch) => {
+  dispatch(slice.actions.startLoading());
+try {
+  const response = await apiService.get("/users/allowed");
+  console.log("response user allowed",response)
+  dispatch(slice.actions.getUsersAllowedSuccess(response.users));
+} catch (error) {
+  dispatch(slice.actions.hasError(error));
+  toast.error(error.message);
+}
+};
+
 export const getCurrentUserProfile = () => async (dispatch) => {
   dispatch(slice.actions.startLoading());
   try {
     const response = await apiService.get("/users/me");
-    dispatch(slice.actions.updateUserProfileSuccess(response.users));
+    console.log("response user me",response)
+    dispatch(slice.actions.updateUserProfileSuccess(response));
   } catch (error) {
     dispatch(slice.actions.hasError(error));
   }
 };
 
-export const getSingleUser = (userId) => async (dispatch) => {
+export const getSingleUser = (id) => async (dispatch) => {
   dispatch(slice.actions.startLoading());
   try {
-    const response = await apiService.get(`/users/${userId}`);
+    const response = await apiService.get(`/users/${id}`);
     console.log("response userId", response)
     dispatch(slice.actions.getSingleUserSuccess(response));
   } catch (error) {

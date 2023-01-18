@@ -28,22 +28,23 @@ const IconStyle = styled(Box)(({ theme }) => ({
   marginRight: theme.spacing(2),
 }));
 
-function MemberProfile({index}) {
+function MemberProfile({user}) {
 
-  const { currentPageUsers, usersById } = useSelector(
+  const { userList } = useSelector(
     (state) => state.user
   );
+  console.log("userList",userList)
 
-  let  {userId}  = useParams();
+  let  { userId }  = useParams();
   console.log("userId", userId )
-
-  const user = currentPageUsers.map((userId) => usersById[userId]);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getSingleUser(userId));
   }, [dispatch, userId])
+
+  // const { user } = useSelector((state) => state.user);
 
   console.log("user",user)
   return (
@@ -56,7 +57,7 @@ function MemberProfile({index}) {
         sx={{ color: "#616161", fontWeight: "700", paddingLeft: "2%", textAlign:"center"}}
         gutterBottom
       >
-        {user && user[0].name.toUpperCase()} PROFILE
+        {userList?.name} Profile
       </Typography>
       <Grid item xs={12} md={8} sx={{ marginTop: "20px" }}>
         <Card
@@ -85,7 +86,7 @@ function MemberProfile({index}) {
                   marginTop:"20px"
                 }}
               >
-                {user && user[0].employeeId}
+                {userList?.employeeId}
               </Typography>
             </Stack>
 
@@ -101,7 +102,7 @@ function MemberProfile({index}) {
                   marginLeft: "50px",
                 }}
               >
-                {user && user[0].name}
+                {userList?.name}
               </Typography>
             </Stack>
 
@@ -120,7 +121,7 @@ function MemberProfile({index}) {
                   marginLeft: "50px",
                 }}
               >
-                {user && user[0].email}
+                {userList?.email}
               </Typography>
             </Stack>
 
@@ -139,7 +140,7 @@ function MemberProfile({index}) {
                   marginLeft: "50px",
                 }}
               >
-                {user && user[0].department}
+                {userList?.department}
               </Typography>
             </Stack>
 
@@ -158,7 +159,7 @@ function MemberProfile({index}) {
                   marginLeft: "50px",
                 }}
               >
-                {user && user[0].role}
+                {userList?.role}
               </Typography>
             </Stack>
 
@@ -177,7 +178,7 @@ function MemberProfile({index}) {
                   marginLeft: "50px",
                 }}
               >
-                {user && user[0].phone}
+                {userList?.phone}
               </Typography>
             </Stack>
           </Stack>

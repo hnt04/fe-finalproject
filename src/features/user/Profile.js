@@ -36,7 +36,7 @@ function Profile({ profile }) {
     >
       <Typography
         variant="h4"
-        sx={{ color: "#616161", fontWeight: "700", paddingLeft: "2%", textAlign:"center"}}
+        sx={{ color: "#616161", fontWeight: "700", paddingLeft: "2%", textAlign:"center", fontSize:"60px"}}
         gutterBottom
       >
         MY PROFILE

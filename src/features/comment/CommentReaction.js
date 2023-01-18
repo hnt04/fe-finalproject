@@ -1,9 +1,8 @@
 import { IconButton, Stack, Typography } from "@mui/material";
-import ThumbDownAltRoundedIcon from "@mui/icons-material/ThumbDownAltRounded";
-import ThumbUpRoundedIcon from "@mui/icons-material/ThumbUpRounded";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { sendCommentReaction } from "./commentSlice";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 function CommentReaction({ comment }) {
   const dispatch = useDispatch();
@@ -15,13 +14,13 @@ function CommentReaction({ comment }) {
   return (
     <Stack direction="row" alignItems="center">
       <IconButton
-        onClick={() => handleClick("like")}
+        onClick={() => handleClick("heart")}
         sx={{ color: "primary.main" }}
       >
-        <ThumbUpRoundedIcon sx={{ fontSize: 20 }} />
+        <FavoriteBorderIcon sx={{ fontSize: 20 }} />
       </IconButton>
       <Typography variant="body2" mr={1}>
-        {comment?.reactions?.like}
+        {comment?.reactions?.heart}
       </Typography>
 
     </Stack>

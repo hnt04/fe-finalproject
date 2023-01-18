@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 const initialState = {
     isLoading: false,
     error: null,
+    commendationsList:[],
     commentsById: {},
     commentsByPost: {},
     totalCommentsByPost: {},
@@ -115,7 +116,7 @@ export const sendCommentReaction =
       dispatch(
         slice.actions.sendCommentReactionSuccess({
           commentId,
-          reactions: response.data,
+          reactions: response,
         })
       );
     } catch (error) {

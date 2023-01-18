@@ -1,88 +1,128 @@
-import React from "react";
-import { Table, TableHead, Avatar, TableRow, TableBody, TableCell, Link, TableContainer, Box } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Stack } from "@mui/material";
+import { FormProvider } from "../../components/form";
 import useAuth from "../../hooks/useAuth";
-import ActionButton from "./ActionButton";
+import TextField from "@mui/material/TextField";
+import { LoadingButton } from "@mui/lab";
+import { useForm } from "react-hook-form";
+import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
+import { FSelect } from "../../components/form";
+import {
+  createCommendations,
+  getCommendations,
+} from "../commendtionboard/commendationSlice";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+
+const filter = createFilterOptions();
+
+const defaultValues = {
+  month: "January",
+  name: "",
+};
 
 function UserTable({ users }) {
-  const { user } = useAuth();
   // console.log("user table",user)
 
-  const getAction = (targetUser) => {
-    const props = {
-      id: targetUser._id,
-    };
-    return {
-      action: <ActionButton {...props} />,
-    };
+  const { isLoading } = useSelector((state) => state.commendation);
+
+  const methods = useForm({
+    defaultValues,
+  });
+
+  const monthOfYear = [
+    { id: "January", name: "January" },
+    { id: "February", name: "February" },
+    { id: "March", name: "March" },
+    { id: "April", name: "April" },
+    { id: "May", name: "May" },
+    { id: "June", name: "June" },
+    { id: "July", name: "July" },
+    { id: "August", name: "August" },
+    { id: "September", name: "September" },
+    { id: "October", name: "October" },
+    { id: "November", name: "November" },
+    { id: "December", name: "December" },
+  ];
+
+  const [open, toggleOpen] = React.useState(false);
+
+  const { userList } = useSelector((state) => state.user);
+
+  const {
+    handleSubmit,
+    reset,
+    formState: { isSubmitting },
+  } = methods;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    reset({
+      name: "",
+    });
+  }, [userList]);
+
+  const onSubmit = (commendations) => {
+    console.log("commendations", commendations);
+    dispatch(
+      createCommendations({ ...commendations, name: userListCommendation })).then(() => reset());
   };
-console.log("users",users)
+
+  const [userListCommendation, setUserListCommendation] = useState([]);
 
   return (
-    <Box sx={{ overflowX: "auto" }}>
-      <TableContainer sx={{ minWidth: 800 }}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell sx={{ width: { xs: "20%", sm: "25%" } }}>
-                Name
-              </TableCell>
-              <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
-                Role
-              </TableCell>
-              <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
-                Department
-              </TableCell>
-              <TableCell>Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {users?.map((user) => {
-              const { action } = getAction(user);
-              console.log("user action",user)
-              return (
-                <TableRow key={user?._id} hover>
-                  <TableCell
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <Avatar
-                      alt={user?.name}
-                      src={user?.avatarUrl}
-                      sx={{ mr: 2 }}
-                    />
-                    <Link
-                      variant="subtitle2"
-                      sx={{ fontWeight: 600 }}
-                      component={RouterLink}
-                      to={`/users/${user._id}`}
-                    >
-                      {user?.name}
-                    </Link>
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    sx={{ display: { xs: "none", md: "table-cell" } }}
-                  >
-                    {user?.role}
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    sx={{ display: { xs: "none", md: "table-cell" } }}
-                  >
-                    {user?.department}
-                  </TableCell>
-                  <TableCell align="left">{action}</TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Box>
+    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+      <Stack spacing={2}>
+        <FSelect
+          name="month"
+          label="Month"
+          variant="standard"
+          inputProps={{ "aria-label": "Without label" }}
+        >
+          {monthOfYear.map((option) => (
+            <option key={option.name}>{option.name}</option>
+          ))}
+        </FSelect>
+        <Autocomplete
+          multiple
+          id="users-tags"
+          options={users}
+          getOptionLabel={(option) => {
+            return option.name;
+          }}
+          onChange={(e, value) => {
+            setUserListCommendation(value);
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              variant="standard"
+              label="User"
+              placeholder="User"
+            />
+          )}
+        />
+        <LoadingButton
+          type="submit"
+          variant="contained"
+          size="small"
+          loading={isSubmitting || isLoading}
+          sx={{
+            boxShadow: "none",
+            backgroundColor: "#4a148c",
+
+            "&:hover": {
+              backgroundColor: "#8f8996",
+              color: "#4a148c",
+            },
+            color: "#ffff",
+          }}
+        >
+          Create Commendation For This Month
+        </LoadingButton>
+      </Stack>
+    </FormProvider>
   );
 }
 

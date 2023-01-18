@@ -60,7 +60,7 @@ function ThemeProvider({ children }) {
             secondary: SECONDARY,
             SUCCESS: SUCCESS,
             text: { primary: GREY[800], secondary: GREY[600], disabled: GREY[500] },
-            background: { paper: "#000022", default: "#000022", neutral: GREY[200] },
+            background: { paper: "#ece4f2", default: "#ece4f2", neutral: GREY[200] },
             action: {
               active: GREY[600],
               hover: GREY[500_8],

@@ -3,15 +3,10 @@ import { Box, Card, alpha, Stack,Button, Modal, Container, Grid } from "@mui/mat
 import { FormProvider, FTextField, FUploadImage } from "../../components/form";
 import { LoadingButton } from "@mui/lab";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { createPost } from "./postSlice";
 import { useDispatch, useSelector } from "react-redux";
-import ClearIcon from '@mui/icons-material/Clear';
 
-const yupSchema = Yup.object().shape({
-    content: Yup.string().required("Content is required"),
-  });
   
   const defaultValues = {
     content: "", 
@@ -81,8 +76,7 @@ function PostForm() {
               alignItems: "center",
               justifyContent: "center",
               marginTop:"0"}}>
-          <Button sx={{width:"150px", marginRight:"10px"}} onClick={handleOpen} variant="contained" color="success">Add Image
-            <Modal sx={{width:"700px", marginTop:"500px",marginLeft:"1000px"}} open={open} >
+          
               <Box onClose={handleClose}>
                 <FUploadImage
                   name="image"
@@ -91,28 +85,19 @@ function PostForm() {
                   onDrop={handleDrop}
                 />
               </Box>
-            </Modal>
-          </Button>
-          {/* <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end",
-              marginTop:"0"
-            }}
-          > */}
+              </Grid>
+
             <LoadingButton
               type="submit"
               variant="contained"
               size="small"
               color="success"
-              loading={isSubmitting}
-              sx={{width:"150px", height:"37px"}}
+              loading={isSubmitting || isLoading}
+              sx={{width:"150px", display:"flex",alignItems:"center",height:"37px", background:"#4a148c"}}
             >
               Post
             </LoadingButton>
           {/* </Box> */}
-          </Grid>
         </Stack>
       </FormProvider>
     </Card>

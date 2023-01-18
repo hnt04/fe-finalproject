@@ -56,7 +56,7 @@ function LoginPage() {
     }
 
   return (
-    <Stack  sx={{ backgroundColor: "#000022"}}>
+    <Stack  sx={{ backgroundColor: "#ece4f2"}}>
     <Container maxWidth="50vw" sx={{backgroundColor:"rgba(245, 248, 250, 0.918)", height:"680px", width:"25vw", paddingTop:"5%"}}>
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Typography component="h4"

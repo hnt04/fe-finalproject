@@ -67,7 +67,6 @@ function PostCard({ post, handleChoose, handleChooseEdit }) {
       </MenuItem>
     </Menu>
   );
-  console.log("renderMenu",renderMenu)
 
   return (
      <Card>
@@ -79,7 +78,7 @@ function PostCard({ post, handleChoose, handleChooseEdit }) {
         title={
           <Link
             variant="subtitle2"
-            color="#dbabf5"
+            color="#7b228f"
             component={RouterLink}
             sx={{ fontWeight: 600 }}
             to={`/users/${post?.author?._id}`}
@@ -105,7 +104,7 @@ function PostCard({ post, handleChoose, handleChooseEdit }) {
         }>
         </CardHeader>
       <Stack spacing={2} sx={{ p: 3 }}>
-        <Typography sx={{color:"#ffff"}}>{post?.content}</Typography>
+        <Typography sx={{color:"#616161"}}>{post?.content}</Typography>
 
         {post?.image && (
           <Box
