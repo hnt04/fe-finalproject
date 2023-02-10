@@ -1,6 +1,6 @@
 # CompanyPrivateSocial
 account: caitlyn@mail.com
-password: 123
+password: 12345
 
 ## Idea
 CompanyPrivateSocial is a social of company. In there, employee can contact, update, follow their work and their active in company.
