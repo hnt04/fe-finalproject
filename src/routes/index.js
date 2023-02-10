@@ -36,8 +36,7 @@ function Router() {
         <Route path="users/:userId" element={<MemberProfile />} />
         <Route path="member" element={<MemberList />} />
         <Route path="commendation" element={<CommendationBoardPage />} />
-        <Route path="tasks" element={<TaskAllList />} />
-        <Route path="tasks/me" element={<TasksPage />} />
+        <Route path="tasks" element={<TasksPage />} />
         <Route path="users" element={
             <AuthRequiredHR>
               <UserMainPage />

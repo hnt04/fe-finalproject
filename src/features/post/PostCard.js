@@ -69,7 +69,7 @@ function PostCard({ post, handleChoose, handleChooseEdit }) {
   );
 
   return (
-     <Card>
+     <Card sx={{width:"60vw"}}>
       <CardHeader
         disableTypography
         avatar={

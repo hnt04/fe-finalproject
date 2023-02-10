@@ -3,6 +3,7 @@ import { Container, Tab, Box, Tabs, Typography } from "@mui/material";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import AccountGeneral from "../features/user/AccountGeneral";
 import { capitalCase } from "change-case";
+import PasswordChanging from "../features/user/PasswordChanging";
 
 function AccountPage() {
   const [currentTab, setCurrentTab] = useState("general");
@@ -12,6 +13,11 @@ function AccountPage() {
       value: "general",
       icon: <AccountBoxIcon sx={{ fontSize: 30 }} />,
       component: <AccountGeneral />,
+    },
+    {
+      value: "password changing",
+      icon: <AccountBoxIcon sx={{ fontSize: 30 }} />,
+      component: <PasswordChanging />,
     },
   ];
 

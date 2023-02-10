@@ -130,28 +130,7 @@ function MainHeader() {
 
       <Divider sx={{ borderStyle: "dashed" }} />
 
-      <MenuItem
-        onClick={handleMenuClose}
-        to="/tasks/me"
-        component={RouterLink}
-        sx={{ mx: 1, color: "#616161" }}
-      >
-        My Task
-      </MenuItem>
-
-      <Divider sx={{ borderStyle: "dashed" }} />
-
-      {/* <MenuItem
-        onClick={handleMenuClose}
-        to="/users"
-        component={RouterLink}
-        sx={{ mx: 1, color:"##616161" }}
-      >
-        Company's Member
-      </MenuItem> */}
-
-      {/* <Divider sx={{ borderStyle: "dashed" }} /> */}
-
+      {user?.department === "HR" && (
       <MenuItem
         onClick={handleMenuClose}
         to="/register"
@@ -160,7 +139,8 @@ function MainHeader() {
       >
         Register
       </MenuItem>
-
+      )}
+      
       <Divider sx={{ borderStyle: "dashed" }} />
 
       <MenuItem onClick={handleLogout} sx={{ m: 1, color: "#616161" }}>
@@ -205,18 +185,6 @@ function MainHeader() {
                 </Typography>
               </RouterLink>
             </Typography>
-            {/* <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-              
-                // name="q"
-                placeholder="Search"
-                // defaultValue={q ?? undefined}
-                // inputProps={{ "arial-label": "search" }}
-              />
-            </Search> */}
 
             <Box sx={{ flexGrow: 1 }} />
             <Box>

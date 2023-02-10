@@ -54,7 +54,7 @@ function PostForm() {
 };
 
   return (
-    <Card sx={{ p: 3 }}>
+    <Card sx={{ p: 3,width:"60vw" }}>
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <Stack className="postForm" spacing={2}>
           <FTextField
@@ -93,7 +93,7 @@ function PostForm() {
               size="small"
               color="success"
               loading={isSubmitting || isLoading}
-              sx={{width:"150px", display:"flex",alignItems:"center",height:"37px", background:"#4a148c"}}
+              sx={{width:"150px", display:"flex",alignItem:"center",height:"37px", background:"#4a148c"}}
             >
               Post
             </LoadingButton>

@@ -10,7 +10,7 @@ function UserPage({ profile }) {
     console.log("user","user")
     return profile && (
         <Grid item xs={12} md={8}>
-          <Stack spacing={3}>
+          <Stack spacing={3} sx={{marginLeft:"20vw", marginTop:"10px"}}>
             {user?._id === profile?._id && <PostForm />}
             <PostList userId={profile?._id} />
           </Stack>

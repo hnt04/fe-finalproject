@@ -88,7 +88,7 @@ const slice = createSlice({
 export default slice.reducer;
 
 export const updateUserProfile =
-  ({ userId, employeeId,name, email,avatarUrl,department,role, phone, tasks}) => async (dispatch) => {
+  ({ userId, password,employeeId,name, email,avatarUrl,department,role, phone, tasks}) => async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
       const data = {
@@ -99,7 +99,8 @@ export const updateUserProfile =
         department,
         role,
         phone,
-        tasks
+        tasks,
+        password
       };
       if (avatarUrl instanceof File) {
         const imageUrl = await cloudinaryUpload(avatarUrl);

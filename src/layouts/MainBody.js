@@ -2,8 +2,6 @@ import React from "react";
 import {
   MenuList,
   Divider,
-  ListItemIcon,
-  Container,
   Paper,
   MenuItem,
   Typography,

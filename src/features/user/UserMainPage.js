@@ -68,10 +68,6 @@ function UserMainPage() {
     setPage(0);
   };
 
-//   const handleSubmit = (searchQuery) => {
-//     setFilterName(searchQuery);
-//   };
-
   useEffect(() => {
     dispatch(getUsers({ filterName, page: page + 1, limit: rowsPerPage }));
   }, [filterName, page, rowsPerPage, dispatch]);

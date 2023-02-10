@@ -98,7 +98,7 @@ function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
 
       <MenuItem>
         <Button onClose={handleClose} onClick={() => handleChooseEdit(task)}>
-          Edit Post
+          Edit Task
         </Button>
         <Modal>
           <PostFormUpdate />
@@ -158,14 +158,25 @@ function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
           {moment(tasks?.deadlineAt).format("MM DD YYYY")}
         </Typography>
       </Stack>
-      <Divider light />
+      <Typography
+        sx={{
+          mb: 1.5,
+          textDecorationLine: `${
+            tasks.status === "DONE" ? "line-through" : ""
+          }`,
+        }}
+        color="text.secondary"
+      >
+        Status: <b>{tasks?.status}</b>
+      </Typography>
       <Stack direction="row" alignItems="center" pt={1}>
         <PersonIcon />{tasks?.handler.map((item) => (
           <Typography>{item.name}</Typography>
         ))}
       </Stack>
-      <FormControl component="fieldset">
-        <FormLabel component="legend">Status</FormLabel>
+      <Divider light />
+      <FormControl sx={{marginTop:"10px"}} component="fieldset">
+        <FormLabel component="legend">Process:</FormLabel>
         <FormGroup aria-label="position">
           <FormControlLabel
             value="PENDING"
