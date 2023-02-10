@@ -9,7 +9,6 @@ import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import { FSelect } from "../../components/form";
 import {
   createCommendations,
-  getCommendations,
 } from "../commendtionboard/commendationSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -19,6 +18,7 @@ const filter = createFilterOptions();
 const defaultValues = {
   month: "January",
   name: "",
+  year:"2023"
 };
 
 function UserTable({ users }) {
@@ -45,7 +45,13 @@ function UserTable({ users }) {
     { id: "December", name: "December" },
   ];
 
-  const [open, toggleOpen] = React.useState(false);
+  const yearCommendation = [
+    { id: "2023", name: "2023" },
+    { id: "2024", name: "2024" },
+    { id: "2025", name: "2025" },
+    { id: "2026", name: "2026" },
+    { id: "2027", name: "2027" }
+  ];
 
   const { userList } = useSelector((state) => state.user);
 
@@ -74,6 +80,16 @@ function UserTable({ users }) {
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={2}>
+      <FSelect
+          name="year"
+          label="Year"
+          variant="standard"
+          inputProps={{ "aria-label": "Without label" }}
+        >
+          {yearCommendation.map((option) => (
+            <option key={option.name}>{option.name}</option>
+          ))}
+        </FSelect>
         <FSelect
           name="month"
           label="Month"

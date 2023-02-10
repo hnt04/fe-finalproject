@@ -189,7 +189,7 @@ console.log("currentPageCommendations",currentPageCommendations)
           {commendations.map((commendation) =>(
             <>
             <Typography sx={{ marginTop:"20px",color: "#616161", fontWeight: "600", fontSize: "40px" }}>
-            {commendation.month}</Typography>
+            {commendation.month} - {commendation.year}</Typography>
           
           <CommendationsEachMonth commendation={commendation} users={users} />
           </>))}

@@ -90,7 +90,7 @@ function PostList({ userId, id }) {
           <PostFormUpdate onClose={handleCloseEdit}  post={chosenPost} handleEdit={handleEdit}/>
       </Modal>
 
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Box sx={{ display: "flex", justifyContent: "center", marginBottom:"20px"}}>
         {totalPosts ? (
           <LoadingButton
             variant="outlined"
@@ -98,6 +98,7 @@ function PostList({ userId, id }) {
             loading={isLoading}
             onClick={() => setPage((page) => page + 1)}
             disabled={Boolean(totalPosts) && posts.length >= totalPosts}
+            sx={{marginBottom:"20px", marginRight:"500px"}}
           >
             Load more
           </LoadingButton>

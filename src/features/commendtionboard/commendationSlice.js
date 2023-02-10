@@ -52,12 +52,6 @@ const slice = createSlice({
       state.isLoading = false;
       state.error = null;
 
-      // const currentComm = action.payload;
-      // console.log("action.payload commendations",action.payload)
-      // console.log("currentComm",currentComm)
-
-      // state.commendationsList = action.payload;
-
       const commendations = action.payload;
       console.log("action.payload commendations",action.payload)
       commendations.forEach((commendation) => {
@@ -88,14 +82,16 @@ export const getCommendations = ({month, page = 1, limit = POST_PER_PAGE}) => as
   }
 };
 
-export const createCommendations = ({month,name}) => async (dispatch) => {
+export const createCommendations = ({month,name,year}) => async (dispatch) => {
     dispatch(slice.actions.startLoading());
     console.log("month",month);
-    console.log("name",name)
+    console.log("name",name);
+    console.log("year",year)
     try {
       const response = await apiService.post(`/commendations`,{
         month,
-        name
+        name,
+        year
       });
       dispatch(
         slice.actions.createCommendationSuccess(response));

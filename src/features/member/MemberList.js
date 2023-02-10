@@ -11,6 +11,12 @@ import {
   Avatar,
   Pagination,
   Stack,
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
@@ -82,86 +88,111 @@ function MemberList() {
       >
         Company's Employees
       </Typography>
-
-      <Grid
+      <Box sx={{ overflowX: "auto" }}>
+        <TableContainer sx={{ minWidth: 800 }}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>
+                  <b>Employee ID</b>
+                </TableCell>
+                <TableCell sx={{ width: { xs: "20%", sm: "25%" } }}>
+                  <b>Name</b>
+                </TableCell>
+                <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
+                  <b>Email</b>
+                </TableCell>
+                <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
+                  <b>Role</b>
+                </TableCell>
+                <TableCell
+                  sx={{
+                    display: { xs: "none", sm: "table-cell" },
+                    width: "20%",
+                  }}
+                >
+                  <b>Department</b>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {/* <Grid
         container
         maxWidth="lg"
         spacing={{ xs: 0, md: 4 }}
         columns={{ xs: 12, sm: 12, md: 12, lg: 12 }}
-      >
-        {users.map((user) => (
-          <Grid
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              // paddingLeft: "0!important",
-            }}
-            item
-            xs={12}
-            sm={6}
-            md={4}
-            lg={4}
-          >
-            <Card
-              component={Link}
-              to={`users/${user._id}`}
-              sx={{
-                width: "12rem",
-                height: "19rem",
-                textDecoration: "none",
-                marginRight: "20px",
-              }}
-              elevation={0}
-            >
-              <div
-                style={{
-                  borderRadius: 50,
-                  padding: 30,
-                  marginRight: "20px",
-                }}
-              >
-                <Avatar
-                  alt="Missing image"
-                  src={`${user?.avatarUrl}`}
-                  sx={{ margin: "auto", width: 120, height: 120 }}
-                />
-              </div>
-              <CardContent sx={{ paddingBottom: 0, textAlign: "center"}}>
-                <Typography variant="small" color="#4a148c" fontWeight="600">
-                  {`${user?.employeeId}`}
-                </Typography>
-                <Typography>
-                  <Link
-                    variant="subtitle2"
-                    sx={{ fontWeight: 600 }}
-                    component={RouterLink}
-                    to={`/users/${user?._id}`}
+      > */}
+              {users.map((user) => (
+                <TableRow key={user._id} hover>
+                  <TableCell
+                    align="left"
+                    sx={{ display: { xs: "none", md: "table-cell" } }}
                   >
-                    {user?.name}
-                  </Link>
-                </Typography>
-                <Typography variant="small" color="gray">
-                  {`${user?.department}`}
-                </Typography>
-                <br />
-                <Typography variant="small" color="black">
-                  {`${user?.role}`}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-      <Box>
-        <Pagination
-          page={page}
-          onChange={handleChangePage}
-          sx={{ display: "flex", justifyContent: "center" }}
-        />
+                    {user.employeeId}
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <Avatar
+                      alt={user?.name}
+                      src={user?.avatarUrl}
+                      sx={{ mr: 2 }}
+                    />
+
+                    <Link
+                      variant="subtitle2"
+                      sx={{ fontWeight: 600 }}
+                      component={RouterLink}
+                      to={`/users/${user._id}`}
+                    >
+                      {user.name}
+                    </Link>
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    sx={{ display: { xs: "none", md: "table-cell" } }}
+                  >
+                    {user.email}
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    sx={{ display: { xs: "none", md: "table-cell" } }}
+                  >
+                    {user.role}
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    sx={{ display: { xs: "none", sm: "table-cell" } }}
+                  >
+                    {user.department}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Box>
-      {/* </Card> */}
-    </Container>
-  );
-}
+<Typography variant="subtitle" sx={{ color: "text.secondary", ml: 1, marginTop:"10px", marginBottom:"10px", display:"flex", justifyContent:"end" }}>
+  {totalUsers > 1
+    ? `${totalUsers} employees found`
+    : totalUsers === 1
+    ? `${totalUsers} employee found`
+    : "No employee found"}
+</Typography>
+
+<Box>
+  <Pagination
+    page={page}
+    onChange={handleChangePage}
+    sx={{ display: "flex", justifyContent: "center" }}
+  />
+</Box>
+   </Container>
+   );
+ }
 
 export default MemberList;

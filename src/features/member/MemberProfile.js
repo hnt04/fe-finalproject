@@ -5,7 +5,7 @@ import {
   Stack,
   Container,
   Typography,
-  Link,
+  Avatar,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import BadgeIcon from "@mui/icons-material/Badge";
@@ -59,6 +59,11 @@ function MemberProfile({user}) {
       >
         {userList?.name} Profile
       </Typography>
+      <Avatar
+                  alt="Missing image"
+                  src={`${userList?.avatarUrl}`}
+                  sx={{ margin: "auto", width: 120, height: 120 }}
+                />
       <Grid item xs={12} md={8} sx={{ marginTop: "20px" }}>
         <Card
           sx={{
