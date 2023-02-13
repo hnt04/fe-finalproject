@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import {
-  Grid,
   Box,
-  Card,
   Stack,
   Modal,
   Typography,
-  MenuItem,
-  TablePagination,
   Button,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,14 +12,10 @@ import UserTable from "../user/UserTable";
 // import AuthRequiredHR from "../../routes/AuthRequiredHR";
 import useAuth from "../../hooks/useAuth";
 import { getUsers } from "../user/userSlice";
-import ListItemButton from "@mui/material/ListItemButton";
 import { LoadingButton } from "@mui/lab";
 import { getCommendations } from "./commendationSlice";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CommendationsEachMonth from "./CommendationsEachMonth";
 import moment from "moment";
-import Skeleton from "@mui/material/Skeleton";
-
 
 // import UserCard from "../user/UserCard";
 
@@ -39,30 +31,29 @@ const style = {
   p: 4,
 };
 
-const monthOfYear = [
-  { id: "January", name: "January" },
-  { id: "February", name: "February" },
-  { id: "March", name: "March" },
-  { id: "April", name: "April" },
-  { id: "May", name: "May" },
-  { id: "June", name: "June" },
-  { id: "July", name: "July" },
-  { id: "August", name: "August" },
-  { id: "September", name: "September" },
-  { id: "October", name: "October" },
-  { id: "November", name: "November" },
-  { id: "December", name: "December" },
-];
+// const monthOfYear = [
+//   { id: "January", name: "January" },
+//   { id: "February", name: "February" },
+//   { id: "March", name: "March" },
+//   { id: "April", name: "April" },
+//   { id: "May", name: "May" },
+//   { id: "June", name: "June" },
+//   { id: "July", name: "July" },
+//   { id: "August", name: "August" },
+//   { id: "September", name: "September" },
+//   { id: "October", name: "October" },
+//   { id: "November", name: "November" },
+//   { id: "December", name: "December" },
+// ];
 
 function CommendationsBoardPage() {
   const { user } = useAuth();
   console.log("user1", user);
   const [open, setOpen] = useState(false);
 
-  const [filterName, setFilterName] = useState("");
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [filterName] = useState("");
+  const [rowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(1);
-  const [loading, setLoading] = React.useState();
 
   const dispatch = useDispatch();
 
@@ -84,7 +75,7 @@ console.log("currentPageCommendations",currentPageCommendations)
     dispatch(getUsers({ filterName, page: page, limit: rowsPerPage }));
   }, [dispatch, filterName, page, rowsPerPage]);
 
-  const [mth, setMth] = useState(() => {
+  const [mth] = useState(() => {
     const currentMonth = moment().month();
     switch (currentMonth) {
       case 0:
@@ -132,14 +123,13 @@ console.log("currentPageCommendations",currentPageCommendations)
     setOpen(false);
   };
 
-
-  const placeholder = [0, 1, 2, 3];
-  const detailSkeleton = (
-    <Stack spacing={1}>
-      <Skeleton variant="text" />
-      <Skeleton variant="rectangular" width="100%" height={300} />
-    </Stack>
-  );
+  // const placeholder = [0, 1, 2, 3];
+  // const detailSkeleton = (
+  //   <Stack spacing={1}>
+  //     <Skeleton variant="text" />
+  //     <Skeleton variant="rectangular" width="100%" height={300} />
+  //   </Stack>
+  // );
 
   return (
     <Stack width="100%">

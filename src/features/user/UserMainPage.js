@@ -1,42 +1,33 @@
 import React, { useState, useEffect } from "react";
 import {
-  Grid,
   Box,
   Card,
   Stack,
-  Modal,
   Typography,
-  MenuItem,
   TablePagination,
-  Button,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-// import ActionButton from "../user/ActionButton";
 import UserTable from "../user/UserTable";
-// import AuthRequiredHR from "../../routes/AuthRequiredHR";
 import useAuth from "../../hooks/useAuth";
 import { getUsers } from "../user/userSlice";
-// import SearchInput from "../../components/SearchInput";
-import UserCard from "../user/UserCard";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "80vw",
-  bgcolor: "#ece4f2",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+// const style = {
+//   position: "absolute",
+//   top: "50%",
+//   left: "50%",
+//   transform: "translate(-50%, -50%)",
+//   width: "80vw",
+//   bgcolor: "#ece4f2",
+//   border: "2px solid #000",
+//   boxShadow: 24,
+//   p: 4,
+// };
 
 function UserMainPage() {
   const { user } = useAuth();
   console.log("user1", user);
-//   const [open, setOpen] = useState(false);
 
-  const [filterName, setFilterName] = useState("");
+  const [filterName] = useState("");
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
 

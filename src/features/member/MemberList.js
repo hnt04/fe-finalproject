@@ -1,16 +1,11 @@
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import React, { useState, useEffect } from "react";
 import {
   Box,
   Link,
   Container,
-  Grid,
   Avatar,
   Pagination,
-  Stack,
   TableContainer,
   Table,
   TableHead,
@@ -22,18 +17,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 import { getUsers } from "../user/userSlice";
 import useAuth from "../../hooks/useAuth";
-import Skeleton from "@mui/material/Skeleton";
 
 function MemberList() {
   const { user } = useAuth();
   console.log("user", user);
 
-  const [filterName, setFilterName] = useState("");
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [filterName] = useState("");
+  const [rowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
-  const [loading, setLoading] = React.useState();
-  const [openDepart, setOpenDepart] = React.useState(false);
-  const [departItem, setDepartItem] = React.useState();
+
+  const [departItem] = React.useState();
 
   const dispatch = useDispatch();
   const { currentPageUsers, usersById, totalUsers } = useSelector(
@@ -65,13 +58,13 @@ function MemberList() {
     setPage(newPage);
   };
 
-  const placeholder = [0, 1, 2, 3];
-  const detailSkeleton = (
-    <Stack spacing={1}>
-      <Skeleton variant="text" />
-      <Skeleton variant="rectangular" width="100%" height={300} />
-    </Stack>
-  );
+  // const placeholder = [0, 1, 2, 3];
+  // const detailSkeleton = (
+  //   <Stack spacing={1}>
+  //     <Skeleton variant="text" />
+  //     <Skeleton variant="rectangular" width="100%" height={300} />
+  //   </Stack>
+  // );
 
   return (
     <Container maxWidth="lg">
@@ -176,23 +169,33 @@ function MemberList() {
           </Table>
         </TableContainer>
       </Box>
-<Typography variant="subtitle" sx={{ color: "text.secondary", ml: 1, marginTop:"10px", marginBottom:"10px", display:"flex", justifyContent:"end" }}>
-  {totalUsers > 1
-    ? `${totalUsers} employees found`
-    : totalUsers === 1
-    ? `${totalUsers} employee found`
-    : "No employee found"}
-</Typography>
+      <Typography
+        variant="subtitle"
+        sx={{
+          color: "text.secondary",
+          ml: 1,
+          marginTop: "10px",
+          marginBottom: "10px",
+          display: "flex",
+          justifyContent: "end",
+        }}
+      >
+        {totalUsers > 1
+          ? `${totalUsers} employees found`
+          : totalUsers === 1
+          ? `${totalUsers} employee found`
+          : "No employee found"}
+      </Typography>
 
-<Box>
-  <Pagination
-    page={page}
-    onChange={handleChangePage}
-    sx={{ display: "flex", justifyContent: "center" }}
-  />
-</Box>
-   </Container>
-   );
- }
+      <Box>
+        <Pagination
+          page={page}
+          onChange={handleChangePage}
+          sx={{ display: "flex", justifyContent: "center" }}
+        />
+      </Box>
+    </Container>
+  );
+}
 
 export default MemberList;
