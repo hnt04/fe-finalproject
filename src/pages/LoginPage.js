@@ -118,6 +118,7 @@ function LoginPage() {
         >
           <FCheckbox name="remember" label="Remember Me"></FCheckbox>
         </Stack>
+        <Stack sx={{display:"flex", justifyContent:"center"}}>
         <LoadingButton
           fulWidth
           size="large"
@@ -127,7 +128,7 @@ function LoginPage() {
           sx={{width:"17vw"}}
         >
           Login
-        </LoadingButton>
+        </LoadingButton></Stack>
       </FormProvider>
     </Container>
     // </Stack>
