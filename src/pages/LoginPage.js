@@ -118,17 +118,18 @@ function LoginPage() {
         >
           <FCheckbox name="remember" label="Remember Me"></FCheckbox>
         </Stack>
-        <Stack sx={{display:"flex", justifyContent:"center"}}>
-        <LoadingButton
-          fulWidth
-          size="large"
-          type="submit"
-          variant="contained"
-          loading={isSubmitting}
-          sx={{width:"17vw"}}
-        >
-          Login
-        </LoadingButton></Stack>
+        <Stack sx={{display:"flex", alignItems:"center"}}>
+          <LoadingButton
+            fulWidth
+            size="large"
+            type="submit"
+            variant="contained"
+            loading={isSubmitting}
+            sx={{ width: "17vw" }}
+          >
+            login
+          </LoadingButton>
+        </Stack>
       </FormProvider>
     </Container>
     // </Stack>
