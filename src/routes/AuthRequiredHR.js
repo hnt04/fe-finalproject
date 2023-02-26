@@ -2,7 +2,6 @@ import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import useAuth from "../hooks/useAuth";
 import LoadingScreen from "../components/LoadingScreen";
-import { Outlet } from "react-router-dom";
 
 
 function AuthRequiredHR({ children }) {

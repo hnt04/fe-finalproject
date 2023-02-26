@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
 import useAuth from '../hooks/useAuth';
-
-import { Container, Stack } from '@mui/material';
-
 import { Card } from '@mui/material';
-// import ProfileCover from '../features/user/ProfileCover';
+import ProfileCover from '../features/user/ProfileCover';
 import { styled } from "@mui/material/styles";
-import userSlice from '../features/user/userSlice';
 import UserPage from '../features/user/UserPage';
-// import ScheduleSendOutlinedIcon from '@mui/icons-material/ScheduleSendOutlined';
 
 const TabsWrapperStyle = styled("div")(({ theme }) => ({
     zIndex: 9,
@@ -32,7 +27,6 @@ function HomePage() {
 
 
   return user && (
-    <Stack>
         <Card 
             sx={{ 
                 mb: 3,
@@ -40,10 +34,9 @@ function HomePage() {
                 height: "auto",
                 position: "relative",
 
-            }}>
+            }}>{user && <ProfileCover profile={user} />}
             <UserPage  profile={user}/>
         </Card>
-    </Stack>
   );
 }
 

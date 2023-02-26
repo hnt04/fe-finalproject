@@ -16,6 +16,10 @@ import { LoadingButton } from "@mui/lab";
 import { getCommendations } from "./commendationSlice";
 import CommendationsEachMonth from "./CommendationsEachMonth";
 import moment from "moment";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import { Link as RouterLink } from "react-router-dom";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+
 
 // import UserCard from "../user/UserCard";
 
@@ -31,20 +35,6 @@ const style = {
   p: 4,
 };
 
-// const monthOfYear = [
-//   { id: "January", name: "January" },
-//   { id: "February", name: "February" },
-//   { id: "March", name: "March" },
-//   { id: "April", name: "April" },
-//   { id: "May", name: "May" },
-//   { id: "June", name: "June" },
-//   { id: "July", name: "July" },
-//   { id: "August", name: "August" },
-//   { id: "September", name: "September" },
-//   { id: "October", name: "October" },
-//   { id: "November", name: "November" },
-//   { id: "December", name: "December" },
-// ];
 
 function CommendationsBoardPage() {
   const { user } = useAuth();
@@ -123,16 +113,29 @@ console.log("currentPageCommendations",currentPageCommendations)
     setOpen(false);
   };
 
-  // const placeholder = [0, 1, 2, 3];
-  // const detailSkeleton = (
-  //   <Stack spacing={1}>
-  //     <Skeleton variant="text" />
-  //     <Skeleton variant="rectangular" width="100%" height={300} />
-  //   </Stack>
-  // );
+  const breadcrumbs = [
+    <RouterLink
+      underline="hover"
+      color="inherit"
+      to="/"
+      style={{ textDecoration: "none" }}
+    >
+      <Typography>HomePage</Typography>
+    </RouterLink>,
+    <Typography key="3" color="text.primary">
+      Commendation Board
+    </Typography>,
+  ];
 
   return (
-    <Stack width="100%">
+    <Stack width="100%" sx={{marginTop:"5%"}}>
+      <Breadcrumbs
+        separator={<NavigateNextIcon fontSize="small" />}
+        aria-label="breadcrumb"
+        sx={{ marginLeft: "2%" }}
+      >
+        {breadcrumbs}
+      </Breadcrumbs>
       <Typography
         variant="h4"
         sx={{
@@ -146,6 +149,7 @@ console.log("currentPageCommendations",currentPageCommendations)
       >
         Best Employee Of Month
       </Typography>
+      {user?.department === "HR" && (
       <Button
         onClick={handleOpen}
         sx={{
@@ -160,15 +164,14 @@ console.log("currentPageCommendations",currentPageCommendations)
         color="success"
       >
         Edit
-      </Button>
+      </Button>)}
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
-          {user?.department === "HR" ? (
+         
             <UserTable users={users} />
-          ) : (
-            <h1>You can not add Employee</h1>
-          )}
+          
         </Box>
+
       </Modal>
 
       <Stack

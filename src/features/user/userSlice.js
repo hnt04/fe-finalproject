@@ -8,13 +8,13 @@ import { POST_PER_PAGE } from "../../app/config";
 const initialState = {
   isLoading: false,
   error: null,
-  // updatedProfile: null,
   currentPageUsers: [],
   usersById: {},
   userList: [],
   currentUserById:{},
   totalPages: 1,
-  allowedUsers: []
+  allowedUsers: [],
+  selectedUser:null
 };
 
 const slice = createSlice({
@@ -53,6 +53,8 @@ const slice = createSlice({
       state.isLoading = false;
       state.error = null;
       
+      state.selectedUser = action.payload;
+
       const { users, count, totalPages } = action.payload;
       console.log("users users",users)
       console.log("action.payload users",action.payload)
@@ -60,6 +62,7 @@ const slice = createSlice({
       state.currentPageUsers = users.map((user) => user._id);
       state.totalUsers = count;
       state.totalPages = totalPages;
+
     },
 
     getSingleUserSuccess(state, action) {

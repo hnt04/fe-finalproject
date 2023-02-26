@@ -17,7 +17,6 @@ import MenuItem from "@mui/material/MenuItem";
 import EventIcon from "@mui/icons-material/Event";
 import useAuth from "../../hooks/useAuth";
 import CloseIcon from "@mui/icons-material/Close";
-// import UndoIcon from "@mui/icons-material/Undo";
 import Checkbox from "@mui/material/Checkbox";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -31,12 +30,6 @@ import DoNotDisturbAltIcon from '@mui/icons-material/DoNotDisturbAlt';
 import PersonIcon from '@mui/icons-material/Person';
 
 function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
-  // console.log("moment(tasks?.deadlineAt)", moment(tasks?.deadlineAt));
-  // console.log("moment(tasks?.createdAt)", moment(tasks?.createdAt));
-  // console.log(
-  //   "moment(tasks?.deadlineAt).diff(moment(tasks?.createdAt)",
-  //   moment(tasks?.deadlineAt).diff(moment(tasks?.createdAt), "day", true)
-  // );
   console.log("tasks in taskcard", tasks);
   console.log("task", task)
 
@@ -62,11 +55,6 @@ function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
     setAnchorEl(null);
   };
 
-  // useEffect(() => {
-  //   dispatch(() => {
-  //     dispatch(updatedTaskProfile({status}))
-  //   })
-  // }, [dispatch, status]);
   const onChangeStatus =(event) => {
     console.log("event",event.target.name)
     dispatch(updatedTaskProfile({ ...tasks, status: event.target.name }));
@@ -115,7 +103,8 @@ function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
         boxShadow: "none",
         width: "300px",
         height: "400px",
-        backgroundColor: `${tasks.status === "DONE" ? "#e3e6eb" : ""}`,
+        border:"1px solid",
+        backgroundColor: `${tasks.status === "DONE" ? "#E6EEFF" : "#FFE6E6"}`,
         borderRight: `${
           tasks?.status !== "DONE"
             ? dayLeft > 10

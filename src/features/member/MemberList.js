@@ -5,7 +5,7 @@ import {
   Link,
   Container,
   Avatar,
-  Pagination,
+  TablePagination,
   TableContainer,
   Table,
   TableHead,
@@ -17,21 +17,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 import { getUsers } from "../user/userSlice";
 import useAuth from "../../hooks/useAuth";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import SearchInput from "../../components/SearchInput";
 
 function MemberList() {
   const { user } = useAuth();
   console.log("user", user);
 
-  const [filterName] = useState("");
-  const [rowsPerPage] = React.useState(10);
+  const [filterName, setFilterName] = useState("");
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
+  const [filterDepart, setFilterDepart] = useState([]);
+  const [filterRole, setFilterRole] = useState([]);
 
   const [departItem] = React.useState();
 
   const dispatch = useDispatch();
-  const { currentPageUsers, usersById, totalUsers } = useSelector(
+  const { currentPageUsers, usersById, totalUsers, totalPages } = useSelector(
     (state) => state.user
   );
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   const users = currentPageUsers.map((userId) => usersById[userId]);
   console.log("users list", users);
@@ -41,7 +55,7 @@ function MemberList() {
       getUsers({
         filterName,
         department: departItem,
-        page: page,
+        page: page + 1,
         limit: rowsPerPage,
       })
     );
@@ -54,37 +68,58 @@ function MemberList() {
     }
   }, [dispatch, departItem]);
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+  const handleSubmit = (searchQuery) => {
+    setFilterName(searchQuery);
   };
 
-  // const placeholder = [0, 1, 2, 3];
-  // const detailSkeleton = (
-  //   <Stack spacing={1}>
-  //     <Skeleton variant="text" />
-  //     <Skeleton variant="rectangular" width="100%" height={300} />
-  //   </Stack>
-  // );
+  // const defaultValues = {
+  //   department: [],
+  //   role: [],
+  // };
+
+  // const methods = useForm({
+  //   defaultValues,
+  // });
+  // const { watch, reset } = methods;
+  // const filters = watch();
+  // const filterDepartFunc = applyFilter(filterDepart, filters);
+  // const filterRoleFunc = applyFilter(filterRole, filters);
+
+  const breadcrumbs = [
+    <RouterLink
+      underline="hover"
+      color="inherit"
+      to="/"
+      style={{ textDecoration: "none" }}
+    >
+      <Typography>HomePage</Typography>
+    </RouterLink>,
+    <Typography key="3" color="text.primary">
+      Member
+    </Typography>,
+  ];
 
   return (
-    <Container maxWidth="lg">
-      <Typography
-        variant="h4"
-        sx={{
-          color: "#616161",
-          fontWeight: "700",
-          // paddingLeft: "2%",
-          textAlign: "center",
-          fontSize: "60px",
-        }}
-        gutterBottom
+    <Container maxWidth="lg" sx={{ marginTop: "5%" }}>
+      <Breadcrumbs
+        separator={<NavigateNextIcon fontSize="small" />}
+        aria-label="breadcrumb"
+        sx={{ marginLeft: "-10vw" }}
       >
-        Company's Employees
-      </Typography>
+        {breadcrumbs}
+      </Breadcrumbs>
       <Box sx={{ overflowX: "auto" }}>
-        <TableContainer sx={{ minWidth: 800 }}>
-          <Table>
-            <TableHead>
+        <TableContainer sx={{ minWidth: 800, marginTop: "2%" }}>
+          <SearchInput handleSubmit={handleSubmit} />
+
+          <Table sx={{ marginTop: "4%" }}>
+            <TableHead
+              sx={{
+                marginTop: "2%",
+                paddingTop: "2%",
+                backgroundColor: "#800055",
+              }}
+            >
               <TableRow>
                 <TableCell>
                   <b>Employee ID</b>
@@ -108,15 +143,13 @@ function MemberList() {
                 </TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {/* <Grid
-        container
-        maxWidth="lg"
-        spacing={{ xs: 0, md: 4 }}
-        columns={{ xs: 12, sm: 12, md: 12, lg: 12 }}
-      > */}
+            <TableBody sx={{ marginTop: "2%", border: "2px dashed #800055" }}>
               {users.map((user) => (
-                <TableRow key={user._id} hover>
+                <TableRow
+                  key={user._id}
+                  hover
+                  sx={{ marginTop: "2%", border: "2px dashed #800055" }}
+                >
                   <TableCell
                     align="left"
                     sx={{ display: { xs: "none", md: "table-cell" } }}
@@ -174,7 +207,7 @@ function MemberList() {
         sx={{
           color: "text.secondary",
           ml: 1,
-          marginTop: "10px",
+          marginTop: "20px",
           marginBottom: "10px",
           display: "flex",
           justifyContent: "end",
@@ -187,15 +220,40 @@ function MemberList() {
           : "No employee found"}
       </Typography>
 
-      <Box>
-        <Pagination
-          page={page}
-          onChange={handleChangePage}
-          sx={{ display: "flex", justifyContent: "center" }}
-        />
-      </Box>
+      <Box sx={{ flexGrow: 1 }} />
+
+      <TablePagination
+        sx={{
+          "& .MuiTablePagination-selectLabel, .MuiTablePagination-select, .MuiTablePagination-selectIcon":
+            {
+              display: "center",
+            },
+        }}
+        component="div"
+        count={totalUsers ? totalUsers : 0}
+        page={page}
+        onPageChange={handleChangePage}
+        rowsPerPage={rowsPerPage}
+        rowsPerPageOptions={[10, 20]}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </Container>
   );
 }
+
+// function applyFilter(products, filters) {
+//   // FILTER PRODUCTS
+//   if (filters.gender.length > 0) {
+//     filteredProducts = products.filter((product) =>
+//       filters.gender.includes(product.gender)
+//     );
+//   }
+//   if (filters.category !== "All") {
+//     filteredProducts = products.filter(
+//       (product) => product.category === filters.category
+//     );
+//   }
+//   return filteredProducts;
+// }
 
 export default MemberList;

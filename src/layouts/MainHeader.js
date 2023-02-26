@@ -10,8 +10,7 @@ import Logo from "../components/Logo";
 import { Avatar, Divider } from "@mui/material";
 import useAuth from "../hooks/useAuth";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
-import { styled, alpha } from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
+import ListIcon from "@mui/icons-material/List";
 
 function MainHeader() {
   const { user, logout } = useAuth();
@@ -19,56 +18,25 @@ function MainHeader() {
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorElMenu, setAnchorElMenu] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
+  const mainMenuOpen = Boolean(anchorElMenu);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }));
-
-  const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": { backgroundColor: alpha(theme.palette.common.white, 0.25) },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: "250px",
-      marginTop: "10px",
-      width: "700px",
-      height: "50px",
-      borderRadius: "28px",
-    },
-  }));
-
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: "inherit",
-    "& .MuiInputBase-input": {
-      padding: theme.spacing(1, 1, 1, 0),
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("md")]: {
-        marginTop: "7px",
-        fontWeight: 300,
-        width: "700px",
-      },
-    },
-  }));
+  const handleMainMenuOpen = (event) => {
+    setAnchorElMenu(event.currentTarget);
+  };
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleMainMenuClose = () => {
+    setAnchorElMenu(null);
   };
 
   const handleLogout = async () => {
@@ -108,15 +76,6 @@ function MainHeader() {
 
       <Divider sx={{ borderStyle: "dashed" }} />
 
-      <MenuItem
-        onClick={handleMenuClose}
-        to="/me"
-        component={RouterLink}
-        sx={{ mx: 1, color: "#616161" }}
-      >
-        My Profile
-      </MenuItem>
-
       <Divider sx={{ borderStyle: "dashed" }} />
 
       <MenuItem
@@ -131,16 +90,16 @@ function MainHeader() {
       <Divider sx={{ borderStyle: "dashed" }} />
 
       {user?.department === "HR" && (
-      <MenuItem
-        onClick={handleMenuClose}
-        to="/register"
-        component={RouterLink}
-        sx={{ mx: 1, color: "#616161" }}
-      >
-        Register
-      </MenuItem>
+        <MenuItem
+          onClick={handleMenuClose}
+          to="/register"
+          component={RouterLink}
+          sx={{ mx: 1, color: "#616161" }}
+        >
+          Register
+        </MenuItem>
       )}
-      
+
       <Divider sx={{ borderStyle: "dashed" }} />
 
       <MenuItem onClick={handleLogout} sx={{ m: 1, color: "#616161" }}>
@@ -150,33 +109,116 @@ function MainHeader() {
   );
   console.log("renderMenu-Header", renderMenu);
 
+  const mainMenuId = "main-menu";
+  const renderMainMenu = (
+    <Menu
+      anchorElMenu={anchorElMenu}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      sx={{ marginTop: "8px" }}
+      id={mainMenuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={mainMenuOpen}
+      onClose={handleMainMenuClose}
+    >
+      <MenuItem
+        onClick={handleMainMenuClose}
+        to="/member"
+        component={RouterLink}
+        sx={{
+          mx: 1,
+          color: "#9500B3",
+          fontSize: "20px",
+          fontWeight: "600",
+          marginTop: "3%",
+          marginRight: "50px",
+          marginBottom: "3%",
+          "&:hover": { color: "#757575", textDecoration: "none" },
+        }}
+      >
+        Member
+      </MenuItem>
+      <Divider sx={{ borderStyle: "dashed" }} />
+
+      <MenuItem
+        onClick={handleMainMenuClose}
+        to="/commendation"
+        component={RouterLink}
+        sx={{
+          mx: 1,
+          color: "#9500B3",
+          fontSize: "20px",
+          fontWeight: "600",
+          marginTop: "3%",
+          marginRight: "50px",
+          marginBottom: "3%",
+          "&:hover": { color: "#757575", textDecoration: "none" },
+        }}
+      >
+        Commendation Page
+      </MenuItem>
+      <Divider sx={{ borderStyle: "dashed" }} />
+
+      <MenuItem
+        onClick={handleMainMenuClose}
+        to="/tasks"
+        component={RouterLink}
+        sx={{
+          mx: 1,
+          color: "#9500B3",
+          fontSize: "20px",
+          fontWeight: "600",
+          marginTop: "3%",
+          marginRight: "50px",
+          marginBottom: "3%",
+          "&:hover": { color: "#757575", textDecoration: "none" },
+        }}
+      >
+        Task
+      </MenuItem>
+    </Menu>
+  );
+
   return (
     user && (
       <Box sx={{ mb: 3 }}>
         <AppBar
           position="static"
           color="transparent"
-          sx={{ backgroundColor: "#4a148c", height: "74px" }}
+          sx={{
+            backgroundColor: "rgba(0,0,0,0.1)",
+            height: "7%",
+            width: "100%",
+            borderRadius: "0 0 20px 20px",
+            position: "fixed",
+            zIndex: "2",
+          }}
         >
           <Toolbar>
             <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <Logo />
-          </IconButton>
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              sx={{ mr: 2 }}
+            >
+              <Logo />
+            </IconButton>
             <Typography>
-              <RouterLink to="/">
+              <RouterLink to="/" style={{ textDecoration: "none" }}>
                 <Typography
                   variant="h4"
                   noWrap
                   component="div"
                   sx={{
                     display: { xs: "none", sm: "block" },
-                    color: "#f3e5f5",
+                    color: "#9500B3",
                     marginTop: "10px",
                     fontWeight: 700,
                   }}
@@ -185,73 +227,28 @@ function MainHeader() {
                 </Typography>
               </RouterLink>
             </Typography>
-
             <Box sx={{ flexGrow: 1 }} />
-            <Box>
-              <Typography>
-                <RouterLink to="/member">
-                  <Typography
-                    color="#f3e5f5"
-                    sx={{
-                      fontSize: "20px",
-                      fontWeight: "600",
-                      marginTop: "3%",
-                      marginRight:"50px",
-                      marginBottom: "3%",
-                      "&:hover": { color: "#757575", textDecoration: "none" },
-                    }}
-                  >
-                    Member
-                  </Typography>
-                </RouterLink>
-              </Typography>
-            </Box> |
-
-            <Box>
-              <RouterLink to="/commendation">
-                <Typography
-                  color="#f3e5f5"
-                  sx={{
-                    textDecoration: "none",
-                    fontSize: "20px",
-                    fontWeight: "600",
-                    marginTop: "10px",
-                    marginLeft: "50px",
-                    marginBottom: "3%",
-                    marginRight:"50px",
-                    "&:hover": { color: "#757575", textDecoration: "none" },
-                  }}
-                >
-                  Commendation Board
-                </Typography>
-              </RouterLink>
-            </Box> |
-            <Box>
-              <RouterLink to="/tasks">
-                <Typography
-                  color="#f3e5f5"
-                  sx={{
-                    fontSize: "20px",
-                    fontWeight: "600",
-                    marginTop: "10px",
-                    marginLeft: "50px",
-                    marginBottom: "3%",
-                    marginRight:"50px",
-                    "&:hover": { color: "#757575", textDecoration: "none" },
-                  }}
-                >
-                  Task
-                </Typography>
-              </RouterLink>
-            </Box> |
-
             <Box>
               <Avatar
                 onClick={handleProfileMenuOpen}
-                // src={user?.avatarUrl}
-                // alt={user?.name}
-                sx={{ width: 44, height: 44, marginTop: "10px", marginLeft:"50px" }}
+                sx={{
+                  width: 44,
+                  height: 44,
+                  marginTop: "10px",
+                  marginLeft: "50px",
+                }}
               />
+            </Box>
+            <Box>
+              <ListIcon
+                onClick={handleMainMenuOpen}
+                sx={{
+                  width: 44,
+                  height: 44,
+                  marginTop: "10px",
+                  marginLeft: "50px",
+                }}
+              />{renderMainMenu}
             </Box>
           </Toolbar>
         </AppBar>

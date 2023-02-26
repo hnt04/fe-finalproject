@@ -3,27 +3,26 @@ import useAuth from "../../hooks/useAuth";
 import {Grid,Stack} from "@mui/material";
 import PostForm from "../post/PostForm";
 import PostList from "../post/PostList";
-import ProfileAbout from "./ProfileAbout";
+import ProfileColleagues from "./ProfileColleagues";
 
-function UserPage({ profile }) {
-    console.log("profile",profile)
-    const { user } = useAuth();
-    console.log("user",user)
-    return profile && (
+function ColleaguePage({ profileColleague }) {
+  console.log("profileColleague",profileColleague)
+  // console.log("userListColleague",userList)
+
+    return profileColleague && (
       <Grid container spacing={3}>
       <Grid item xs={12} md={4}>
         <Stack spacing={3} sx={{marginLeft:"4vw", marginTop:"4vh"}}>
-          <ProfileAbout profile={profile} />
+          <ProfileColleagues profileColleague={profileColleague} />
         </Stack>
       </Grid>
         <Grid item xs={12} md={8}>
           <Stack spacing={3} sx={{  marginTop:"4vh"}}>
-            {user?._id === profile?._id && <PostForm />}
-            <PostList userId={profile?._id} />
+            <PostList userColleagueId={profileColleague?._id} />
           </Stack>
       </Grid>
       </Grid>
     )
 }
 
-export default UserPage;
+export default ColleaguePage;

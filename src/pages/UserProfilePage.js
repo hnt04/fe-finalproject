@@ -1,30 +1,32 @@
 import React, { useEffect } from "react";
 import { Card, Container } from "@mui/material";
-import Profile from "../features/user/Profile";
-// import ProfileCover from "../features/user/ProfileCover";
+import ProfileColleagueCover from "../features/user/ProfileColleagueCover";
 import { useParams } from "react-router-dom";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../features/user/userSlice";
+import {   useDispatch, useSelector } from "react-redux";
 import LoadingScreen from "../components/LoadingScreen";
+import { getSingleUser } from "../features/user/userSlice";
+import UserPage from "../features/user/UserPage";
+import ColleaguePage from "../features/user/ColleaguePage";
+
+// import UserPage from "../features/user/UserPage";
+// import ColleaguePage from "../features/user/ColleaguePage";
 
 function UserProfilePage() {
-  const params = useParams();
-  const userId = params.userId;
-  const dispatch = useDispatch();
-  const { selectedUser, isLoading } = useSelector(
-    (state) => state.user,
-    shallowEqual
+  const { userList,isLoading } = useSelector(
+    (state) => state.user
   );
-  console.log("selectedUser", selectedUser)
+  console.log("userList",userList)
+
+  let  { userId }  = useParams();
+  console.log("userId", userId )
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userId) {
-      dispatch(getUsers(userId));
-    }
-  }, [dispatch, userId]);
-
+    dispatch(getSingleUser(userId));
+  }, [dispatch, userId])
   return (
-    <Container>
+  <>
       {isLoading ? (
         <LoadingScreen />
       ) : (
@@ -32,15 +34,17 @@ function UserProfilePage() {
           <Card
             sx={{
               mb: 3,
-              height: 280,
+              marginTop:"4%",
+              // height: 280,
               position: "relative",
-            }}>
-          {/* > {selectedUser && <ProfileCover profile={selectedUser} />} */}
+            }}
+          > {userList && <ProfileColleagueCover profileColleague={userList} />}
+          <ColleaguePage profileColleague={userList} />
           </Card>
-          {selectedUser && <Profile profile={selectedUser} />}
+          
         </>
       )}
-    </Container>
+      </>
   );
 }
 

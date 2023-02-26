@@ -1,17 +1,8 @@
-import {
-  Grid,
-  Box,
-  Card,
-  Stack,
-  Container,
-  Typography,
-  Avatar,
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
-import BadgeIcon from "@mui/icons-material/Badge";
 import EmailIcon from "@mui/icons-material/Email";
-import useAuth from "../../hooks/useAuth";
+import { styled } from "@mui/material/styles";
+import { Card, Typography, Stack, Box } from "@mui/material";
 import Grid3x3Icon from "@mui/icons-material/Grid3x3";
+import BadgeIcon from "@mui/icons-material/Badge";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
@@ -24,38 +15,14 @@ const IconStyle = styled(Box)(({ theme }) => ({
   marginRight: theme.spacing(2),
 }));
 
-function Profile({ profile }) {
-  console.log("profile",profile)
-  const { user } = useAuth();
-  console.log("userprofile", user);
+function ProfileColleagues({profileColleague}) {
+  const { employeeId, name, email, department, role, phone } = profileColleague;
+  console.log("profileColleague",profileColleague)
 
   return (
-    <Container
-      maxWidth="100vw"
-      sx={{ height: "70vh", width: "75vw", paddingTop: "1%", marginTop: "2%" }}
-    >
-      <Typography
-        variant="h4"
-        sx={{ color: "#616161", fontWeight: "700", paddingLeft: "2%", textAlign:"center", fontSize:"60px"}}
-        gutterBottom
-      >
-        MY PROFILE
-      </Typography>
-      <Avatar
-                  alt="Missing image"
-                  src={`${user?.avatarUrl}`}
-                  sx={{ margin: "auto", width: 120, height: 120 }}
-                />
-      <Grid item xs={12} md={8} sx={{ marginTop: "20px" }}>
-        <Card
-          sx={{
-            p: 3,
-            backgroundColor: "#2F4F4",
-            marginTop: "2%",
-          }}
-        >
-          <Stack spacing={2} sx={{ p: 3, backgroundColor: "#e0e0e06b" }}>
-            {/* <Typography variant="body2">{aboutMe}</Typography> */}
+    <Card>
+      <Stack spacing={2} sx={{ p: 3, backgroundColor: "#ebebeb", width:"100%" }}>
+            <Typography sx={{color:"#40004D",fontSize:"32px",fontWeight:"700",textAlign:"center"}}>{name} Profile</Typography>
 
             <Stack
               direction="row"
@@ -68,12 +35,12 @@ function Profile({ profile }) {
                 sx={{
                   color: "#70809",
                   fontSize: "24px",
-                  fontWeight: "700",
+                  fontWeight: "500",
                   marginLeft: "50px",
                   marginTop:"20px"
                 }}
               >
-                {user?.employeeId}
+                {employeeId}
               </Typography>
             </Stack>
 
@@ -85,11 +52,11 @@ function Profile({ profile }) {
                 sx={{
                   color: "#70809",
                   fontSize: "24px",
-                  fontWeight: "700",
+                  fontWeight: "500",
                   marginLeft: "50px",
                 }}
               >
-                {user?.name}
+                {name}
               </Typography>
             </Stack>
 
@@ -104,11 +71,11 @@ function Profile({ profile }) {
                 sx={{
                   color: "#70809",
                   fontSize: "24px",
-                  fontWeight: "700",
+                  fontWeight: "500",
                   marginLeft: "50px",
                 }}
               >
-                {user?.email}
+                {email}
               </Typography>
             </Stack>
 
@@ -123,11 +90,11 @@ function Profile({ profile }) {
                 sx={{
                   color: "#70809",
                   fontSize: "24px",
-                  fontWeight: "700",
+                  fontWeight: "500",
                   marginLeft: "50px",
                 }}
               >
-                {user?.department}
+                {department}
               </Typography>
             </Stack>
 
@@ -142,11 +109,11 @@ function Profile({ profile }) {
                 sx={{
                   color: "#70809",
                   fontSize: "24px",
-                  fontWeight: "700",
+                  fontWeight: "500",
                   marginLeft: "50px",
                 }}
               >
-                {user?.role}
+                {role}
               </Typography>
             </Stack>
 
@@ -161,18 +128,16 @@ function Profile({ profile }) {
                 sx={{
                   color: "#70809",
                   fontSize: "24px",
-                  fontWeight: "700",
+                  fontWeight: "500",
                   marginLeft: "50px",
                 }}
               >
-                {user?.phone}
+                {phone}
               </Typography>
             </Stack>
           </Stack>
-        </Card>
-      </Grid>
-    </Container>
+    </Card>
   );
 }
 
-export default Profile;
+export default ProfileColleagues;

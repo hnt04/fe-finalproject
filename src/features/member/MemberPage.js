@@ -7,8 +7,6 @@ import { Link as RouterLink } from "react-router-dom";
 
 
 function MemberPage() {
-  //   const { user } = useAuth;
-  //   console.log("user", user);
   return (
     <Container>
       <Grid container spacing={3}>

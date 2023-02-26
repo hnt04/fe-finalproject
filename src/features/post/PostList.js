@@ -21,7 +21,7 @@ const style = {
   p: 4,
 };
 
-function PostList({ userId, id }) {
+function PostList({ userId, userColleagueId }) {
   const [page, setPage] = useState(1);
   const { currentPagePosts, postsById, isLoading, totalPosts } = useSelector(
     (state) => state.post
@@ -54,6 +54,7 @@ function PostList({ userId, id }) {
   useEffect(() => {
     if (userId) dispatch(getPosts({ userId, page }));
   }, [dispatch, userId, page]);
+
 
   return (
     <>

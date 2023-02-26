@@ -49,6 +49,8 @@ function LoginPage() {
 
   const onSubmit = async (data) => {
     const from = location.state?.from?.pathname || "/";
+    console.log("data", data);
+
     let { email, password } = data;
 
     try {
@@ -69,26 +71,26 @@ function LoginPage() {
       sx={{ backgroundColor: "rgba(245, 248, 250, 0.918)", height: "72vh" }}
     >
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-        <Typography
-          component="h4"
-          variant="h1"
-          sx={{
-            display: { xs: "none", md: "block" },
-            textAlign: "center",
-            cursor: "pointer",
-            color: "#616161",
-            paddingTop: "8vh",
-            marginBottom: "4vh",
-          }}
-        >
-          Log In
-        </Typography>
         <Stack spacing={3}>
-          {!!errors.responseError && (
+          <Typography
+            component="h4"
+            variant="h1"
+            sx={{
+              display: { md: "block" },
+              textAlign: "center",
+              cursor: "pointer",
+              color: "#616161",
+              paddingTop: "8vh",
+              marginBottom: "4vh",
+            }}
+          >
+            Log In
+          </Typography>
+          {/* {!!errors.responseError && (
             <Alert variant="filled" severity="error">
               {errors.responseError.message}
             </Alert>
-          )}
+          )} */}
           <FTextField name="email" label="Email address" />
 
           <FTextField
@@ -118,10 +120,10 @@ function LoginPage() {
         >
           <FCheckbox name="remember" label="Remember Me"></FCheckbox>
         </Stack>
-        <Stack sx={{display:"flex", alignItems:"center"}}>
+        <Stack sx={{ display: "flex", alignItems: "center" }}>
           <LoadingButton
             fulWidth
-            size="large"
+            // size="large"
             type="submit"
             variant="contained"
             loading={isSubmitting}
@@ -132,7 +134,6 @@ function LoginPage() {
         </Stack>
       </FormProvider>
     </Container>
-    // </Stack>
   );
 }
 

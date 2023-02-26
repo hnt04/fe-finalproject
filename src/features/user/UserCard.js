@@ -11,20 +11,8 @@ import RecommendIcon from "@mui/icons-material/Recommend";
 import { getSingleUser } from "./userSlice";
 import { useDispatch } from "react-redux";
 
-
-
 function UserCard({ profile }) {
   const { user } = useAuth();
-  // const currentUserId = user._id;
-  // const { _id: name, avatarUrl, email } = profile;
-
-  // const actionButton = (
-  //   <ActionButton
-  //         />
-  // );
-
-  // const [userError, setMovieError] = useState();
-
   let  userId  = useParams();
   console.log("userId", userId )
 
