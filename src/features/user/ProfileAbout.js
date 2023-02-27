@@ -22,13 +22,13 @@ function ProfileAbout() {
   return (
     <Card>
       <Stack spacing={2} sx={{ p: 3, backgroundColor: "#ebebeb" }}>
-            <Typography sx={{color:"#40004D",fontSize:"32px",fontWeight:"700",textAlign:"center"}}>MY PROFILE</Typography>
+            <Typography sx={{color:"#40004D",fontSize:"32px",fontWeight:"700",textAlign:"center"}}>Profile</Typography>
 
             <Stack
               direction="row"
               sx={{ paddingBottom: "20px" }}
             >
-              <IconStyle sx={{ marginLeft: "50px",marginTop:"20px"}}>
+              <IconStyle sx={{ marginLeft: "30px",marginTop:"20px"}}>
                 <Grid3x3Icon />
               </IconStyle>
               <Typography
@@ -36,7 +36,7 @@ function ProfileAbout() {
                   color: "#70809",
                   fontSize: "24px",
                   fontWeight: "500",
-                  marginLeft: "50px",
+                  marginLeft: "30px",
                   marginTop:"20px"
                 }}
               >
@@ -45,7 +45,7 @@ function ProfileAbout() {
             </Stack>
 
             <Stack direction="row" sx={{ paddingBottom: "20px" }}>
-              <IconStyle sx={{ marginLeft: "50px" }}>
+              <IconStyle sx={{ marginLeft: "30px" }}>
                 <BadgeIcon />
               </IconStyle>
               <Typography
@@ -53,7 +53,7 @@ function ProfileAbout() {
                   color: "#70809",
                   fontSize: "24px",
                   fontWeight: "500",
-                  marginLeft: "50px",
+                  marginLeft: "30px",
                 }}
               >
                 {user?.name}
@@ -64,7 +64,7 @@ function ProfileAbout() {
               direction="row"
               sx={{ paddingBottom: "20px", marginLeft: "50px" }}
             >
-              <IconStyle sx={{ marginLeft: "50px" }}>
+              <IconStyle sx={{ marginLeft: "30px" }}>
                 <EmailIcon />
               </IconStyle>
               <Typography
@@ -72,7 +72,7 @@ function ProfileAbout() {
                   color: "#70809",
                   fontSize: "24px",
                   fontWeight: "500",
-                  marginLeft: "50px",
+                  marginLeft: "30px",
                 }}
               >
                 {user?.email}
@@ -83,7 +83,7 @@ function ProfileAbout() {
               direction="row"
               sx={{ paddingBottom: "20px", marginLeft: "50px" }}
             >
-              <IconStyle sx={{ marginLeft: "50px" }}>
+              <IconStyle sx={{ marginLeft: "30px" }}>
                 <ApartmentIcon />
               </IconStyle>
               <Typography
@@ -91,7 +91,7 @@ function ProfileAbout() {
                   color: "#70809",
                   fontSize: "24px",
                   fontWeight: "500",
-                  marginLeft: "50px",
+                  marginLeft: "30px",
                 }}
               >
                 {user?.department}
@@ -102,7 +102,7 @@ function ProfileAbout() {
               direction="row"
               sx={{ paddingBottom: "20px", marginLeft: "50px" }}
             >
-              <IconStyle sx={{ marginLeft: "50px" }}>
+              <IconStyle sx={{ marginLeft: "30px" }}>
                 <AssignmentIndIcon />
               </IconStyle>
               <Typography
@@ -110,7 +110,7 @@ function ProfileAbout() {
                   color: "#70809",
                   fontSize: "24px",
                   fontWeight: "500",
-                  marginLeft: "50px",
+                  marginLeft: "30px",
                 }}
               >
                 {user?.role}
@@ -119,9 +119,9 @@ function ProfileAbout() {
 
             <Stack
               direction="row"
-              sx={{ paddingBottom: "20px", marginLeft: "50px" }}
+              sx={{ paddingBottom: "20px", marginLeft: "30px" }}
             >
-              <IconStyle sx={{ marginLeft: "50px" }}>
+              <IconStyle sx={{ marginLeft: "30px" }}>
                 <ContactPhoneIcon />
               </IconStyle>
               <Typography
@@ -129,7 +129,7 @@ function ProfileAbout() {
                   color: "#70809",
                   fontSize: "24px",
                   fontWeight: "500",
-                  marginLeft: "50px",
+                  marginLeft: "30px",
                 }}
               >
                 {user?.phone}
