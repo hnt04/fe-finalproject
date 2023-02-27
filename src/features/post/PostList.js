@@ -99,7 +99,7 @@ function PostList({ userId, userColleagueId }) {
             loading={isLoading}
             onClick={() => setPage((page) => page + 1)}
             disabled={Boolean(totalPosts) && posts.length >= totalPosts}
-            sx={{marginBottom:"20px", marginRight:"500px"}}
+            // sx={{marginBottom:"20px", marginRight:"500px"}}
           >
             Load more
           </LoadingButton>
