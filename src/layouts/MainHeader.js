@@ -193,7 +193,7 @@ function MainHeader() {
           color="transparent"
           sx={{
             backgroundColor: "rgba(0,0,0,0.1)",
-            height: "7%",
+            // height: "7%",
             width: "100%",
             borderRadius: "0 0 20px 20px",
             position: "fixed",
@@ -234,7 +234,7 @@ function MainHeader() {
                 sx={{
                   width: 44,
                   height: 44,
-                  marginTop: "10px",
+                  marginTop: "2px",
                   marginLeft: "50px",
                 }}
               />
