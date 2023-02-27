@@ -11,6 +11,7 @@ const DropZoneStyle = styled("div")(({ theme }) => ({
   position: "relative",
   height: 200,
   padding: theme.spacing(3, 1),
+  width:"56vw",
   borderRadius: theme.shape.borderRadius,
   transition: theme.transitions.create("padding"),
   backgroundColor: "#F4F6F8",
@@ -31,7 +32,7 @@ function UploadSingleFile({ error = false, file, helperText, sx, ...other }) {
   });
 
   return (
-    <Box sx={{ width: "100%", ...sx }}>
+    <Box sx={{ maxWidth: "100%", ...sx }}>
       <DropZoneStyle
         {...getRootProps()}
         sx={{

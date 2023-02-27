@@ -63,9 +63,9 @@ function PostForm() {
   };
 
   return (
-    <Card sx={{ p: 3, width: "60vw", backgroundColor: "#ebebeb" }}>
+    <Card sx={{ p: 3, width: "56vw", backgroundColor: "#ebebeb"}}>
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-        <Stack className="postForm" spacing={2}>
+        <Stack className="postForm" spacing={2} >
           <FTextField
             name="content"
             multiline
@@ -94,6 +94,7 @@ function PostForm() {
                 accept="image/*"
                 // maxSize={3145728}
                 onDrop={handleDrop}
+                width="50%"
               />
             </Box>
           </Grid>

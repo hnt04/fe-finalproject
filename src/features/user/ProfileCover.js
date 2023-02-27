@@ -11,7 +11,8 @@ function ProfileCover({ profile }) {
   } = profile;
 
   return (
-    <Box sx={{marginTop:"4%",backgroundColor:"#E6CCFF",padding:"2%"}}>
+    <Box sx={{marginTop:"4%",backgroundColor:"#E6CCFF",padding:"2%",marginLeft: "10%", marginRight:"10%"
+  }}>
         <Avatar
           src={avatarUrl}
           alt={name}

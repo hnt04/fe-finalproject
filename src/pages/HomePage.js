@@ -35,7 +35,7 @@ function HomePage() {
                 position: "relative",
 
             }}>{user && <ProfileCover profile={user} />}
-            <UserPage  profile={user}/>
+            <UserPage profile={user}/>
         </Box>
   );
 }

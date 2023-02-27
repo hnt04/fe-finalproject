@@ -20,7 +20,7 @@ function ProfileAbout() {
   const { user } = useAuth();
 
   return (
-    <Card>
+    <Card sx={{marginLeft:"20%"}}>
       <Stack spacing={2} sx={{ p: 3, backgroundColor: "#ebebeb" }}>
             <Typography sx={{color:"#40004D",fontSize:"32px",fontWeight:"700",textAlign:"center"}}>Profile</Typography>
 

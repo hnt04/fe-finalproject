@@ -77,7 +77,7 @@ function PostCard({ post, handleChoose, handleChooseEdit }) {
   );
 
   return (
-    <Card sx={{ width: "60vw", backgroundColor: "#f7fafa" }}>
+    <Card sx={{ width: "56vw", backgroundColor: "#f7fafa" }}>
       {user?.name === post?.author?.name ? (
       <CardHeader
         disableTypography
