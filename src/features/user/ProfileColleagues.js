@@ -20,7 +20,7 @@ function ProfileColleagues({profileColleague}) {
   console.log("profileColleague",profileColleague)
 
   return (
-    <Card>
+    <Card sx={{marginLeft:{xs : "6%", md:"20%"}, width:"84%"}}>
       <Stack spacing={2} sx={{ p: 3, backgroundColor: "#ebebeb", width:"100%" }}>
             <Typography sx={{color:"#40004D",fontSize:"32px",fontWeight:"700",textAlign:"center"}}>{name} Profile</Typography>
 

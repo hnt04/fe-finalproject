@@ -9,7 +9,7 @@ function ProfileColleagueCover({ profileColleague }) {
   console.log("profileColleagueCover",profileColleague)
 
   return (
-    <Container sx={{marginTop:"4%",backgroundColor:"#E6CCFF",padding:"2%"}}>
+    <Box sx={{marginTop:"4%",backgroundColor:"#E6CCFF",padding:"2%", marginLeft: "10%", marginRight:"10%"}}>
         <Avatar
           src={avatarUrl}
           alt={name}
@@ -32,7 +32,7 @@ function ProfileColleagueCover({ profileColleague }) {
         >
           <Typography sx={{color:"#4D0019", marginTop:"5px", marginLeft:"-25px"}} variant="h4">{name}</Typography>
         </Box>
-    </Container>
+    </Box>
   );
 }
 

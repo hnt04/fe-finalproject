@@ -72,19 +72,6 @@ function MemberList() {
     setFilterName(searchQuery);
   };
 
-  // const defaultValues = {
-  //   department: [],
-  //   role: [],
-  // };
-
-  // const methods = useForm({
-  //   defaultValues,
-  // });
-  // const { watch, reset } = methods;
-  // const filters = watch();
-  // const filterDepartFunc = applyFilter(filterDepart, filters);
-  // const filterRoleFunc = applyFilter(filterRole, filters);
-
   const breadcrumbs = [
     <RouterLink
       underline="hover"
@@ -104,7 +91,7 @@ function MemberList() {
       <Breadcrumbs
         separator={<NavigateNextIcon fontSize="small" />}
         aria-label="breadcrumb"
-        sx={{ marginLeft: "-10vw" }}
+        sx={{ marginLeft: {xs:"10%", md:"-10vw"} }}
       >
         {breadcrumbs}
       </Breadcrumbs>

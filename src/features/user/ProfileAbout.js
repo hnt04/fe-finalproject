@@ -20,8 +20,8 @@ function ProfileAbout() {
   const { user } = useAuth();
 
   return (
-    <Card sx={{marginLeft:"20%"}}>
-      <Stack spacing={2} sx={{ p: 3, backgroundColor: "#ebebeb" }}>
+    <Card sx={{marginLeft:{xs : "6%", md:"20%"}, width:"84%"}}>
+      <Stack spacing={2} sx={{ p: 2, backgroundColor: "#ebebeb" }}>
             <Typography sx={{color:"#40004D",fontSize:"32px",fontWeight:"700",textAlign:"center"}}>Profile</Typography>
 
             <Stack

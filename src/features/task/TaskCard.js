@@ -17,7 +17,8 @@ import MenuItem from "@mui/material/MenuItem";
 import EventIcon from "@mui/icons-material/Event";
 import useAuth from "../../hooks/useAuth";
 import CloseIcon from "@mui/icons-material/Close";
-import Checkbox from "@mui/material/Checkbox";
+import RadioGroup from '@mui/material/RadioGroup';
+import Radio from '@mui/material/Radio';
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
@@ -45,7 +46,12 @@ function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
-  const [taskStatus, setTaskStatus] = React.useState("PENDING");
+  const [taskStatus, setTaskStatus] = React.useState({
+    WORKING: true,
+    REVIEW: false,
+    PENDING: false,
+    DONE:false
+  });
 
   const isMenuOpen = Boolean(anchorEl);
 
@@ -59,6 +65,9 @@ function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
     console.log("event",event.target.name)
     dispatch(updatedTaskProfile({ ...tasks, status: event.target.name }));
   };
+
+  const {WORKING,REVIEW,PENDING,DONE} = taskStatus
+  const error = [WORKING,REVIEW,PENDING,DONE].filter((v) => v).length !== 2;
 
   const menuId = "option-menu";
   const renderMenuTask = (
@@ -164,25 +173,25 @@ function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
         ))}
       </Stack>
       <Divider light />
-      <FormControl sx={{marginTop:"10px"}} component="fieldset">
+      <FormControl sx={{marginTop:"10px"}} component="fieldset"  error={error}>
         <FormLabel component="legend">Process:</FormLabel>
-        <FormGroup aria-label="position">
+        <RadioGroup aria-label="position">
           <FormControlLabel
             value="PENDING"
-            control={<Checkbox />}
+            control={<Radio name="PENDING" onChange={onChangeStatus}  />}
             label="PENDING"
             labelPlacement="PENDING"
           />
           <FormControlLabel
             value="WORKING"
-            control={<Checkbox name="WORKING" onChange={onChangeStatus} />}
+            control={<Radio  name="WORKING" onChange={onChangeStatus} />}
             label="WORKING"
             labelPlacement="WORKING"
           />
           {user?._id === tasks.assigner ? (
             <FormControlLabel
               value="REVIEW"
-              control={<Checkbox name="REVIEW" onChange={onChangeStatus} />}
+              control={<Radio name="REVIEW" onChange={onChangeStatus} />}
               label="REVIEW"
               labelPlacement="REVIEW"
             />
@@ -192,7 +201,7 @@ function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
           {user?._id === tasks.assigner ? (
             <FormControlLabel
               value="DONE"
-              control={<Checkbox name="DONE" onChange={onChangeStatus} />}
+              control={<Radio name="DONE" onChange={onChangeStatus} />}
               label="DONE"
               labelPlacement="DONE"
             />
@@ -202,14 +211,14 @@ function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
           {user?._id === tasks.assigner ? (
             <FormControlLabel
               value="ARCHIVE"
-              control={<Checkbox name="ARCHIVE" onChange={onChangeStatus} />}
+              control={<Radio name="ARCHIVE" onChange={onChangeStatus} />}
               label="ARCHIVE"
               labelPlacement="ARCHIVE"
             />
           ) : (
             <Typography><DoNotDisturbAltIcon /> ARCHIVE - You can not choose this status</Typography>
           )}
-        </FormGroup>
+        </RadioGroup>
       </FormControl>
       {renderMenuTask}
     </Card>

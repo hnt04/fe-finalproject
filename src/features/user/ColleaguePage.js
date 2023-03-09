@@ -17,7 +17,7 @@ function ColleaguePage({ profileColleague }) {
         </Stack>
       </Grid>
         <Grid item xs={12} md={8}>
-          <Stack spacing={3} sx={{  marginTop:"4vh"}}>
+          <Stack spacing={3} sx={{  marginTop:"4vh", marginLeft:{xs : "8%", md: "0%"}}}>
             <PostList userColleagueId={profileColleague?._id} />
           </Stack>
       </Grid>

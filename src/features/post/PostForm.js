@@ -63,7 +63,7 @@ function PostForm() {
   };
 
   return (
-    <Card sx={{ p: 3, width: "56vw", backgroundColor: "#ebebeb"}}>
+    <Card sx={{ p: 3, width: {xs:"90%", md:"85%"}, backgroundColor: "#ebebeb"}}>
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <Stack className="postForm" spacing={2} >
           <FTextField

@@ -151,6 +151,7 @@ export const createTask = ({ userId, task_name, handler, description, status, de
       console.log("response", response)
       dispatch(slice.actions.updatedTaskProfileSuccess(response));
       toast.success("Update Task successfully");
+      dispatch(getTaskOfId());
     } catch (error) {
       dispatch(slice.actions.hasError(error.message));
       toast.error(error.message);
