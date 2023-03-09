@@ -87,144 +87,146 @@ function MemberList() {
   ];
 
   return (
-    <Container maxWidth="lg" sx={{ marginTop: "5%" }}>
+    <Box  sx={{ marginTop: "4%"}}>
       <Breadcrumbs
         separator={<NavigateNextIcon fontSize="small" />}
         aria-label="breadcrumb"
-        sx={{ marginLeft: {xs:"10%", md:"-10vw"} }}
+        sx={{ marginLeft:  "2%"  }}
       >
         {breadcrumbs}
       </Breadcrumbs>
-      <Box sx={{ overflowX: "auto" }}>
-        <TableContainer sx={{ minWidth: 800, marginTop: "2%" }}>
-          <SearchInput handleSubmit={handleSubmit} />
+      <Container maxWidth="lg">
+        <Box sx={{ overflowX: "auto" }}>
+          <TableContainer sx={{ minWidth: 800, marginTop: "2%" }}>
+            <SearchInput handleSubmit={handleSubmit} />
 
-          <Table sx={{ marginTop: "4%" }}>
-            <TableHead
-              sx={{
-                marginTop: "2%",
-                paddingTop: "2%",
-                backgroundColor: "#800055",
-              }}
-            >
-              <TableRow>
-                <TableCell>
-                  <b>Employee ID</b>
-                </TableCell>
-                <TableCell sx={{ width: { xs: "20%", sm: "25%" } }}>
-                  <b>Name</b>
-                </TableCell>
-                <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
-                  <b>Email</b>
-                </TableCell>
-                <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
-                  <b>Role</b>
-                </TableCell>
-                <TableCell
-                  sx={{
-                    display: { xs: "none", sm: "table-cell" },
-                    width: "20%",
-                  }}
-                >
-                  <b>Department</b>
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody sx={{ marginTop: "2%", border: "2px dashed #800055" }}>
-              {users.map((user) => (
-                <TableRow
-                  key={user._id}
-                  hover
-                  sx={{ marginTop: "2%", border: "2px dashed #800055" }}
-                >
-                  <TableCell
-                    align="left"
-                    sx={{ display: { xs: "none", md: "table-cell" } }}
-                  >
-                    {user.employeeId}
+            <Table sx={{ marginTop: "4%" }}>
+              <TableHead
+                sx={{
+                  marginTop: "2%",
+                  paddingTop: "2%",
+                  backgroundColor: "#800055",
+                }}
+              >
+                <TableRow>
+                  <TableCell>
+                    <b>Employee ID</b>
+                  </TableCell>
+                  <TableCell sx={{ width: { xs: "20%", sm: "25%" } }}>
+                    <b>Name</b>
+                  </TableCell>
+                  <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
+                    <b>Email</b>
+                  </TableCell>
+                  <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
+                    <b>Role</b>
                   </TableCell>
                   <TableCell
                     sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      cursor: "pointer",
+                      display: { xs: "none", sm: "table-cell" },
+                      width: "20%",
                     }}
                   >
-                    <Avatar
-                      alt={user?.name}
-                      src={user?.avatarUrl}
-                      sx={{ mr: 2 }}
-                    />
-
-                    <Link
-                      variant="subtitle2"
-                      sx={{ fontWeight: 600 }}
-                      component={RouterLink}
-                      to={`/users/${user._id}`}
-                    >
-                      {user.name}
-                    </Link>
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    sx={{ display: { xs: "none", md: "table-cell" } }}
-                  >
-                    {user.email}
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    sx={{ display: { xs: "none", md: "table-cell" } }}
-                  >
-                    {user.role}
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    sx={{ display: { xs: "none", sm: "table-cell" } }}
-                  >
-                    {user.department}
+                    <b>Department</b>
                   </TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Box>
-      <Typography
-        variant="subtitle"
-        sx={{
-          color: "text.secondary",
-          ml: 1,
-          marginTop: "20px",
-          marginBottom: "10px",
-          display: "flex",
-          justifyContent: "end",
-        }}
-      >
-        {totalUsers > 1
-          ? `${totalUsers} employees found`
-          : totalUsers === 1
-          ? `${totalUsers} employee found`
-          : "No employee found"}
-      </Typography>
+              </TableHead>
+              <TableBody sx={{ marginTop: "2%", border: "2px dashed #800055" }}>
+                {users.map((user) => (
+                  <TableRow
+                    key={user._id}
+                    hover
+                    sx={{ marginTop: "2%", border: "2px dashed #800055" }}
+                  >
+                    <TableCell
+                      align="left"
+                      sx={{ display: { xs: "none", md: "table-cell" } }}
+                    >
+                      {user.employeeId}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <Avatar
+                        alt={user?.name}
+                        src={user?.avatarUrl}
+                        sx={{ mr: 2 }}
+                      />
 
-      <Box sx={{ flexGrow: 1 }} />
+                      <Link
+                        variant="subtitle2"
+                        sx={{ fontWeight: 600 }}
+                        component={RouterLink}
+                        to={`/users/${user._id}`}
+                      >
+                        {user.name}
+                      </Link>
+                    </TableCell>
+                    <TableCell
+                      align="left"
+                      sx={{ display: { xs: "none", md: "table-cell" } }}
+                    >
+                      {user.email}
+                    </TableCell>
+                    <TableCell
+                      align="left"
+                      sx={{ display: { xs: "none", md: "table-cell" } }}
+                    >
+                      {user.role}
+                    </TableCell>
+                    <TableCell
+                      align="left"
+                      sx={{ display: { xs: "none", sm: "table-cell" } }}
+                    >
+                      {user.department}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Box>
+        <Typography
+          variant="subtitle"
+          sx={{
+            color: "text.secondary",
+            ml: 1,
+            marginTop: "20px",
+            marginBottom: "10px",
+            display: "flex",
+            justifyContent: "end",
+          }}
+        >
+          {totalUsers > 1
+            ? `${totalUsers} employees found`
+            : totalUsers === 1
+            ? `${totalUsers} employee found`
+            : "No employee found"}
+        </Typography>
 
-      <TablePagination
-        sx={{
-          "& .MuiTablePagination-selectLabel, .MuiTablePagination-select, .MuiTablePagination-selectIcon":
-            {
-              display: "center",
-            },
-        }}
-        component="div"
-        count={totalUsers ? totalUsers : 0}
-        page={page}
-        onPageChange={handleChangePage}
-        rowsPerPage={rowsPerPage}
-        rowsPerPageOptions={[10, 20]}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Container>
+        <Box sx={{ flexGrow: 1 }} />
+
+        <TablePagination
+          sx={{
+            "& .MuiTablePagination-selectLabel, .MuiTablePagination-select, .MuiTablePagination-selectIcon":
+              {
+                display: "center",
+              },
+          }}
+          component="div"
+          count={totalUsers ? totalUsers : 0}
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          rowsPerPageOptions={[10, 20]}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Container>
+    </Box>
   );
 }
 

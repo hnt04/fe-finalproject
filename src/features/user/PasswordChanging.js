@@ -10,7 +10,7 @@ import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { FormProvider, FTextField, FUploadAvatar } from "../../components/form";
+import { FormProvider, FTextField,  } from "../../components/form";
 
 const UpdateUserSchema = Yup.object().shape({
   password: Yup.string().required("Password is required"),
