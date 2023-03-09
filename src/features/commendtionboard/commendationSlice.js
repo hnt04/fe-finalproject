@@ -75,7 +75,9 @@ export const getCommendations = ({month, page = 1, limit = POST_PER_PAGE}) => as
     dispatch(
       slice.actions.getCommendationSuccess(response.commendations)
     );
+    toast.success("Get Commendation successfully");
     console.log("response get Commendation", response)
+    
   } catch (error) {
     dispatch(slice.actions.hasError(error.message));
     toast.error(error.message);

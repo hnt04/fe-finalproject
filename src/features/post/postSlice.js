@@ -163,7 +163,7 @@ export const sendPostReaction = ({ postId, emoji }) => async (dispatch) => {
       dispatch(slice.actions.updatedPostSuccess(response));
       console.log("response update post", response)
       toast.success("Update Post successfully");
-
+      dispatch(getPosts())
     } catch (error) {
       dispatch(slice.actions.hasError(error.message));
       toast.error(error.message);
