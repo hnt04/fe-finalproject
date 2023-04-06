@@ -6,9 +6,7 @@ import PostList from "../post/PostList";
 import ProfileAbout from "./ProfileAbout";
 
 function UserPage({ profile }) {
-    console.log("profile",profile)
     const { user } = useAuth();
-    console.log("user",user)
     return profile && (
       <Grid container spacing={3} >
       <Grid item xs={12} md={4} >
@@ -17,7 +15,7 @@ function UserPage({ profile }) {
         </Stack>
       </Grid>
         <Grid item xs={12} md={8}>
-          <Stack spacing={3} sx={{  marginTop:"4vh", marginLeft:{xs : "8%", md: "0%"} }}>
+          <Stack spacing={3} sx={{  marginTop:"4vh", marginLeft:{xs : "8%", md: "1%"} }}>
             {user?._id === profile?._id && <PostForm />}
             <PostList userId={profile?._id} />
           </Stack>

@@ -6,6 +6,7 @@ import {
 } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import customizeComponents from './customizations/index';
+import font from "../Font (2).jpg"
 
 const PRIMARY = {
     lighter: "#C8FACD",
@@ -60,7 +61,7 @@ function ThemeProvider({ children }) {
             secondary: SECONDARY,
             SUCCESS: SUCCESS,
             text: { primary: GREY[800], secondary: GREY[600], disabled: GREY[500] },
-            background: { paper: "#ece4f2", default: "#ece4f2", neutral: GREY[200] },
+            background: { paper: "#DFE3E8", default: "#DFE3E8", neutral: GREY[200] },
             action: {
               active: GREY[600],
               hover: GREY[500_8],

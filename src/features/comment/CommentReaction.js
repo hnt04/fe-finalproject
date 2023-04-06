@@ -1,13 +1,15 @@
 import { IconButton, Stack, Typography } from "@mui/material";
-import React from "react";
+import React, {useState} from "react";
 import { useDispatch } from "react-redux";
 import { sendCommentReaction } from "./commentSlice";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 function CommentReaction({ comment }) {
   const dispatch = useDispatch();
+  const [active, setActive] = useState(false);
 
   const handleClick = (emoji) => {
+    setActive(!active)
     dispatch(sendCommentReaction({ commentId: comment._id, emoji }));
   };
 
@@ -15,9 +17,8 @@ function CommentReaction({ comment }) {
     <Stack direction="row" alignItems="center">
       <IconButton
         onClick={() => handleClick("heart")}
-        sx={{ color: "primary.main" }}
       >
-        <FavoriteBorderIcon sx={{ fontSize: 20 }} />
+        <FavoriteBorderIcon sx={{ fontSize: 20, color: active ? "red" : "green" }} />
       </IconButton>
       <Typography variant="body2" mr={1}>
         {comment?.reactions?.heart}

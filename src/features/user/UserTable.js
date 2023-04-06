@@ -70,7 +70,6 @@ function UserTable({ users }) {
   }, [userList]);
 
   const onSubmit = (commendations) => {
-    console.log("commendations", commendations);
     dispatch(
       createCommendations({ ...commendations, name: userListCommendation })).then(() => reset());
   };

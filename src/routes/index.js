@@ -14,7 +14,7 @@ import AuthRequiredHR from "./AuthRequiredHR";
 import MemberList from "../features/member/MemberList";
 import TasksPage from "../features/task/TasksPage";
 import UserProfilePage from "../pages/UserProfilePage";
-import ColleaguePage from "../features/user/ColleaguePage";
+import PostUnCheck from "../features/post/PostUnCheck";
 
 function Router() {
   return (
@@ -33,6 +33,7 @@ function Router() {
         <Route path="users/:userId" element={<UserProfilePage />} />
         <Route path="member" element={<MemberList />} />
         <Route path="commendation" element={<CommendationBoardPage />} />
+        <Route path="post-box" element={<PostUnCheck />} />
         <Route path="tasks" element={<TasksPage />} />
       </Route>
 

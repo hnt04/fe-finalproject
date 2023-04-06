@@ -1,25 +1,31 @@
-import { Avatar, Box, Typography } from "@mui/material";
-import { Container } from "@mui/system";
+import { Avatar, Box, Stack, Typography } from "@mui/material";
+import backdrop from "../../backdrop.jpg";
 
 function ProfileColleagueCover({ profileColleague }) {
-  const {
-    name,
-    avatarUrl,
-  } = profileColleague;
-  console.log("profileColleagueCover",profileColleague)
+  const { name, avatarUrl } = profileColleague;
 
   return (
-    <Box sx={{marginTop:"4%",backgroundColor:"#E6CCFF",padding:"2%", marginLeft: "10%", marginRight:"10%"}}>
+    <Box
+      sx={{
+        marginTop: "1%",
+        padding: "2%",
+        marginLeft: "10%",
+        marginRight: "10%",
+      }}
+    >
+
+      <Stack sx={{ marginLeft: "10%" }}>
         <Avatar
           src={avatarUrl}
           alt={name}
+          variant="rounded"
           sx={{
             mx: "auto",
             borderWidth: 2,
             borderStyle: "solid",
             borderColor: "common.white",
-            width: { xs: 80, md: 128 },
-            height: { xs: 80, md: 128 },
+            width: { xs: 128, md: 256 },
+            height: { xs: 128, md: 256 },
           }}
         />
         <Box
@@ -30,8 +36,14 @@ function ProfileColleagueCover({ profileColleague }) {
             textAlign: { xs: "center", md: "center" },
           }}
         >
-          <Typography sx={{color:"#4D0019", marginTop:"5px", marginLeft:"-25px"}} variant="h4">{name}</Typography>
+          <Typography
+            sx={{ color: "#4D0019", marginTop: "4%", marginBottom:"4%", marginRight:"4%" }}
+            variant="h3"
+          >
+            {name}
+          </Typography>
         </Box>
+      </Stack>
     </Box>
   );
 }

@@ -6,6 +6,7 @@ import BadgeIcon from "@mui/icons-material/Badge";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
+import ProfileColleagueCover from "./ProfileColleagueCover";
 
 const IconStyle = styled(Box)(({ theme }) => ({
   width: 20,
@@ -15,128 +16,139 @@ const IconStyle = styled(Box)(({ theme }) => ({
   marginRight: theme.spacing(2),
 }));
 
-function ProfileColleagues({profileColleague}) {
+function ProfileColleagues({ profileColleague }) {
   const { employeeId, name, email, department, role, phone } = profileColleague;
-  console.log("profileColleague",profileColleague)
+  console.log("profileColleague", profileColleague);
 
   return (
-    <Card sx={{marginLeft:{xs : "6%", md:"20%"}, width:"84%"}}>
-      <Stack spacing={2} sx={{ p: 3, backgroundColor: "#ebebeb", width:"100%" }}>
-            <Typography sx={{color:"#40004D",fontSize:"32px",fontWeight:"700",textAlign:"center"}}>{name} Profile</Typography>
+    <Box sx={{ marginLeft: { xs: "6%", md: "20%" }, width: "84%", marginBottom:"50%" }}>
+      <ProfileColleagueCover profileColleague={profileColleague} />
 
-            <Stack
-              direction="row"
-              sx={{ paddingBottom: "20px" }}
-            >
-              <IconStyle sx={{ marginLeft: "50px",marginTop:"20px"}}>
-                <Grid3x3Icon />
-              </IconStyle>
-              <Typography
-                sx={{
-                  color: "#70809",
-                  fontSize: "24px",
-                  fontWeight: "500",
-                  marginLeft: "50px",
-                  marginTop:"20px"
-                }}
-              >
-                {employeeId}
-              </Typography>
-            </Stack>
+      <Stack
+        spacing={2}
+        sx={{ p: 3, backgroundColor: "#ebebeb", width: "100%" }}
+      >
+        <Typography
+          sx={{
+            color: "#40004D",
+            fontSize: "32px",
+            fontWeight: "700",
+            textAlign: "center",
+          }}
+        >
+          Personal Profile
+        </Typography>
 
-            <Stack direction="row" sx={{ paddingBottom: "20px" }}>
-              <IconStyle sx={{ marginLeft: "50px" }}>
-                <BadgeIcon />
-              </IconStyle>
-              <Typography
-                sx={{
-                  color: "#70809",
-                  fontSize: "24px",
-                  fontWeight: "500",
-                  marginLeft: "50px",
-                }}
-              >
-                {name}
-              </Typography>
-            </Stack>
+        <Stack direction="row" sx={{ paddingBottom: "20px" }}>
+          <IconStyle sx={{ marginLeft: "50px", marginTop: "20px" }}>
+            <Grid3x3Icon />
+          </IconStyle>
+          <Typography
+            sx={{
+              color: "#70809",
+              fontSize: "24px",
+              fontWeight: "500",
+              marginLeft: "50px",
+              marginTop: "20px",
+            }}
+          >
+            {employeeId}
+          </Typography>
+        </Stack>
 
-            <Stack
-              direction="row"
-              sx={{ paddingBottom: "20px", marginLeft: "50px" }}
-            >
-              <IconStyle sx={{ marginLeft: "50px" }}>
-                <EmailIcon />
-              </IconStyle>
-              <Typography
-                sx={{
-                  color: "#70809",
-                  fontSize: "24px",
-                  fontWeight: "500",
-                  marginLeft: "50px",
-                }}
-              >
-                {email}
-              </Typography>
-            </Stack>
+        <Stack direction="row" sx={{ paddingBottom: "20px" }}>
+          <IconStyle sx={{ marginLeft: "50px" }}>
+            <BadgeIcon />
+          </IconStyle>
+          <Typography
+            sx={{
+              color: "#70809",
+              fontSize: "24px",
+              fontWeight: "500",
+              marginLeft: "50px",
+            }}
+          >
+            {name}
+          </Typography>
+        </Stack>
 
-            <Stack
-              direction="row"
-              sx={{ paddingBottom: "20px", marginLeft: "50px" }}
-            >
-              <IconStyle sx={{ marginLeft: "50px" }}>
-                <ApartmentIcon />
-              </IconStyle>
-              <Typography
-                sx={{
-                  color: "#70809",
-                  fontSize: "24px",
-                  fontWeight: "500",
-                  marginLeft: "50px",
-                }}
-              >
-                {department}
-              </Typography>
-            </Stack>
+        <Stack
+          direction="row"
+          sx={{ paddingBottom: "20px", marginLeft: "50px" }}
+        >
+          <IconStyle sx={{ marginLeft: "50px" }}>
+            <EmailIcon />
+          </IconStyle>
+          <Typography
+            sx={{
+              color: "#70809",
+              fontSize: "24px",
+              fontWeight: "500",
+              marginLeft: "50px",
+            }}
+          >
+            {email}
+          </Typography>
+        </Stack>
 
-            <Stack
-              direction="row"
-              sx={{ paddingBottom: "20px", marginLeft: "50px" }}
-            >
-              <IconStyle sx={{ marginLeft: "50px" }}>
-                <AssignmentIndIcon />
-              </IconStyle>
-              <Typography
-                sx={{
-                  color: "#70809",
-                  fontSize: "24px",
-                  fontWeight: "500",
-                  marginLeft: "50px",
-                }}
-              >
-                {role}
-              </Typography>
-            </Stack>
+        <Stack
+          direction="row"
+          sx={{ paddingBottom: "20px", marginLeft: "50px" }}
+        >
+          <IconStyle sx={{ marginLeft: "50px" }}>
+            <ApartmentIcon />
+          </IconStyle>
+          <Typography
+            sx={{
+              color: "#70809",
+              fontSize: "24px",
+              fontWeight: "500",
+              marginLeft: "50px",
+            }}
+          >
+            {department}
+          </Typography>
+        </Stack>
 
-            <Stack
-              direction="row"
-              sx={{ paddingBottom: "20px", marginLeft: "50px" }}
-            >
-              <IconStyle sx={{ marginLeft: "50px" }}>
-                <ContactPhoneIcon />
-              </IconStyle>
-              <Typography
-                sx={{
-                  color: "#70809",
-                  fontSize: "24px",
-                  fontWeight: "500",
-                  marginLeft: "50px",
-                }}
-              >
-                {phone}
-              </Typography>
-            </Stack>
-          </Stack>
-    </Card>
+        <Stack
+          direction="row"
+          sx={{ paddingBottom: "20px", marginLeft: "50px" }}
+        >
+          <IconStyle sx={{ marginLeft: "50px" }}>
+            <AssignmentIndIcon />
+          </IconStyle>
+          <Typography
+            sx={{
+              color: "#70809",
+              fontSize: "24px",
+              fontWeight: "500",
+              marginLeft: "50px",
+            }}
+          >
+            {role}
+          </Typography>
+        </Stack>
+
+        <Stack
+          direction="row"
+          sx={{ paddingBottom: "20px", marginLeft: "50px" }}
+        >
+          <IconStyle sx={{ marginLeft: "50px" }}>
+            <ContactPhoneIcon />
+          </IconStyle>
+          <Typography
+            sx={{
+              color: "#70809",
+              fontSize: "24px",
+              fontWeight: "500",
+              marginLeft: "50px",
+            }}
+          >
+            {phone}
+          </Typography>
+        </Stack>
+      </Stack>
+    </Box>
   );
 }
 

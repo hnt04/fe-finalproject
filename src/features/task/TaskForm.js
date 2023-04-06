@@ -33,7 +33,6 @@ function TaskForm() {
     });
 
     const { user } = useAuth();
-    console.log("user",user)
 
     const [isDisabled, setIsDisabled] = useState(false);
     
@@ -46,8 +45,6 @@ function TaskForm() {
     const dispatch = useDispatch();
 
     const { userList, allowedUsers, usersById } = useSelector((state) => state.user)
-    console.log("usersById",usersById)
-    console.log("allowedUsers",allowedUsers)
 
     const [filterName, setFilterName] = useState("");
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -81,17 +78,13 @@ useEffect(() => {
   dispatch(getUsersAllowed());
 }, [dispatch]);
 
-// const users = allowedUsers.map((user) => usersById[userId]);
-console.log("allowedUsers",allowedUsers)
-//dispatch getUserAllowed -> select user -> map vào handler
-// onChange (lấy value trong multiple) -> set new state -> add array  
+
 const [taskHandler, setTaskHandler] = useState([]);
 const [taskDeadline, setTaskDeadline] = useState("");
 
-// const onChangeHandler = 
 
   return (
-    // <Card sx={{ p: 3 }}>
+
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={2}>
         <FTextField
@@ -165,17 +158,6 @@ const [taskDeadline, setTaskDeadline] = useState("");
                   shrink: true,
                 }}
               />
-        {/* <DatePicker
-          disableFuture
-          label="Responsive"
-          openTo="year"
-          views={['year', 'month', 'day']}
-          value={taskDeadline}
-          onChange={(e,newValue) => {
-            setTaskDeadline(newValue);
-          }}
-          renderInput={(params) => <TextField {...params} />}
-        /> */}
 
         <LoadingButton
           type="submit"

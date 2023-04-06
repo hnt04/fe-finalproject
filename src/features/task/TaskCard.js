@@ -16,7 +16,6 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import EventIcon from "@mui/icons-material/Event";
 import useAuth from "../../hooks/useAuth";
-import CloseIcon from "@mui/icons-material/Close";
 import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
 import FormGroup from "@mui/material/FormGroup";
@@ -31,12 +30,7 @@ import DoNotDisturbAltIcon from '@mui/icons-material/DoNotDisturbAlt';
 import PersonIcon from '@mui/icons-material/Person';
 
 function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
-  console.log("tasks in taskcard", tasks);
-  console.log("task", task)
-
-
   const { user } = useAuth();
-  console.log("user task", user);
   const dispatch = useDispatch();
   const dayLeft = Math.ceil(
     moment(tasks?.deadlineAt)

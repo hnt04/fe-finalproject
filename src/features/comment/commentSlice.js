@@ -30,9 +30,7 @@ const slice = createSlice({
             state.isLoading = false;
             state.error = null;
             const { postId, comments, count, page } = action.payload;
-            console.log("action.payload comment",action.payload)
-            console.log("postId a1",comments)
-            console.log("comments a1",comments)
+
             comments.forEach((comment) => (state.commentsById[comment._id] = comment));
               state.commentsByPost[postId] = comments
                 .map((comment) => comment._id)
@@ -56,7 +54,6 @@ const slice = createSlice({
             deleteCommentSuccess(state, action) {
               state.isLoading = false;
               state.error = null;
-              console.log("comment", action.payload.commentId)
               const  postId = action.payload
               delete state.commentsById[action.payload.commentId]
               state.commentsByPost = state.commentsByPost[postId].filter((commentId) => commentId !== action.payload.commentId)
@@ -74,8 +71,7 @@ export const getComments =
       const response = await apiService.get(`/posts/${postId}/comments`, {
         params,
       });
-      console.log("response comment",response)
-      console.log("postID",postId)
+
       dispatch(
         slice.actions.getCommentsSuccess({
           ...response,

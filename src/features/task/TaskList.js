@@ -18,18 +18,11 @@ import {
 } from "@mui/material";
 import TaskCard from "./TaskCard";
 import { getTaskOfId, updatedTaskProfile } from "./taskSlice";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import { CardActionArea } from "@mui/material";
-// import { updateUserProfile } from "../user/userSlice";
-// import PostDeleteConfirmation from "../post/PostDeleteConfirm";
-// import PostFormUpdate from "../post/PostFormUpdate";
+
 
 function TaskList({ tasks }) {
-  // const { tasks } = useSelector((state) => state.task);
-  // console.log("tasks",tasks)
+
   console.log("tasks", tasks);
-  // console.log("taskHandle",tasksHandle)
 
   const dispatch = useDispatch();
   useEffect(() => {

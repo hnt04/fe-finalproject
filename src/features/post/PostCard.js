@@ -23,9 +23,7 @@ import { Button, Modal } from "@mui/material";
 import useAuth from "../../hooks/useAuth";
 
 function PostCard({ post, handleChoose, handleChooseEdit }) {
-  console.log("post post",post)
   const { user } = useAuth();
-  console.log("user post", user);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
 

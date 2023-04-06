@@ -24,12 +24,13 @@ const UpdateFormSchema = yup.object().shape({
   name: yup.string().required("Content is required"),
 });
 
-function PostFormUpdate({ post }) {
+function PostCheckFormUpdate({ post }) {
   const isLoading = useSelector((state) => state.user.isLoading);
 
   const defaultValues = {
     content: " ", 
-    image: " "
+    image: " ",
+    check:false
   };
 
   const methods = useForm({
@@ -60,8 +61,11 @@ function PostFormUpdate({ post }) {
     [setValue]
   );
 
+  const [postStatus,setPostState] = useState(post.check)
+
   const onSubmit = (data) => {
-    dispatch(updatedPostProfile({ postId: post._id, content: data.content, image: post.image }));
+    console.log("data", {postId: post._id, ...data})
+    dispatch(updatedPostProfile({ postId: post._id, check: !post.check }));
   };
 
   return (  
@@ -110,4 +114,4 @@ function PostFormUpdate({ post }) {
   );
 }
 
-export default PostFormUpdate;
+export default PostCheckFormUpdate;

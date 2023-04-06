@@ -41,11 +41,6 @@ const slice = createSlice({
     createCommendationSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
-      // const newCommendations = action.payload;
-      // console.log("newCommendations",newCommendations)
-      // newCommendations.forEach((commendation) => {
-      //   state.commendationsByUser[commendation._id] = commendation;
-      // });
     },
 
     getCommendationSuccess(state, action) {
@@ -53,7 +48,6 @@ const slice = createSlice({
       state.error = null;
 
       const commendations = action.payload;
-      console.log("action.payload commendations",action.payload)
       commendations.forEach((commendation) => {
         state.commendationsById[commendation._id] = commendation;
         if (!state.currentPageCommendations.includes(commendation._id))
@@ -76,7 +70,6 @@ export const getCommendations = ({month, page = 1, limit = POST_PER_PAGE}) => as
       slice.actions.getCommendationSuccess(response.commendations)
     );
     toast.success("Get Commendation successfully");
-    console.log("response get Commendation", response)
     
   } catch (error) {
     dispatch(slice.actions.hasError(error.message));
@@ -86,9 +79,7 @@ export const getCommendations = ({month, page = 1, limit = POST_PER_PAGE}) => as
 
 export const createCommendations = ({month,name,year}) => async (dispatch) => {
     dispatch(slice.actions.startLoading());
-    console.log("month",month);
-    console.log("name",name);
-    console.log("year",year)
+
     try {
       const response = await apiService.post(`/commendations`,{
         month,

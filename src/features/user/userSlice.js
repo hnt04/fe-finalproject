@@ -56,8 +56,7 @@ const slice = createSlice({
       state.selectedUser = action.payload;
 
       const { users, count, totalPages } = action.payload;
-      console.log("users users",users)
-      console.log("action.payload users",action.payload)
+
       users.forEach((user) => (state.usersById[user._id] = user));
       state.currentPageUsers = users.map((user) => user._id);
       state.totalUsers = count;
@@ -124,7 +123,6 @@ export const getUsers = ({filterName, page = 1, limit = POST_PER_PAGE}) => async
       const params = { page, limit };
     if (filterName) params.name = filterName;
     const response = await apiService.get("/users",{params});
-    console.log("response user",response)
     dispatch(slice.actions.getUserSuccess(response));
   } catch (error) {
     dispatch(slice.actions.hasError(error));
@@ -136,7 +134,6 @@ export const getUsersAllowed = () => async (dispatch) => {
   dispatch(slice.actions.startLoading());
 try {
   const response = await apiService.get("/users/allowed");
-  console.log("response user allowed",response)
   dispatch(slice.actions.getUsersAllowedSuccess(response.users));
 } catch (error) {
   dispatch(slice.actions.hasError(error));
@@ -148,7 +145,6 @@ export const getCurrentUserProfile = () => async (dispatch) => {
   dispatch(slice.actions.startLoading());
   try {
     const response = await apiService.get("/users/me");
-    console.log("response user me",response)
     dispatch(slice.actions.updateUserProfileSuccess(response));
   } catch (error) {
     dispatch(slice.actions.hasError(error));
@@ -159,7 +155,6 @@ export const getSingleUser = (id) => async (dispatch) => {
   dispatch(slice.actions.startLoading());
   try {
     const response = await apiService.get(`/users/${id}`);
-    console.log("response userId", response)
     dispatch(slice.actions.getSingleUserSuccess(response));
   } catch (error) {
     dispatch(slice.actions.hasError(error));

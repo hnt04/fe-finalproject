@@ -86,11 +86,6 @@ function LoginPage() {
           >
             Log In
           </Typography>
-          {/* {!!errors.responseError && (
-            <Alert variant="filled" severity="error">
-              {errors.responseError.message}
-            </Alert>
-          )} */}
           <FTextField name="email" label="Email address" />
 
           <FTextField

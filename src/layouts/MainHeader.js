@@ -14,7 +14,6 @@ import ListIcon from "@mui/icons-material/List";
 
 function MainHeader() {
   const { user, logout } = useAuth();
-  console.log("user", user);
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -107,7 +106,6 @@ function MainHeader() {
       </MenuItem>
     </Menu>
   );
-  console.log("renderMenu-Header", renderMenu);
 
   const mainMenuId = "main-menu";
   const renderMainMenu = (
@@ -182,6 +180,28 @@ function MainHeader() {
       >
         Task
       </MenuItem>
+
+      <Divider sx={{ borderStyle: "dashed" }} />
+
+      {user?.department === "HR" && (
+      <MenuItem
+        onClick={handleMainMenuClose}
+        to="/post-box"
+        component={RouterLink}
+        sx={{
+          mx: 1,
+          color: "#9500B3",
+          fontSize: "20px",
+          fontWeight: "600",
+          marginTop: "3%",
+          marginRight: "50px",
+          marginBottom: "3%",
+          "&:hover": { color: "#757575", textDecoration: "none" },
+        }}
+      >
+        Check Post
+      </MenuItem>
+      )}
     </Menu>
   );
 
@@ -198,6 +218,7 @@ function MainHeader() {
             borderRadius: "0 0 20px 20px",
             position: "fixed",
             zIndex: "2",
+            border: "1px solid green",
           }}
         >
           <Toolbar>
@@ -248,7 +269,8 @@ function MainHeader() {
                   marginTop: "10px",
                   marginLeft: "50px",
                 }}
-              />{renderMainMenu}
+              />
+              {renderMainMenu}
             </Box>
           </Toolbar>
         </AppBar>

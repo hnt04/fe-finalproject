@@ -21,18 +21,16 @@ const style = {
   p: 4,
 };
 
-function PostList({ userId, userColleagueId }) {
+function PostList({ userId }) {
   const [page, setPage] = useState(1);
   const { currentPagePosts, postsById, isLoading, totalPosts } = useSelector(
     (state) => state.post
   );
-  console.log("postsById",postsById)
   const posts = currentPagePosts.map((postId) => postsById[postId]);
-  console.log("posts1",posts)
   const dispatch = useDispatch();
 
-  const [open, setOpen] = React.useState(false);
-  const [openEdit, setOpenEdit] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
   const [chosenId, setChosenId] = useState(null);
   const [chosenPost, setChosenPost] = useState(null)
   const handleChoose = (id)=> {
@@ -52,8 +50,8 @@ function PostList({ userId, userColleagueId }) {
   const handleEdit = (post) => dispatch(updatedPostProfile(post))
 
   useEffect(() => {
-    if (userId) dispatch(getPosts({ userId, page }));
-  }, [dispatch, userId, page]);
+    if (userId) dispatch(getPosts({ userId, page}));
+  }, [dispatch, userId, page ]);
 
 
   return (

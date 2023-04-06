@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Box, Grid, Card, InputAdornment, IconButton } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { updateUserProfile } from "./userSlice";
-import { fData } from "../../utils/numberFormat";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +18,7 @@ const UpdateUserSchema = Yup.object().shape({
   .oneOf([Yup.ref("password")], "Passwords must match"),
 });
 
-function AccountGeneral() {
+function PasswordChanging() {
   const { user } = useAuth();
   const isLoading = useSelector((state) => state.user.isLoading);
 
@@ -43,12 +42,12 @@ function AccountGeneral() {
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
 
-  const onSubmit = (data) => {
+  const onSubmitPassword = (data) => {
     dispatch(updateUserProfile({ userId: user._id, ...data }));
   };
 
   return (
-    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmitPassword)}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={12}>
           <Card sx={{ p: 3 }}>
@@ -63,8 +62,6 @@ function AccountGeneral() {
                 },
                 paddingBottom:"30px",
                 marginLeft:"10px"
-                // display:"flex",
-                // justifyContent:"center"
               }}
             >
               <FTextField
@@ -100,11 +97,6 @@ function AccountGeneral() {
                         )
                     }}>
                 </FTextField>
-{/* 
-              <FTextField name="department" label="Department" />
-              <FTextField name="role" label="Role" />
-
-              <FTextField name="phone" label="Phone Number" /> */}
             </Box>
 
               <LoadingButton
@@ -121,4 +113,4 @@ function AccountGeneral() {
   );
 }
 
-export default AccountGeneral;
+export default PasswordChanging;

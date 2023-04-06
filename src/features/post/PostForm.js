@@ -58,7 +58,6 @@ function PostForm() {
   const handleClose = () => setOpen(false);
 
   const onSubmit = (posts) => {
-    console.log("posts post", posts);
     dispatch(createPost(posts)).then(() => reset());
   };
 

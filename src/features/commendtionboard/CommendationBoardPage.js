@@ -38,7 +38,6 @@ const style = {
 
 function CommendationsBoardPage() {
   const { user } = useAuth();
-  console.log("user1", user);
   const [open, setOpen] = useState(false);
 
   const [filterName] = useState("");
@@ -50,14 +49,12 @@ function CommendationsBoardPage() {
   const { currentPageCommendations, commendationsById, isLoading,totalCommendations } = useSelector(
     (state) => state.commendation
   );
-console.log("currentPageCommendations",currentPageCommendations)
 
   const { currentPageUsers, usersById } = useSelector(
     (state) => state.user
   );
 
   const users = currentPageUsers.map((userId) => usersById[userId]);
-  console.log("usersById", usersById);
 
   // const commendation = commendationsList.map(())
 
@@ -98,10 +95,8 @@ console.log("currentPageCommendations",currentPageCommendations)
   });
 
   const commendations = currentPageCommendations.map((month) => commendationsById[month])
-  console.log("commendations page",commendations)
   
   useEffect(() => {
-    console.log("month", mth);
     dispatch(getCommendations(mth));
   }, [dispatch, mth]);
 

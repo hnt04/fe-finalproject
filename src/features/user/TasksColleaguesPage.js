@@ -27,7 +27,7 @@ const style = {
   p: 4,
 };
 
-const TasksPage = () => {
+const TasksColleaguesPage = () => {
   const { tasksHandle, tasksAssign } = useSelector((state) => state.task);
 
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -54,11 +54,13 @@ const TasksPage = () => {
 
   const tasks = currentPageTasks.map((taskId) => tasksById[taskId]);
 
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getTasks({ page: page, limit: rowsPerPage }));
   }, [dispatch, page, rowsPerPage]);
+
 
   const handleOpen = () => {
     setOpen(true);
@@ -88,116 +90,7 @@ const TasksPage = () => {
 
   return (
     <Stack sx={{ marginBottom: "700px", marginTop: "5%" }}>
-      <Breadcrumbs
-        separator={<NavigateNextIcon fontSize="small" />}
-        aria-label="breadcrumb"
-        sx={{ marginLeft: "2%" }}
-      >
-        {breadcrumbs}
-      </Breadcrumbs>
-      <Typography
-        variant="h4"
-        sx={{
-          color: "#616161",
-          fontWeight: "700",
-          textAlign: "center",
-          fontSize: "60px",
-        }}
-        gutterBottom
-      >
-        Your Task
-      </Typography>
-
-      <Button
-        onClick={handleOpen}
-        sx={{
-          maxWidth: "100%",
-          width: "15vw",
-          fontSize: "20px",
-          marginRight: "10px",
-          display: "flex",
-          alignSelf: "center",
-        }}
-        size="small"
-        variant="contained"
-        color="success"
-      >
-        Create New Task
-        {/* <AddIcon /> */}
-      </Button>
-      <Modal open={open} onClose={handleClose}>
-        <Box sx={style}>
-          <TaskForm users={users} />
-        </Box>
-      </Modal>
-      <Typography
-        sx={{
-          color: "#616161",
-          fontWeight: "300",
-          fontSize: "20px",
-          textAlign: "center",
-          marginTop: "10px",
-        }}
-      >
-        ( <b>Note:</b> The color of right bar is display for deadline status
-        <Typography
-          sx={{
-            color: "#616161",
-            fontWeight: "300",
-            fontSize: "20px",
-            textAlign: "center",
-            marginTop: "5px",
-          }}
-        >
-          <RectangleIcon
-            sx={{
-              border: "solid 1px #1c1b1b",
-              width: "50px",
-              color: "#edf7f2",
-              backgroundColor: "#edf7f2",
-            }}
-          />{" "}
-          : More than 10 days left
-        </Typography>
-        <Typography
-          sx={{
-            color: "#616161",
-            fontWeight: "300",
-            fontSize: "20px",
-            textAlign: "center",
-            marginTop: "5px",
-          }}
-        >
-          <RectangleIcon
-            sx={{
-              border: "solid 1px #1c1b1b",
-              width: "50px",
-              color: "#f3f777",
-              backgroundColor: "#f3f777",
-            }}
-          />{" "}
-          : Deadline in 5 - 10 days
-        </Typography>
-        <Typography
-          sx={{
-            color: "#616161",
-            fontWeight: "300",
-            fontSize: "20px",
-            textAlign: "center",
-            marginTop: "5px",
-          }}
-        >
-          <RectangleIcon
-            sx={{
-              border: "solid 1px #1c1b1b",
-              width: "50px",
-              color: "#D32F2F",
-              backgroundColor: "#D32F2F",
-            }}
-          />{" "}
-          : Less than 5 days left )
-        </Typography>
-      </Typography>
+      
       <List>
         <ListItemButton onClick={handleClickOpenHandleList}>
           <Typography
@@ -250,4 +143,4 @@ const TasksPage = () => {
   );
 };
 
-export default TasksPage;
+export default TasksColleaguesPage;

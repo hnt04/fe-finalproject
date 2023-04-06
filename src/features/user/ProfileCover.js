@@ -1,18 +1,25 @@
-import { Avatar, Box, Typography } from "@mui/material";
+import { Avatar, Box, Typography, Stack } from "@mui/material";
 import useAuth from "../../hooks/useAuth";
-import { Container } from "@mui/system";
+import backdrop from "../../backdrop.jpg";
 
 function ProfileCover({ profile }) {
   const { user } = useAuth();
-  console.log("user",user)
-  const {
-    name,
-    avatarUrl,
-  } = profile;
+  console.log("user", user);
+  const { name, avatarUrl } = profile;
 
   return (
-    <Box sx={{marginTop:"4%",backgroundColor:"#E6CCFF",padding:"2%",marginLeft: "10%", marginRight:"10%"
-  }}>
+    <Box
+      sx={{
+        marginTop: "4%",
+        padding: "2%",
+        marginLeft: "10%",
+        marginRight: "10%",
+      }}
+    >
+      <Box sx={{ position: "relative", marginLeft:"-3%" }}>
+        <img width="102%" height="350vh" src={backdrop} />
+      </Box>
+      <Stack sx={{ position: "absolute", marginTop:"-4%", marginLeft:"32%" }}>
         <Avatar
           src={avatarUrl}
           alt={name}
@@ -21,6 +28,7 @@ function ProfileCover({ profile }) {
             borderWidth: 2,
             borderStyle: "solid",
             borderColor: "common.white",
+            marginTop: "-150%",
             width: { xs: 80, md: 128 },
             height: { xs: 80, md: 128 },
           }}
@@ -33,8 +41,14 @@ function ProfileCover({ profile }) {
             textAlign: { xs: "center", md: "center" },
           }}
         >
-          <Typography sx={{color:"#4D0019", marginTop:"5px", marginLeft:"-25px"}} variant="h4">{name}</Typography>
+          <Typography
+            sx={{ color: "#4D0019", marginTop: "5px", marginLeft: "-25px" }}
+            variant="h4"
+          >
+            {name}
+          </Typography>
         </Box>
+      </Stack>
     </Box>
   );
 }

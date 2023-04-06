@@ -21,7 +21,7 @@ function ProfileAbout() {
 
   return (
     <Card sx={{marginLeft:{xs : "6%", md:"20%"}, width:"84%"}}>
-      <Stack spacing={2} sx={{ p: 2, backgroundColor: "#ebebeb" }}>
+      <Stack spacing={2} sx={{ p: 2, backgroundImage: "profile" }}>
             <Typography sx={{color:"#40004D",fontSize:"32px",fontWeight:"700",textAlign:"center"}}>Profile</Typography>
 
             <Stack

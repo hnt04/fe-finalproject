@@ -32,10 +32,8 @@ function MemberProfile({user}) {
   const { userList } = useSelector(
     (state) => state.user
   );
-  console.log("userList",userList)
 
   let  { userId }  = useParams();
-  console.log("userId", userId )
 
   const dispatch = useDispatch();
 
@@ -43,7 +41,6 @@ function MemberProfile({user}) {
     dispatch(getSingleUser(userId));
   }, [dispatch, userId])
 
-  // const { user } = useSelector((state) => state.user);
 
   console.log("user",user)
   return (
