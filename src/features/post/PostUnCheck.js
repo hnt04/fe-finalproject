@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { LoadingButton } from "@mui/lab";
 import PostCardCheck from "./PostCardCheck";
-import { getUnCheckPosts } from "./postSlice";
+import { updatedCheckPost,getUnCheckPosts } from "./postSlice";
 import { Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -43,20 +43,14 @@ function PostUnCheck() {
   const [chosenId, setChosenId] = useState(null);
   const [chosenPost, setChosenPost] = useState(null);
 
-  const [checkStatus,setCheckStatus] = useState(check)
+  // const [checkStatus,setCheckStatus] = useState(check)
+
+  const [checkStatus, setCheckStatus] = React.useState(check);
 
   const toggleChecked = (post) => {
-    console.log("post check", post)
-    // dispatch(updatedPostProfile({...post, check: !checkStatus }))
-    setCheckStatus(!checkStatus)
-  }
-  console.log("checkStatus",checkStatus)
+    dispatch(updatedCheckPost({post, check: !checkStatus }))
 
-  useEffect(() => {
-    if(checkStatus) {
-      
-    }
-  })
+  }
 
   const handleChoose = (id) => {
     setOpen(true);
@@ -75,7 +69,7 @@ function PostUnCheck() {
 
   const onChangeStatusPost =(post) => {
     console.log("post onChange",post)
-    dispatch(updatedPostProfile({ ...post, check: !check }));
+    dispatch(updatedPostProfile(post));
   };
 
   useEffect(() => {
@@ -83,8 +77,6 @@ function PostUnCheck() {
       dispatch(getUnCheckPosts({ page }));
     }
   }, [dispatch, page]);
-
-  //state -> initialValue === post.check -> onChange set state => !state
 
   return (
     <Box sx={{ marginTop: "4%" }}>
@@ -130,7 +122,6 @@ function PostUnCheck() {
         </Box>
       </Modal>
       <Modal open={openBrowse} onClose={handleCloseBrowse}>
-        {/* <BrowsePost post={post} /> */}
         <Box sx={style}>
           <Typography variant="h5" textAlign="center">
             Browse Post
@@ -156,7 +147,6 @@ function PostUnCheck() {
             <Button
               variant="outlined"
               color="success"
-              // onClick={() => onChangeStatusPost(chosenPost)}
               onClick={() => toggleChecked(chosenPost)}
             >
               Agree

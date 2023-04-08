@@ -200,14 +200,13 @@ export const sendPostReaction =
   };
 
 export const updatedPostProfile =
-  ({ content, postId, image,check }) =>
+  ({ content, postId, image }) =>
   async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
       const response = await apiService.put(`/posts/${postId}`, {
         content,
         image,
-        check
       });
       dispatch(slice.actions.updatedPostSuccess(response));
       toast.success("Update Post successfully");
@@ -218,21 +217,21 @@ export const updatedPostProfile =
     }
   };
 
-  // export const updatedCheckPost =
-  // ({  postId, check}) =>
-  // async (dispatch) => {
-  //   dispatch(slice.actions.startLoading());
-  //   try {
-  //     const response = await apiService.put(`/posts/uncheck/${postId}`, {
-  //       postId, 
-  //       check
-  //     });
-  //     console.log("response update",response)
-  //     dispatch(slice.actions.updatedCheckPostSuccess(response));
-  //     toast.success("Post is browsed");
-  //     dispatch(getUnCheckPosts());
-  //   } catch (error) {
-  //     dispatch(slice.actions.hasError(error.message));
-  //     toast.error(error.message);
-  //   }
-  // };
+  export const updatedCheckPost =
+  ({  post, check}) =>
+  async (dispatch) => {
+    console.log("check post", {  post, check})
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await apiService.put(`/posts/uncheck/${post}`, {
+        check
+      });
+      console.log("response update",response)
+      dispatch(slice.actions.updatedCheckPostSuccess(response));
+      toast.success("Post is browsed");
+      dispatch(getUnCheckPosts());
+    } catch (error) {
+      dispatch(slice.actions.hasError(error.message));
+      toast.error(error.message);
+    }
+  };
