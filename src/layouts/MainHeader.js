@@ -10,7 +10,6 @@ import Logo from "../components/Logo";
 import { Avatar, Divider } from "@mui/material";
 import useAuth from "../hooks/useAuth";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
-import ListIcon from "@mui/icons-material/List";
 
 function MainHeader() {
   const { user, logout } = useAuth();
@@ -26,16 +25,8 @@ function MainHeader() {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMainMenuOpen = (event) => {
-    setAnchorElMenu(event.currentTarget);
-  };
-
   const handleMenuClose = () => {
     setAnchorEl(null);
-  };
-
-  const handleMainMenuClose = () => {
-    setAnchorElMenu(null);
   };
 
   const handleLogout = async () => {
@@ -107,104 +98,6 @@ function MainHeader() {
     </Menu>
   );
 
-  const mainMenuId = "main-menu";
-  const renderMainMenu = (
-    <Menu
-      anchorElMenu={anchorElMenu}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      sx={{ marginTop: "8px" }}
-      id={mainMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={mainMenuOpen}
-      onClose={handleMainMenuClose}
-    >
-      <MenuItem
-        onClick={handleMainMenuClose}
-        to="/member"
-        component={RouterLink}
-        sx={{
-          mx: 1,
-          color: "#9500B3",
-          fontSize: "20px",
-          fontWeight: "600",
-          marginTop: "3%",
-          marginRight: "50px",
-          marginBottom: "3%",
-          "&:hover": { color: "#757575", textDecoration: "none" },
-        }}
-      >
-        Member
-      </MenuItem>
-      <Divider sx={{ borderStyle: "dashed" }} />
-
-      <MenuItem
-        onClick={handleMainMenuClose}
-        to="/commendation"
-        component={RouterLink}
-        sx={{
-          mx: 1,
-          color: "#9500B3",
-          fontSize: "20px",
-          fontWeight: "600",
-          marginTop: "3%",
-          marginRight: "50px",
-          marginBottom: "3%",
-          "&:hover": { color: "#757575", textDecoration: "none" },
-        }}
-      >
-        Commendation Page
-      </MenuItem>
-      <Divider sx={{ borderStyle: "dashed" }} />
-
-      <MenuItem
-        onClick={handleMainMenuClose}
-        to="/tasks"
-        component={RouterLink}
-        sx={{
-          mx: 1,
-          color: "#9500B3",
-          fontSize: "20px",
-          fontWeight: "600",
-          marginTop: "3%",
-          marginRight: "50px",
-          marginBottom: "3%",
-          "&:hover": { color: "#757575", textDecoration: "none" },
-        }}
-      >
-        Task
-      </MenuItem>
-
-      <Divider sx={{ borderStyle: "dashed" }} />
-
-      {user?.department === "HR" && (
-      <MenuItem
-        onClick={handleMainMenuClose}
-        to="/post-box"
-        component={RouterLink}
-        sx={{
-          mx: 1,
-          color: "#9500B3",
-          fontSize: "20px",
-          fontWeight: "600",
-          marginTop: "3%",
-          marginRight: "50px",
-          marginBottom: "3%",
-          "&:hover": { color: "#757575", textDecoration: "none" },
-        }}
-      >
-        Check Post
-      </MenuItem>
-      )}
-    </Menu>
-  );
-
   return (
     user && (
       <Box sx={{ mb: 3 }}>
@@ -213,7 +106,6 @@ function MainHeader() {
           color="transparent"
           sx={{
             backgroundColor: "rgba(0,0,0,0.1)",
-            // height: "7%",
             width: "100%",
             borderRadius: "0 0 20px 20px",
             position: "fixed",
@@ -239,18 +131,19 @@ function MainHeader() {
                   component="div"
                   sx={{
                     display: { xs: "none", sm: "block" },
-                    color: "#9500B3",
+                    color: "#119656",
                     marginTop: "10px",
                     fontWeight: 700,
                   }}
                 >
-                  Tynna Company Social
+                  TyCorp Social
                 </Typography>
               </RouterLink>
             </Typography>
             <Box sx={{ flexGrow: 1 }} />
             <Box>
               <Avatar
+                src={user?.avatarUrl}
                 onClick={handleProfileMenuOpen}
                 sx={{
                   width: 44,
@@ -260,18 +153,7 @@ function MainHeader() {
                 }}
               />
             </Box>
-            <Box>
-              <ListIcon
-                onClick={handleMainMenuOpen}
-                sx={{
-                  width: 44,
-                  height: 44,
-                  marginTop: "10px",
-                  marginLeft: "50px",
-                }}
-              />
-              {renderMainMenu}
-            </Box>
+            
           </Toolbar>
         </AppBar>
         {renderMenu}

@@ -22,10 +22,6 @@ const slice = createSlice({
       state.isLoading = true;
     },
 
-    browsePost(state,action) {
-      // state.check = !state.check;
-    },
-
     hasError(state, action) {
       state.isLoading = false;
       state.error = action.payload;
@@ -85,6 +81,16 @@ const slice = createSlice({
     },
 
     deletePostSuccess(state, action) {
+      state.isLoading = false;
+      state.error = null;
+      delete state.postsById[action.payload.postId];
+
+      state.currentPagePosts = state.currentPagePosts.filter(
+        (postId) => postId !== action.payload.postId
+      );
+    },
+
+    deleteUnCheckPostSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
       delete state.postsById[action.payload.postId];
@@ -169,6 +175,18 @@ export const deletePost = (postId) => async (dispatch) => {
   try {
     const response = await apiService.delete(`/posts/${postId}`);
     dispatch(slice.actions.deletePostSuccess({ ...response, postId }));
+    toast.success("Delete successfully");
+  } catch (error) {
+    dispatch(slice.actions.hasError(error.message));
+    toast.error(error.message);
+  }
+};
+
+export const deleteUnCheckPost = (postId) => async (dispatch) => {
+  dispatch(slice.actions.startLoading());
+  try {
+    const response = await apiService.delete(`/posts/uncheck/${postId}`);
+    dispatch(slice.actions.deleteUnCheckPostSuccess({ ...response, postId }));
     toast.success("Delete successfully");
   } catch (error) {
     dispatch(slice.actions.hasError(error.message));

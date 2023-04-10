@@ -13,10 +13,8 @@ function UserProfilePage() {
   const { userList,isLoading } = useSelector(
     (state) => state.user
   );
-  console.log("userList",userList)
 
   let  { userId }  = useParams();
-  console.log("userId", userId )
 
   const dispatch = useDispatch();
 

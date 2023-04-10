@@ -65,7 +65,6 @@ function LoginPage() {
   };
 
   return (
-    // <Stack  sx={{ backgroundColor: "#ece4f2" }}>
     <Container
       maxWidth="xs"
       sx={{ backgroundColor: "rgba(245, 248, 250, 0.918)", height: "72vh" }}

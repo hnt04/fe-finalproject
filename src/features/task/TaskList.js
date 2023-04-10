@@ -57,8 +57,6 @@ function TaskList({ tasks }) {
                 sx={{
                   display: "flex",
                   justifyContent: "center",
-                  // marginBottom:"100px"
-                  // paddingLeft: "0!important",
                   height:"600px",
                   
                 }}

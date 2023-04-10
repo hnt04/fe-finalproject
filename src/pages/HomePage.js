@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import useAuth from '../hooks/useAuth';
 import { Box } from '@mui/material';
-import ProfileCover from '../features/user/ProfileCover';
-import { styled } from "@mui/material/styles";
 import UserPage from '../features/user/UserPage';
 
 function HomePage() {
@@ -17,8 +15,8 @@ function HomePage() {
                 maxHeight:"100%",
                 height: "auto",
                 position: "relative",
-            }}>{user && <ProfileCover profile={user} />}
-            <UserPage profile={user}/>
+            }}>
+            <UserPage profile={user} />
         </Box>
   );
 }

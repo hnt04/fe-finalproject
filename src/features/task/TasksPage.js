@@ -1,4 +1,14 @@
-import { Stack, Typography, Button, Modal, Box, List } from "@mui/material";
+import {
+  Stack,
+  Typography,
+  Button,
+  Modal,
+  Box,
+  List,
+  Grid,
+  Divider,
+  Card,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -12,8 +22,9 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import ListItemButton from "@mui/material/ListItemButton";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import Collapse from '@mui/material/Collapse';
-
+import Collapse from "@mui/material/Collapse";
+import MenuItem from "@mui/material/MenuItem";
+import useAuth from "../../hooks/useAuth";
 
 const style = {
   position: "absolute",
@@ -29,6 +40,7 @@ const style = {
 
 const TasksPage = () => {
   const { tasksHandle, tasksAssign } = useSelector((state) => state.task);
+  const { user } = useAuth();
 
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
@@ -87,166 +99,262 @@ const TasksPage = () => {
   ];
 
   return (
-    <Stack sx={{ marginBottom: "700px", marginTop: "5%" }}>
-      <Breadcrumbs
-        separator={<NavigateNextIcon fontSize="small" />}
-        aria-label="breadcrumb"
-        sx={{ marginLeft: "2%" }}
-      >
-        {breadcrumbs}
-      </Breadcrumbs>
-      <Typography
-        variant="h4"
-        sx={{
-          color: "#616161",
-          fontWeight: "700",
-          textAlign: "center",
-          fontSize: "60px",
-        }}
-        gutterBottom
-      >
-        Your Task
-      </Typography>
-
-      <Button
-        onClick={handleOpen}
-        sx={{
-          maxWidth: "100%",
-          width: "15vw",
-          fontSize: "20px",
-          marginRight: "10px",
-          display: "flex",
-          alignSelf: "center",
-        }}
-        size="small"
-        variant="contained"
-        color="success"
-      >
-        Create New Task
-        {/* <AddIcon /> */}
-      </Button>
-      <Modal open={open} onClose={handleClose}>
-        <Box sx={style}>
-          <TaskForm users={users} />
-        </Box>
-      </Modal>
-      <Typography
-        sx={{
-          color: "#616161",
-          fontWeight: "300",
-          fontSize: "20px",
-          textAlign: "center",
-          marginTop: "10px",
-        }}
-      >
-        ( <b>Note:</b> The color of right bar is display for deadline status
-        <Typography
+    <Grid container spacing={3} sx={{ padding: "2%" }}>
+      <Grid item xs={12} md={4}>
+        <Card
           sx={{
-            color: "#616161",
-            fontWeight: "300",
-            fontSize: "20px",
-            textAlign: "center",
-            marginTop: "5px",
+            width: "70%",
+            marginTop: "4vh",
+            marginLeft: "4vw",
+            paddingBottom: "4vh",
+            paddingTop: "4vh",
           }}
         >
-          <RectangleIcon
-            sx={{
-              border: "solid 1px #1c1b1b",
-              width: "50px",
-              color: "#edf7f2",
-              backgroundColor: "#edf7f2",
-            }}
-          />{" "}
-          : More than 10 days left
-        </Typography>
-        <Typography
+          <Stack spacing={3} sx={{ marginLeft: "2vw", marginRight:"2vw" }}>
+            <MenuItem
+              to="/member"
+              component={RouterLink}
+              sx={{
+                mx: 1,
+                color: "#5c8072",
+                fontSize: "20px",
+                fontWeight: "600",
+                marginTop: "3%",
+                marginBottom: "3%",
+                "&:hover": { color: "#757575", textDecoration: "none" },
+              }}
+            >
+              Member
+            </MenuItem>
+            <Divider sx={{ borderStyle: "dashed" }} />
+            <MenuItem
+              to="/commendation"
+              component={RouterLink}
+              sx={{
+                mx: 1,
+                color: "#5c8072",
+                fontSize: "20px",
+                fontWeight: "600",
+                marginTop: "3%",
+                marginRight: "50px",
+                marginBottom: "3%",
+                "&:hover": { color: "#757575", textDecoration: "none" },
+              }}
+            >
+              Commendation Page
+            </MenuItem>
+            <Divider sx={{ borderStyle: "dashed" }} />
+            <MenuItem
+              to="/tasks"
+              component={RouterLink}
+              sx={{
+                mx: 1,
+                color: "#5c8072",
+                fontSize: "20px",
+                fontWeight: "600",
+                marginTop: "3%",
+                marginRight: "50px",
+                marginBottom: "3%",
+                "&:hover": { color: "#757575", textDecoration: "none" },
+              }}
+            >
+              Task
+            </MenuItem>
+            <Divider sx={{ borderStyle: "dashed" }} />
+            {user?.department === "HR" && (
+              <MenuItem
+                to="/post-box"
+                component={RouterLink}
+                sx={{
+                  mx: 1,
+                  color: "#5c8072",
+                  fontSize: "20px",
+                  fontWeight: "600",
+                  marginTop: "3%",
+                  marginRight: "50px",
+                  marginBottom: "3%",
+                  "&:hover": { color: "#757575", textDecoration: "none" },
+                }}
+              >
+                Check Post
+              </MenuItem>
+            )}
+          </Stack>
+        </Card>
+        <Card
           sx={{
-            color: "#616161",
-            fontWeight: "300",
-            fontSize: "20px",
-            textAlign: "center",
-            marginTop: "5px",
+            width: "70%",
+            marginTop: "4vh",
+            marginLeft: "4vw",
+            paddingBottom: "4vh",
+            paddingTop: "4vh",
           }}
         >
-          <RectangleIcon
+          <Button
+            onClick={handleOpen}
             sx={{
-              border: "solid 1px #1c1b1b",
-              width: "50px",
-              color: "#f3f777",
-              backgroundColor: "#f3f777",
+              marginLeft:"32%",
+              maxWidth: "40%",
+              width: {xs:"50vw",md:"15vw"},
+              fontSize: "20px",
+              display: "flex",
+              alignSelf: "center",
             }}
-          />{" "}
-          : Deadline in 5 - 10 days
-        </Typography>
-        <Typography
-          sx={{
-            color: "#616161",
-            fontWeight: "300",
-            fontSize: "20px",
-            textAlign: "center",
-            marginTop: "5px",
-          }}
-        >
-          <RectangleIcon
-            sx={{
-              border: "solid 1px #1c1b1b",
-              width: "50px",
-              color: "#D32F2F",
-              backgroundColor: "#D32F2F",
-            }}
-          />{" "}
-          : Less than 5 days left )
-        </Typography>
-      </Typography>
-      <List>
-        <ListItemButton onClick={handleClickOpenHandleList}>
+            size="small"
+            variant="contained"
+            color="success"
+          >
+            Create Task
+          </Button>
+          <Modal open={open} onClose={handleClose}>
+            <Box sx={style}>
+              <TaskForm users={users} />
+            </Box>
+          </Modal>
           <Typography
             sx={{
               color: "#616161",
-              fontWeight: "600",
-              fontSize: "40px",
-              marginTop: "50px",
-              marginBottom: "100px",
-              marginLeft: "30px",
+              fontWeight: "300",
+              fontSize: "20px",
+              textAlign: "center",
+              marginTop: "5%",
             }}
           >
-            Task Handler{" "}
+            ( <b>Note:</b> The color of right bar is display for deadline status
+            <Typography
+              sx={{
+                color: "#616161",
+                fontWeight: "300",
+                fontSize: "20px",
+                textAlign: "center",
+                marginTop: "5px",
+              }}
+            >
+              <RectangleIcon
+                sx={{
+                  border: "solid 1px #1c1b1b",
+                  width: "50px",
+                  color: "#edf7f2",
+                  backgroundColor: "#edf7f2",
+                }}
+              />{" "}
+              : More than 10 days left
+            </Typography>
+            <Typography
+              sx={{
+                color: "#616161",
+                fontWeight: "300",
+                fontSize: "20px",
+                textAlign: "center",
+                marginTop: "5px",
+              }}
+            >
+              <RectangleIcon
+                sx={{
+                  border: "solid 1px #1c1b1b",
+                  width: "50px",
+                  color: "#f3f777",
+                  backgroundColor: "#f3f777",
+                }}
+              />{" "}
+              : Deadline in 5 - 10 days
+            </Typography>
+            <Typography
+              sx={{
+                color: "#616161",
+                fontWeight: "300",
+                fontSize: "20px",
+                textAlign: "center",
+                marginTop: "5px",
+              }}
+            >
+              <RectangleIcon
+                sx={{
+                  border: "solid 1px #1c1b1b",
+                  width: "50px",
+                  color: "#D32F2F",
+                  backgroundColor: "#D32F2F",
+                }}
+              />{" "}
+              : Less than 5 days left )
+            </Typography>
           </Typography>
-          {openHandleList ? (
-            <ExpandLess sx={{ marginLeft: "4%", marginTop: "-2%" }} />
-          ) : (
-            <ExpandMore sx={{ marginLeft: "4%", marginTop: "-2%" }} />
-          )}
-        </ListItemButton>
-        <Collapse in={openHandleList} timeout="auto" unmountOnExit>
-          <TaskList tasks={tasksHandle} />
-        </Collapse>
-      </List>
+        </Card>
+      </Grid>
+      <Grid item xs={12} md={8}>
+        <Stack spacing={3} sx={{ marginLeft: "4vw", marginTop: "4vh" }}>
+          <Breadcrumbs
+            separator={<NavigateNextIcon fontSize="small" />}
+            aria-label="breadcrumb"
+            sx={{ marginLeft: "2%" }}
+          >
+            {breadcrumbs}
+          </Breadcrumbs>
 
-      <List>
-        <ListItemButton onClick={handleClickOpenAssignList}>
           <Typography
+            variant="h4"
             sx={{
               color: "#616161",
-              fontWeight: "600",
-              fontSize: "40px",
-              marginBottom: "100px",
-              marginLeft: "30px",
+              fontWeight: "700",
+              textAlign: "center",
+              fontSize: "60px",
             }}
+            gutterBottom
           >
-            Task Assigner
+            Your Task
           </Typography>
-          {openAssignList ? (
-            <ExpandLess sx={{ marginLeft: "4%", marginTop: "-6%" }} />
-          ) : (
-            <ExpandMore sx={{ marginLeft: "4%", marginTop: "-6%" }} />
-          )}
-        </ListItemButton>
-        <Collapse in={openAssignList} timeout="auto" unmountOnExit>
-          <TaskList tasks={tasksAssign} />
-        </Collapse>
-      </List>
-    </Stack>
+
+          <List>
+            <ListItemButton onClick={handleClickOpenHandleList}>
+              <Typography
+                sx={{
+                  color: "#616161",
+                  fontWeight: "600",
+                  fontSize: "40px",
+                  marginTop: "50px",
+                  marginBottom: "100px",
+                  marginLeft: "30px",
+                }}
+              >
+                Task Handler{" "}
+              </Typography>
+              {openHandleList ? (
+                <ExpandLess sx={{ marginLeft: "4%", marginTop: "-2%" }} />
+              ) : (
+                <ExpandMore sx={{ marginLeft: "4%", marginTop: "-2%" }} />
+              )}
+            </ListItemButton>
+            <Collapse in={openHandleList} timeout="auto" unmountOnExit>
+              <TaskList tasks={tasksHandle} />
+            </Collapse>
+          </List>
+
+          <List>
+            <ListItemButton onClick={handleClickOpenAssignList}>
+              <Typography
+                sx={{
+                  color: "#616161",
+                  fontWeight: "600",
+                  fontSize: "40px",
+                  marginBottom: "100px",
+                  marginLeft: "30px",
+                }}
+              >
+                Task Assigner
+              </Typography>
+              {openAssignList ? (
+                <ExpandLess sx={{ marginLeft: "4%", marginTop: "-6%" }} />
+              ) : (
+                <ExpandMore sx={{ marginLeft: "4%", marginTop: "-6%" }} />
+              )}
+            </ListItemButton>
+            <Collapse in={openAssignList} timeout="auto" unmountOnExit>
+              <TaskList tasks={tasksAssign} />
+            </Collapse>
+          </List>
+        </Stack>
+      </Grid>
+    </Grid>
   );
 };
 

@@ -5,11 +5,12 @@ import {
   Modal,
   Typography,
   Button,
+  Grid,
+  Divider,
+  Card,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-// import ActionButton from "../user/ActionButton";
 import UserTable from "../user/UserTable";
-// import AuthRequiredHR from "../../routes/AuthRequiredHR";
 import useAuth from "../../hooks/useAuth";
 import { getUsers } from "../user/userSlice";
 import { LoadingButton } from "@mui/lab";
@@ -19,9 +20,7 @@ import moment from "moment";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import { Link as RouterLink } from "react-router-dom";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-
-
-// import UserCard from "../user/UserCard";
+import MenuItem from "@mui/material/MenuItem";
 
 const style = {
   position: "absolute",
@@ -35,7 +34,6 @@ const style = {
   p: 4,
 };
 
-
 function CommendationsBoardPage() {
   const { user } = useAuth();
   const [open, setOpen] = useState(false);
@@ -46,17 +44,16 @@ function CommendationsBoardPage() {
 
   const dispatch = useDispatch();
 
-  const { currentPageCommendations, commendationsById, isLoading,totalCommendations } = useSelector(
-    (state) => state.commendation
-  );
+  const {
+    currentPageCommendations,
+    commendationsById,
+    isLoading,
+    totalCommendations,
+  } = useSelector((state) => state.commendation);
 
-  const { currentPageUsers, usersById } = useSelector(
-    (state) => state.user
-  );
+  const { currentPageUsers, usersById } = useSelector((state) => state.user);
 
   const users = currentPageUsers.map((userId) => usersById[userId]);
-
-  // const commendation = commendationsList.map(())
 
   useEffect(() => {
     dispatch(getUsers({ filterName, page: page, limit: rowsPerPage }));
@@ -94,8 +91,10 @@ function CommendationsBoardPage() {
     }
   });
 
-  const commendations = currentPageCommendations.map((month) => commendationsById[month])
-  
+  const commendations = currentPageCommendations.map(
+    (month) => commendationsById[month]
+  );
+
   useEffect(() => {
     dispatch(getCommendations(mth));
   }, [dispatch, mth]);
@@ -123,81 +122,176 @@ function CommendationsBoardPage() {
   ];
 
   return (
-    <Stack width="100%" sx={{marginTop:"5%"}}>
-      <Breadcrumbs
-        separator={<NavigateNextIcon fontSize="small" />}
-        aria-label="breadcrumb"
-        sx={{ marginLeft: "2%" }}
-      >
-        {breadcrumbs}
-      </Breadcrumbs>
-      <Typography
-        variant="h4"
-        sx={{
-          color: "#616161",
-          fontWeight: "700",
-          // paddingLeft: "2%",
-          textAlign: "center",
-          fontSize: "60px",
-        }}
-        gutterBottom
-      >
-        Best Employee Of Month
-      </Typography>
-      {user?.department === "HR" && (
-      <Button
-        onClick={handleOpen}
-        sx={{
-          width: "20px",
-          fontSize: "20px",
-          marginRight: "10px",
-          display: "flex",
-          alignSelf: "center",
-        }}
-        size="small"
-        variant="contained"
-        color="success"
-      >
-        Edit
-      </Button>)}
-      <Modal open={open} onClose={handleClose}>
-        <Box sx={style}>
-         
-            <UserTable users={users} />
-          
-        </Box>
-
-      </Modal>
-
-      <Stack
-        container
-        spacing={2}
-        sx={{ marginLeft: "20%" }}
-      >
-          {commendations.map((commendation) =>(
-            <>
-            <Typography sx={{ marginTop:"20px",color: "#616161", fontWeight: "600", fontSize: "40px" }}>
-            {commendation.month} - {commendation.year}</Typography>
-          
-          <CommendationsEachMonth commendation={commendation} users={users} />
-          </>))}
-      </Stack>
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        {totalCommendations ? (
-          <LoadingButton
-            variant="outlined"
-            size="small"
-            loading={isLoading}
-            onClick={() => setPage((page) => page + 1)}
-            disabled={Boolean(totalCommendations) && commendations.length >= totalCommendations}
+    <Grid container spacing={3} sx={{ padding: "2%" }}>
+      <Grid item xs={12} md={4}>
+        <Card
+          sx={{
+            width: "70%",
+            marginTop: "4vh",
+            marginLeft: "4vw",
+            paddingBottom: "4vh",
+            paddingTop: "4vh",
+          }}
+        >
+          <Stack spacing={3} sx={{ marginLeft: "2vw", marginRight:"2vw"}}>
+            <MenuItem
+              to="/member"
+              component={RouterLink}
+              sx={{
+                mx: 1,
+                color: "#5c8072",
+                fontSize: "20px",
+                fontWeight: "600",
+                marginTop: "3%",
+                marginBottom: "3%",
+                "&:hover": { color: "#757575", textDecoration: "none" },
+              }}
+            >
+              Member
+            </MenuItem>
+            <Divider sx={{ borderStyle: "dashed" }} />
+            <MenuItem
+              to="/commendation"
+              component={RouterLink}
+              sx={{
+                mx: 1,
+                color: "#5c8072",
+                fontSize: "20px",
+                fontWeight: "600",
+                marginTop: "3%",
+                marginRight: "50px",
+                marginBottom: "3%",
+                "&:hover": { color: "#757575", textDecoration: "none" },
+              }}
+            >
+              Commendation Page
+            </MenuItem>
+            <Divider sx={{ borderStyle: "dashed" }} />
+            <MenuItem
+              to="/tasks"
+              component={RouterLink}
+              sx={{
+                mx: 1,
+                color: "#5c8072",
+                fontSize: "20px",
+                fontWeight: "600",
+                marginTop: "3%",
+                marginRight: "50px",
+                marginBottom: "3%",
+                "&:hover": { color: "#757575", textDecoration: "none" },
+              }}
+            >
+              Task
+            </MenuItem>
+            <Divider sx={{ borderStyle: "dashed" }} />
+            {user?.department === "HR" && (
+              <MenuItem
+                to="/post-box"
+                component={RouterLink}
+                sx={{
+                  mx: 1,
+                  color: "#5c8072",
+                  fontSize: "20px",
+                  fontWeight: "600",
+                  marginTop: "3%",
+                  marginRight: "50px",
+                  marginBottom: "3%",
+                  "&:hover": { color: "#757575", textDecoration: "none" },
+                }}
+              >
+                Check Post
+              </MenuItem>
+            )}
+          </Stack>
+        </Card>
+      </Grid>
+      <Grid item xs={12} md={8}>
+        <Stack width="100%" sx={{ marginTop: "5%" }}>
+          <Breadcrumbs
+            separator={<NavigateNextIcon fontSize="small" />}
+            aria-label="breadcrumb"
+            sx={{ marginLeft: "2%" }}
           >
-            Load more
-          </LoadingButton>
-        ) : (
-          <Typography variant="h6">No More</Typography>
-        )}
-      </Box>
-    </Stack>
+            {breadcrumbs}
+          </Breadcrumbs>
+          <Typography
+            variant="h4"
+            sx={{
+              color: "#616161",
+              fontWeight: "700",
+              // paddingLeft: "2%",
+              textAlign: "center",
+              fontSize: "60px",
+            }}
+            gutterBottom
+          >
+            Best Employee Of Month
+          </Typography>
+          {user?.department === "HR" && (
+            <Button
+              onClick={handleOpen}
+              sx={{
+                width: "20px",
+                fontSize: "20px",
+                marginRight: "10px",
+                display: "flex",
+                alignSelf: "center",
+              }}
+              size="small"
+              variant="contained"
+              color="success"
+            >
+              Edit
+            </Button>
+          )}
+          <Modal open={open} onClose={handleClose}>
+            <Box sx={style}>
+              <UserTable users={users} />
+            </Box>
+          </Modal>
+
+          <Stack container spacing={2} sx={{ marginLeft: "20%" }}>
+            {commendations.map((commendation) => (
+              <>
+                <Typography
+                  sx={{
+                    marginTop: "20px",
+                    color: "#616161",
+                    fontWeight: "600",
+                    fontSize: "40px",
+                  }}
+                >
+                  {commendation.month} - {commendation.year}
+                </Typography>
+
+                <CommendationsEachMonth
+                  commendation={commendation}
+                  users={users}
+                />
+              </>
+            ))}
+          </Stack>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            {totalCommendations ? (
+              <LoadingButton
+                variant="outlined"
+                size="small"
+                loading={isLoading}
+                onClick={() => setPage((page) => page + 1)}
+                disabled={
+                  Boolean(totalCommendations) &&
+                  commendations.length >= totalCommendations
+                }
+              >
+                Load more
+              </LoadingButton>
+            ) : (
+              <Typography variant="h6">No More</Typography>
+            )}
+          </Box>
+        </Stack>
+      </Grid>
+    </Grid>
   );
 }
 

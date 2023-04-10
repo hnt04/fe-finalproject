@@ -120,7 +120,8 @@ function PostCard({ post, handleChoose, handleChooseEdit }) {
             variant="subtitle2"
             color="#7b228f"
             component={RouterLink}
-            sx={{ fontWeight: 600 }}
+            sx={{ fontWeight: 600,fontSize: "20px",
+          }}
             to={`/users/${post?.author?._id}`}
           >
             {post?.author?.name}
@@ -137,7 +138,8 @@ function PostCard({ post, handleChoose, handleChooseEdit }) {
       ></CardHeader>
       )}
       <Stack spacing={2} sx={{ p: 3 }}>
-        <Typography sx={{ color: "#616161" }}>{post?.content}</Typography>
+        <Typography sx={{ color: "#616161",fontSize: "20px",
+ }}>{post?.content}</Typography>
 
         {post?.image && (
           <Box
