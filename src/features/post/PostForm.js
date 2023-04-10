@@ -42,7 +42,7 @@ function PostForm() {
   return (
     <>
       <Stack>
-        <Button  onClick={handleOpen} variant="outlined" sx={{width:"84%"}}>Hey {user.name}, do you want to share something... ?</Button>
+        <Button  onClick={handleOpen} variant="outlined" sx={{width:{xs:"88%", md:"100%" }}}>Hey {user.name}, do you want to share something... ?</Button>
         <Modal open={open} onClose={handleClose}>
           <Box sx={style}>
             <PostFormModal />

@@ -45,6 +45,7 @@ const TasksPage = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
   const [open, setOpen] = useState(false);
+  const [openMore, setOpenMore] = useState(false);
   const [openHandleList, setOpenHandleList] = useState(false);
   const [openAssignList, setOpenAssignList] = useState(false);
 
@@ -54,6 +55,10 @@ const TasksPage = () => {
 
   const handleClickOpenAssignList = () => {
     setOpenAssignList(!openAssignList);
+  };
+
+  const handleClickOpenMore = () => {
+    setOpenMore(!openMore);
   };
 
   const { currentPageUsers, usersById, totalUsers } = useSelector(
@@ -99,7 +104,7 @@ const TasksPage = () => {
   ];
 
   return (
-    <Grid container spacing={3} sx={{ padding: "2%" }}>
+    <Grid container spacing={3} sx={{ paddingTop: "2%", marginLeft: "-2%" }}>
       <Grid item xs={12} md={4}>
         <Card
           sx={{
@@ -110,7 +115,7 @@ const TasksPage = () => {
             paddingTop: "4vh",
           }}
         >
-          <Stack spacing={3} sx={{ marginLeft: "2vw", marginRight:"2vw" }}>
+          <Stack spacing={3} sx={{ marginLeft: "2vw", marginRight: "2vw" }}>
             <MenuItem
               to="/member"
               component={RouterLink}
@@ -181,105 +186,6 @@ const TasksPage = () => {
             )}
           </Stack>
         </Card>
-        <Card
-          sx={{
-            width: "70%",
-            marginTop: "4vh",
-            marginLeft: "4vw",
-            paddingBottom: "4vh",
-            paddingTop: "4vh",
-          }}
-        >
-          <Button
-            onClick={handleOpen}
-            sx={{
-              marginLeft:"32%",
-              maxWidth: "40%",
-              width: {xs:"50vw",md:"15vw"},
-              fontSize: "20px",
-              display: "flex",
-              alignSelf: "center",
-            }}
-            size="small"
-            variant="contained"
-            color="success"
-          >
-            Create Task
-          </Button>
-          <Modal open={open} onClose={handleClose}>
-            <Box sx={style}>
-              <TaskForm users={users} />
-            </Box>
-          </Modal>
-          <Typography
-            sx={{
-              color: "#616161",
-              fontWeight: "300",
-              fontSize: "20px",
-              textAlign: "center",
-              marginTop: "5%",
-            }}
-          >
-            ( <b>Note:</b> The color of right bar is display for deadline status
-            <Typography
-              sx={{
-                color: "#616161",
-                fontWeight: "300",
-                fontSize: "20px",
-                textAlign: "center",
-                marginTop: "5px",
-              }}
-            >
-              <RectangleIcon
-                sx={{
-                  border: "solid 1px #1c1b1b",
-                  width: "50px",
-                  color: "#edf7f2",
-                  backgroundColor: "#edf7f2",
-                }}
-              />{" "}
-              : More than 10 days left
-            </Typography>
-            <Typography
-              sx={{
-                color: "#616161",
-                fontWeight: "300",
-                fontSize: "20px",
-                textAlign: "center",
-                marginTop: "5px",
-              }}
-            >
-              <RectangleIcon
-                sx={{
-                  border: "solid 1px #1c1b1b",
-                  width: "50px",
-                  color: "#f3f777",
-                  backgroundColor: "#f3f777",
-                }}
-              />{" "}
-              : Deadline in 5 - 10 days
-            </Typography>
-            <Typography
-              sx={{
-                color: "#616161",
-                fontWeight: "300",
-                fontSize: "20px",
-                textAlign: "center",
-                marginTop: "5px",
-              }}
-            >
-              <RectangleIcon
-                sx={{
-                  border: "solid 1px #1c1b1b",
-                  width: "50px",
-                  color: "#D32F2F",
-                  backgroundColor: "#D32F2F",
-                }}
-              />{" "}
-              : Less than 5 days left )
-            </Typography>
-          </Typography>
-        </Card>
       </Grid>
       <Grid item xs={12} md={8}>
         <Stack spacing={3} sx={{ marginLeft: "4vw", marginTop: "4vh" }}>
@@ -290,7 +196,6 @@ const TasksPage = () => {
           >
             {breadcrumbs}
           </Breadcrumbs>
-
           <Typography
             variant="h4"
             sx={{
@@ -299,16 +204,136 @@ const TasksPage = () => {
               textAlign: "center",
               fontSize: "60px",
             }}
-            gutterBottom
           >
             Your Task
           </Typography>
-
+          <List>
+            <ListItemButton
+              sx={{ display: "flex", justifyContent: "center"}}
+              onClick={handleClickOpenMore}
+            >
+              <Typography
+                variant="h4"
+                sx={{
+                  color: "#616161",
+                  fontWeight: "500",
+                  textAlign: "center",
+                  fontSize: "16px",
+                }}
+              >
+                {" "}
+                More
+              </Typography>
+              {openMore ? (
+                <ExpandLess sx={{ marginLeft: "4%", marginTop: "0%" }} />
+              ) : (
+                <ExpandMore sx={{ marginLeft: "4%", marginTop: "0%" }} />
+              )}
+              <Collapse in={openMore} timeout="auto" unmountOnExit>
+                <Card
+                  sx={{
+                    width: "100%",
+                  }}
+                >
+                  <Button
+                    onClick={handleOpen}
+                    sx={{
+                      marginLeft: "32%",
+                      maxWidth: "40%",
+                      width: { xs: "50vw", md: "15vw" },
+                      fontSize: "20px",
+                      display: "flex",
+                      alignSelf: "center",
+                    }}
+                    size="small"
+                    variant="contained"
+                    color="success"
+                  >
+                    Create Task
+                  </Button>
+                  <Modal open={open} onClose={handleClose}>
+                    <Box sx={style}>
+                      <TaskForm users={users} />
+                    </Box>
+                  </Modal>
+                  <Typography
+                    sx={{
+                      color: "#616161",
+                      fontWeight: "300",
+                      fontSize: "20px",
+                      textAlign: "center",
+                      marginTop: "5%",
+                    }}
+                  >
+                    ( <b>Note:</b> The color of right bar is display for
+                    deadline status
+                    <Typography
+                      sx={{
+                        color: "#616161",
+                        fontWeight: "300",
+                        fontSize: "20px",
+                        textAlign: "center",
+                        marginTop: "5px",
+                      }}
+                    >
+                      <RectangleIcon
+                        sx={{
+                          border: "solid 1px #1c1b1b",
+                          width: "50px",
+                          color: "#edf7f2",
+                          backgroundColor: "#edf7f2",
+                        }}
+                      />{" "}
+                      : More than 10 days left
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: "#616161",
+                        fontWeight: "300",
+                        fontSize: "20px",
+                        textAlign: "center",
+                        marginTop: "5px",
+                      }}
+                    >
+                      <RectangleIcon
+                        sx={{
+                          border: "solid 1px #1c1b1b",
+                          width: "50px",
+                          color: "#f3f777",
+                          backgroundColor: "#f3f777",
+                        }}
+                      />{" "}
+                      : Deadline in 5 - 10 days
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: "#616161",
+                        fontWeight: "300",
+                        fontSize: "20px",
+                        textAlign: "center",
+                        marginTop: "5px",
+                      }}
+                    >
+                      <RectangleIcon
+                        sx={{
+                          border: "solid 1px #1c1b1b",
+                          width: "50px",
+                          color: "#D32F2F",
+                          backgroundColor: "#D32F2F",
+                        }}
+                      />{" "}
+                      : Less than 5 days left )
+                    </Typography>
+                  </Typography>
+                </Card>
+              </Collapse>
+            </ListItemButton>
+          </List>
           <List>
             <ListItemButton onClick={handleClickOpenHandleList}>
               <Typography
                 sx={{
-                  color: "#616161",
+                  color: "#405c53",
                   fontWeight: "600",
                   fontSize: "40px",
                   marginTop: "50px",
@@ -333,7 +358,7 @@ const TasksPage = () => {
             <ListItemButton onClick={handleClickOpenAssignList}>
               <Typography
                 sx={{
-                  color: "#616161",
+                  color: "#405c53",
                   fontWeight: "600",
                   fontSize: "40px",
                   marginBottom: "100px",

@@ -37,8 +37,8 @@ function ProfileAbout() {
               borderWidth: 2,
               borderStyle: "solid",
               borderColor: "common.white",
-              width: { xs: 100, md: 100 },
-              height: { xs: 100, md: 100 },
+              width: { xs: 100, md: 80 },
+              height: { xs: 100, md: 80 },
             }}
           />
           <Box
@@ -52,68 +52,39 @@ function ProfileAbout() {
             <Typography
               sx={{
                 color: "#4D0019",
-                marginTop: { xs: "20%", md: "20%" },
+                marginTop: { xs: "20%", md: "10%" },
                 marginLeft: { xs: "-100%", md: "-90%" },
-                fontSize:"40px"
+                fontSize:"28px"
               }}
             >
               <b> {user.name}</b>
             </Typography>
+            <Typography
+              sx={{
+                color: "#2b2d30",
+                marginLeft: { xs: "-90%", md: "-90%" },
+                fontSize:"16px"
+              }}
+            >
+               {user?.department} - {user?.role}
+            </Typography>
           </Box>
         </Stack>
         <hr />
-        <Stack direction="row" sx={{ paddingBottom: "20px" }}>
+        <Stack direction="row" sx={{ paddingBottom: "8px" }}>
           <IconStyle sx={{ marginLeft: "30px", marginTop: "20px" }}>
             <Grid3x3Icon />
           </IconStyle>
           <Typography
             sx={{
-              color: "#70809",
-              fontSize: "24px",
+              color: "#2b2d30",
+              fontSize: "20px",
               fontWeight: "500",
               marginLeft: "30px",
               marginTop: "20px",
             }}
           >
             {user?.employeeId}
-          </Typography>
-        </Stack>
-
-        <Stack
-          direction="row"
-          sx={{ paddingBottom: "20px", marginLeft: "50px" }}
-        >
-          <IconStyle sx={{ marginLeft: "30px" }}>
-            <ApartmentIcon />
-          </IconStyle>
-          <Typography
-            sx={{
-              color: "#70809",
-              fontSize: "24px",
-              fontWeight: "500",
-              marginLeft: "30px",
-            }}
-          >
-            {user?.department}
-          </Typography>
-        </Stack>
-
-        <Stack
-          direction="row"
-          sx={{ paddingBottom: "20px", marginLeft: "50px" }}
-        >
-          <IconStyle sx={{ marginLeft: "30px" }}>
-            <AssignmentIndIcon />
-          </IconStyle>
-          <Typography
-            sx={{
-              color: "#70809",
-              fontSize: "24px",
-              fontWeight: "500",
-              marginLeft: "30px",
-            }}
-          >
-            {user?.role}
           </Typography>
         </Stack>
 
@@ -126,8 +97,8 @@ function ProfileAbout() {
           </IconStyle>
           <Typography
             sx={{
-              color: "#70809",
-              fontSize: "24px",
+              color: "#2b2d30",
+              fontSize: "20px",
               fontWeight: "500",
               marginLeft: "30px",
             }}
