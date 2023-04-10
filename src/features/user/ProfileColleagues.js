@@ -21,7 +21,7 @@ function ProfileColleagues({ profileColleague }) {
   console.log("profileColleague", profileColleague);
 
   return (
-    <Box sx={{ marginLeft: { xs: "6%", md: "20%" }, width: "84%", marginBottom:"50%" }}>
+    <Box sx={{ marginLeft: { xs: "6%", md: "6%" }, width: "84%", marginBottom:"50%" }}>
       <ProfileColleagueCover profileColleague={profileColleague} />
 
       <Stack
