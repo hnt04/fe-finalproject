@@ -16,8 +16,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import EventIcon from "@mui/icons-material/Event";
 import useAuth from "../../hooks/useAuth";
-import RadioGroup from '@mui/material/RadioGroup';
-import Radio from '@mui/material/Radio';
+import RadioGroup from "@mui/material/RadioGroup";
+import Radio from "@mui/material/Radio";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
@@ -26,8 +26,8 @@ import { format } from "date-fns";
 import PostFormUpdate from "../post/PostFormUpdate";
 import TaskDeleteConfirmation from "./TaskDeleteConfirm";
 import _ from "lodash";
-import DoNotDisturbAltIcon from '@mui/icons-material/DoNotDisturbAlt';
-import PersonIcon from '@mui/icons-material/Person';
+import DoNotDisturbAltIcon from "@mui/icons-material/DoNotDisturbAlt";
+import PersonIcon from "@mui/icons-material/Person";
 
 function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
   const { user } = useAuth();
@@ -44,7 +44,8 @@ function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
     WORKING: true,
     REVIEW: false,
     PENDING: false,
-    DONE:false
+    DONE: false,
+    ARCHIVE:false
   });
 
   const isMenuOpen = Boolean(anchorEl);
@@ -55,13 +56,13 @@ function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
     setAnchorEl(null);
   };
 
-  const onChangeStatus =(event) => {
-    console.log("event",event.target.name)
+  const onChangeStatus = (event) => {
+    console.log("event", event.target.name);
     dispatch(updatedTaskProfile({ ...tasks, status: event.target.name }));
   };
 
-  const {WORKING,REVIEW,PENDING,DONE} = taskStatus
-  const error = [WORKING,REVIEW,PENDING,DONE].filter((v) => v).length !== 2;
+  const { WORKING, REVIEW, PENDING, DONE, ARCHIVE } = taskStatus;
+  const error = [WORKING, REVIEW, PENDING, DONE, ARCHIVE].filter((v) => v).length !== 2;
 
   const menuId = "option-menu";
   const renderMenuTask = (
@@ -101,15 +102,16 @@ function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
   return (
     <Card
       sx={{
-        padding: "10px",
+        paddingLeft: "8%",
+        paddingBottom:"8%",
+        paddingTop:"8%",
         mb: "10px",
-        boxShadow: "none",
-        width: "300px",
-        height: "400px",
-        border:"1px solid",
-        backgroundColor: `${tasks.status === "DONE" ? "#E6EEFF" : "#FFE6E6"}`,
-        borderRight: `${
-          tasks?.status !== "DONE"
+        boxShadow: "30",
+        width: "44em",
+        height: "auto",
+        backgroundColor: `${tasks.status === "ARCHIVE" ? "#E6EEFF" : "#ffff"}`,
+        borderLeft: `${
+          tasks?.status !== "ARCHIVE"
             ? dayLeft > 10
               ? "12px solid #edf7f2"
               : dayLeft > 5
@@ -119,12 +121,14 @@ function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
         }`,
       }}
     >
-      <Stack direction="row" justifyContent="space-between">
+      <Stack direction="row" justifyContent="space-between" position="relative" sx={{paddingTop:"1%"}}>
         <Typography
           sx={{
             mb: 1.5,
+            fontSize:"20px",
+            fontWeight:"600",
             textDecorationLine: `${
-              tasks?.status === "DONE" ? "line-through" : ""
+              tasks?.status === "ARCHIVE" ? "line-through" : ""
             }`,
           }}
           color="#616161"
@@ -137,7 +141,7 @@ function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
         sx={{
           mb: 1.5,
           textDecorationLine: `${
-            tasks.status === "DONE" ? "line-through" : ""
+            tasks.status === "ARCHIVE" ? "line-through" : ""
           }`,
         }}
         color="text.secondary"
@@ -147,14 +151,14 @@ function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
       <Stack direction="row" alignItems="center" mb={1.5}>
         <EventIcon style={{ marginRight: "5px", color: "#5B5C5E" }} />
         <Typography color="text.secondary" variant="body2">
-          {moment(tasks?.deadlineAt).format("MM DD YYYY")}
+        {moment(tasks?.createdAt).format("MM DD YYYY")} - {moment(tasks?.deadlineAt).format("MM DD YYYY")}
         </Typography>
       </Stack>
       <Typography
         sx={{
           mb: 1.5,
           textDecorationLine: `${
-            tasks.status === "DONE" ? "line-through" : ""
+            tasks.status === "ARCHIVE" ? "line-through" : ""
           }`,
         }}
         color="text.secondary"
@@ -162,58 +166,77 @@ function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
         Status: <b>{tasks?.status}</b>
       </Typography>
       <Stack direction="row" alignItems="center" pt={1}>
-        <PersonIcon />{tasks?.handler.map((item) => (
-          <Typography>{item.name}</Typography>
+        {tasks?.handler.map((item) => (
+          <Avatar title={`${item.name}`}>{item.avatarUrl}</Avatar>
         ))}
       </Stack>
-      <Divider light />
-      <FormControl sx={{marginTop:"10px"}} component="fieldset"  error={error}>
-        <FormLabel component="legend">Process:</FormLabel>
-        <RadioGroup aria-label="position">
-          <FormControlLabel
-            value="PENDING"
-            control={<Radio name="PENDING" onChange={onChangeStatus}  />}
-            label="PENDING"
-            labelPlacement="PENDING"
-          />
-          <FormControlLabel
-            value="WORKING"
-            control={<Radio  name="WORKING" onChange={onChangeStatus} />}
-            label="WORKING"
-            labelPlacement="WORKING"
-          />
-          {user?._id === tasks.assigner ? (
+      <Card
+        sx={{
+          backgroundColor: `${tasks.status === "ARCHIVE" ? "#E6EEFF" : "#ffff"}`,
+          position: "absolute",
+          marginTop: "-32%",
+          marginLeft: "60%",
+          boxShadow:"0"
+        }}
+      >
+        <FormControl
+          sx={{ marginTop: "10px" }}
+          component="fieldset"
+          error={error}
+        >
+          <FormLabel component="legend">Process:</FormLabel>
+          <RadioGroup aria-label="position">
             <FormControlLabel
-              value="REVIEW"
-              control={<Radio name="REVIEW" onChange={onChangeStatus} />}
-              label="REVIEW"
-              labelPlacement="REVIEW"
+              value="PENDING"
+              control={<Radio name="PENDING" onChange={onChangeStatus} />}
+              label="PENDING"
+              labelPlacement="PENDING"
             />
-          ) : (
-            <Typography><DoNotDisturbAltIcon /> REVIEW - You can not choose this status</Typography>
-          )}
-          {user?._id === tasks.assigner ? (
             <FormControlLabel
-              value="DONE"
-              control={<Radio name="DONE" onChange={onChangeStatus} />}
-              label="DONE"
-              labelPlacement="DONE"
+              value="WORKING"
+              control={<Radio name="WORKING" onChange={onChangeStatus} />}
+              label="WORKING"
+              labelPlacement="WORKING"
             />
-          ) : (
-            <Typography><DoNotDisturbAltIcon /> DONE - You can not choose this status</Typography>
-          )}
-          {user?._id === tasks.assigner ? (
-            <FormControlLabel
-              value="ARCHIVE"
-              control={<Radio name="ARCHIVE" onChange={onChangeStatus} />}
-              label="ARCHIVE"
-              labelPlacement="ARCHIVE"
-            />
-          ) : (
-            <Typography><DoNotDisturbAltIcon /> ARCHIVE - You can not choose this status</Typography>
-          )}
-        </RadioGroup>
-      </FormControl>
+            {user?._id === tasks.assigner ? (
+              <FormControlLabel
+                value="REVIEW"
+                control={<Radio name="REVIEW" onChange={onChangeStatus} />}
+                label="REVIEW"
+                labelPlacement="REVIEW"
+              />
+            ) : (
+              <Typography>
+                <DoNotDisturbAltIcon /> REVIEW - You can not choose this status
+              </Typography>
+            )}
+            {user?._id === tasks.assigner ? (
+              <FormControlLabel
+                value="DONE"
+                control={<Radio name="DONE" onChange={onChangeStatus} />}
+                label="DONE"
+                labelPlacement="DONE"
+              />
+            ) : (
+              <Typography>
+                <DoNotDisturbAltIcon /> DONE - You can not choose this status
+              </Typography>
+            )}
+            {user?._id === tasks.assigner ? (
+              <FormControlLabel
+                value="ARCHIVE"
+                control={<Radio name="ARCHIVE" onChange={onChangeStatus} />}
+                label="ARCHIVE"
+                labelPlacement="ARCHIVE"
+              />
+            ) : (
+              <Typography>
+                <DoNotDisturbAltIcon /> ARCHIVE - You can not choose this status
+              </Typography>
+            )}
+          </RadioGroup>
+        </FormControl>
+      </Card>
       {renderMenuTask}
     </Card>
   );

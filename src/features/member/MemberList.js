@@ -132,7 +132,7 @@ function MemberList() {
                 "&:hover": { color: "#757575", textDecoration: "none" },
               }}
             >
-              Commendation Page
+              Honor
             </MenuItem>
             <Divider sx={{ borderStyle: "dashed" }} />
             <MenuItem

@@ -4,10 +4,10 @@ import {
   Stack,
   Modal,
   Typography,
-  Button,
   Grid,
   Divider,
   Card,
+  IconButton,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import UserTable from "../user/UserTable";
@@ -21,6 +21,7 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import { Link as RouterLink } from "react-router-dom";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import MenuItem from "@mui/material/MenuItem";
+import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 
 const style = {
   position: "absolute",
@@ -39,7 +40,7 @@ function CommendationsBoardPage() {
   const [open, setOpen] = useState(false);
 
   const [filterName] = useState("");
-  const [rowsPerPage] = React.useState(10);
+  const [rowsPerPage] = React.useState(1);
   const [page, setPage] = React.useState(1);
 
   const dispatch = useDispatch();
@@ -97,7 +98,7 @@ function CommendationsBoardPage() {
 
   useEffect(() => {
     dispatch(getCommendations(mth));
-  }, [dispatch, mth]);
+  }, [dispatch, mth]);  
 
   const handleOpen = () => {
     setOpen(true);
@@ -117,7 +118,7 @@ function CommendationsBoardPage() {
       <Typography>HomePage</Typography>
     </RouterLink>,
     <Typography key="3" color="text.primary">
-      Commendation Board
+      Honor
     </Typography>,
   ];
 
@@ -133,7 +134,7 @@ function CommendationsBoardPage() {
             paddingTop: "4vh",
           }}
         >
-          <Stack spacing={3} sx={{ marginLeft: "2vw", marginRight:"2vw"}}>
+          <Stack spacing={3} sx={{ marginLeft: "2vw", marginRight: "2vw" }}>
             <MenuItem
               to="/member"
               component={RouterLink}
@@ -164,7 +165,7 @@ function CommendationsBoardPage() {
                 "&:hover": { color: "#757575", textDecoration: "none" },
               }}
             >
-              Commendation Page
+              Honor
             </MenuItem>
             <Divider sx={{ borderStyle: "dashed" }} />
             <MenuItem
@@ -222,43 +223,34 @@ function CommendationsBoardPage() {
               // paddingLeft: "2%",
               textAlign: "center",
               fontSize: "60px",
+              marginTop: "5%",
             }}
-            gutterBottom
           >
-            Best Employee Of Month
+            HONOR
+            {user?.department === "HR" && (
+              <IconButton onClick={handleOpen}>
+                <PersonAddAltIcon
+                  sx={{ fontSize: "50px", marginLeft: "20px",
+                  "&:hover": { color: "green" }, }}
+                />
+              </IconButton>
+            )}
+            <Modal open={open} onClose={handleClose}>
+              <Box sx={style}>
+                <UserTable users={users} />
+              </Box>
+            </Modal>
           </Typography>
-          {user?.department === "HR" && (
-            <Button
-              onClick={handleOpen}
-              sx={{
-                width: "20px",
-                fontSize: "20px",
-                marginRight: "10px",
-                display: "flex",
-                alignSelf: "center",
-              }}
-              size="small"
-              variant="contained"
-              color="success"
-            >
-              Edit
-            </Button>
-          )}
-          <Modal open={open} onClose={handleClose}>
-            <Box sx={style}>
-              <UserTable users={users} />
-            </Box>
-          </Modal>
 
-          <Stack container spacing={2} sx={{ marginLeft: "20%" }}>
+          <Stack container spacing={2} >
             {commendations.map((commendation) => (
               <>
                 <Typography
                   sx={{
-                    marginTop: "20px",
+                    marginTop: "5%",
                     color: "#616161",
                     fontWeight: "600",
-                    fontSize: "40px",
+                    fontSize: "30px",
                   }}
                 >
                   {commendation.month} - {commendation.year}

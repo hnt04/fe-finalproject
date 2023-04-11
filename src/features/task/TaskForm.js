@@ -112,16 +112,14 @@ function TaskForm() {
           )}
         />
 
-        <FSelect
+        <FTextField
           name="department"
           label="Department"
+          placeholder={user?.department}
           variant="standard"
-          inputProps={{ "aria-label": "Without label" }}
-        >
-          {departmentType.map((item) => (
-            <option key={item.slug}>{item}</option>
-          ))}
-        </FSelect>
+          disabled={isDisabled}
+          value={user?.department}
+        ></FTextField>
 
         <FTextField
           name="assigner"

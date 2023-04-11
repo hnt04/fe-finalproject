@@ -89,7 +89,6 @@ export const createCommendations = ({month,name,year}) => async (dispatch) => {
       dispatch(
         slice.actions.createCommendationSuccess(response));
         toast.success("Create New Commendation Of This Month");
-        // dispatch(getCommendations(month));
     } catch (error) {
       dispatch(slice.actions.hasError(error.message));
       toast.error(error.message);

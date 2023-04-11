@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { DragDropContext } from "react-beautiful-dnd";
 import _ from "lodash";
-import { Droppable } from "react-beautiful-dnd";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-// import { Draggable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import {
@@ -17,7 +12,7 @@ import {
   Modal,
 } from "@mui/material";
 import TaskCard from "./TaskCard";
-import { getTaskOfId, updatedTaskProfile } from "./taskSlice";
+import { getTaskOfId } from "./taskSlice";
 
 
 function TaskList({ tasks }) {
@@ -47,7 +42,7 @@ function TaskList({ tasks }) {
   return (
     <Grid
             container
-            maxWidth="2000px"
+            maxWidth="auto"
             spacing={{ xs: 1, md: 1 }}
             columns={{ xs: 12, sm: 12, md: 12, lg: 12 }}
           >
@@ -57,14 +52,14 @@ function TaskList({ tasks }) {
                 sx={{
                   display: "flex",
                   justifyContent: "center",
-                  height:"600px",
-                  
+                  height:"50%",
+
                 }}
                 item
                 xs={12}
-                sm={6}
-                md={4}
-                lg={4}
+                sm={12}
+                md={12}
+                lg={6}
               >
             <Card
               sx={{
@@ -72,7 +67,7 @@ function TaskList({ tasks }) {
                 backgroundColor: "background",
                 boxShadow: "none",
                 maxHeight: "100vh",
-                color: "#616161",
+                marginLeft:"10%",
               }}
             >
               <TaskCard
