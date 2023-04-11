@@ -175,7 +175,7 @@ function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
           backgroundColor: `${tasks.status === "ARCHIVE" ? "#E6EEFF" : "#ffff"}`,
           position: "absolute",
           marginTop: "-32%",
-          marginLeft: "60%",
+          marginLeft: "50%",
           boxShadow:"0"
         }}
       >
@@ -207,7 +207,7 @@ function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
               />
             ) : (
               <Typography>
-                <DoNotDisturbAltIcon /> REVIEW - You can not choose this status
+                <DoNotDisturbAltIcon /> REVIEW - Not Allowed
               </Typography>
             )}
             {user?._id === tasks.assigner ? (
@@ -219,7 +219,7 @@ function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
               />
             ) : (
               <Typography>
-                <DoNotDisturbAltIcon /> DONE - You can not choose this status
+                <DoNotDisturbAltIcon /> DONE - Not Allowed
               </Typography>
             )}
             {user?._id === tasks.assigner ? (
@@ -231,7 +231,7 @@ function TaskCard({ tasks, task, handleChooseTask, handleChooseEdit }) {
               />
             ) : (
               <Typography>
-                <DoNotDisturbAltIcon /> ARCHIVE - You can not choose this status
+                <DoNotDisturbAltIcon /> ARCHIVE - Not Allowed
               </Typography>
             )}
           </RadioGroup>
