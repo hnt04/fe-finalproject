@@ -22,6 +22,7 @@ import { Link as RouterLink } from "react-router-dom";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import MenuItem from "@mui/material/MenuItem";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
+import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 
 const style = {
   position: "absolute",
@@ -98,7 +99,7 @@ function CommendationsBoardPage() {
 
   useEffect(() => {
     dispatch(getCommendations(mth));
-  }, [dispatch, mth]);  
+  }, [dispatch, mth]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -218,20 +219,23 @@ function CommendationsBoardPage() {
           <Typography
             variant="h4"
             sx={{
-              color: "#616161",
-              fontWeight: "700",
+              fontWeight: "900",
               // paddingLeft: "2%",
               textAlign: "center",
-              fontSize: "60px",
+              fontSize: "70px",
               marginTop: "5%",
+              fontFamily:"Lucida Handwriting"
             }}
           >
             HONOR
             {user?.department === "HR" && (
               <IconButton onClick={handleOpen}>
                 <PersonAddAltIcon
-                  sx={{ fontSize: "50px", marginLeft: "20px",
-                  "&:hover": { color: "green" }, }}
+                  sx={{
+                    fontSize: "50px",
+                    marginLeft: "20px",
+                    "&:hover": { color: "green" },
+                  }}
                 />
               </IconButton>
             )}
@@ -242,24 +246,48 @@ function CommendationsBoardPage() {
             </Modal>
           </Typography>
 
-          <Stack container spacing={2} >
+          <Stack container spacing={2}>
             {commendations.map((commendation) => (
               <>
                 <Typography
                   sx={{
                     marginTop: "5%",
-                    color: "#616161",
+                    color: "#ffff",
+                    paddingLeft:"2%",
+                    paddingTop:"0.5%",
+                    paddingBottom:"0.5%",
+                    borderRadius:"40px 0 0 40px",
                     fontWeight: "600",
                     fontSize: "30px",
+                    width:"24%",
+                    marginLeft: "-3%",
+                    backgroundImage: "linear-gradient(to right, #0ffa61, #77fca5)",
+                    position: "relative",
+                    // MozTransform:"rotate(60deg)",WebkitTransform:"rotate(60deg)",
+                    // msTransform:"rotate(60deg)",
+                    // transform:"rotate(60deg)",
+                    zIndex:"2"
                   }}
                 >
-                  {commendation.month} - {commendation.year}
+                  {commendation.month} - {commendation.year} <LocalFireDepartmentIcon sx={{fontSize:"30px"}} />
                 </Typography>
 
-                <CommendationsEachMonth
-                  commendation={commendation}
-                  users={users}
-                />
+                <Stack
+                  sx={{
+                    boxShadow:"16",
+                    position: "absolute",
+                    paddingTop:"3%",
+                    width: "62%",
+                    marginLeft: "5%",
+                    marginTop: "2%! important",
+                    backgroundColor:"#DFE3E8"
+                  }}
+                >
+                  <CommendationsEachMonth
+                    commendation={commendation}
+                    users={users}
+                  />
+                </Stack>
               </>
             ))}
           </Stack>

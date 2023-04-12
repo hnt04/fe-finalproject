@@ -7,19 +7,9 @@ import {
   Grid,
   Avatar,
 } from "@mui/material";
-import { useDispatch } from "react-redux";
-import useAuth from "../../hooks/useAuth";
+
 
 function CommendationsEachMonth({ users, commendation }) {
-  const [page, setPage] = React.useState(0);
-  const { user } = useAuth();
-
-  const dispatch = useDispatch();
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
   return (
     <>
       <Grid
@@ -32,7 +22,7 @@ function CommendationsEachMonth({ users, commendation }) {
           <Grid
             sx={{
               display: "flex",
-              paddingLeft: "0!important",
+              // paddingLeft: "0!important",
               marginTop: "70px",
               marginBottom: "70px",
             }}
